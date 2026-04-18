@@ -27,56 +27,61 @@ The catalog has 56 numbered projects. Coverage status below.
 
 ### ✅ Covered (48 of 56)
 
-| # | Catalog Project | Blog Post Slug | Hero photo |
-| - | --------------- | -------------- | ---------- |
-| 1 | Atlantis Casino Resort Spa | `atlantis-spa` | ✅ |
-| 2 | Opera House | `opera-house` | ✅ + 3 inline (FLIR) |
-| 3 | Electro Plastics HQ | `electro-plastics-hq` | ✅ |
-| 4 | Rush Creek Spa | `rush-creek-spa` | ✅ |
-| 5 | Snowbank Lake Residence (2022) | `snowbank-lake` | ✅ |
-| 6 | Ohio House (2021) | `ohio-house` | ✅ |
-| 7 | Jesson Residence, Michigan (2016) | `jesson-residence` | ✅ |
-| 8 | John Adams Residence (2012) | `john-adams-residence` | ✅ |
-| 9 | Conservatory (2008) | `conservatory` | ✅ |
-| 10 | Butera Residence (2000) | `butera-residence` | ✅ |
-| 11 | DIYnet Feature (2012) | `diynet-feature` | ✅ |
-| 15 | Church Roof Deicing (Warmzone) | `church-roof-deicing` | ✅ |
-| 16 | Bruce Oswald Roof Deicing | `bruce-oswald-roof` | ✅ |
-| 17 | Bowa Roof Deicing | `bowa-roof` | ✅ |
-| 18 | American Dock Roof Deicing | `american-dock-roof` | ✅ |
-| 19 | Gutter Deicing Systems | `gutter-deicing` | ✅ |
-| 20 | Vail, Colorado Snowmelt System | `vail-snowmelt` | ✅ |
-| 21 | Chadfield Snowmelt | `chadfield-snowmelt` | ✅ |
-| 22 | Able Electric Snowmelt | `able-electric-snowmelt` | ✅ |
-| 23 | Duffy Snowmelt | `duffy-snowmelt` | ✅ |
-| 24 | Electro Plastics Snowmelt | `electro-plastics-snowmelt` | ✅ |
-| 25 | Elevation Snowmelt | `elevation-snowmelt` | ✅ |
-| 26 | UNAVCO Antarctic Polar Research | `unavco-antarctic` | ✅ |
-| 28 | Red Bull Custom RV | `red-bull-rv` | ✅ |
-| 29 | Houseboat Heating | `dutch-houseboat` | ✅ |
-| 30 | Animal Comfort Heating | `animal-comfort` | ✅ |
-| 31 | Palm Tree Heater | `palm-tree-heater` | ✅ |
-| 32 | Propane Tank Heating | `propane-tank` | ✅ |
-| 33 | Battery-Powered Wearable Heaters | `wearable-heaters` | ✅ |
-| 34 | Natural Current NanoHeaters | `nanoheaters` | ✅ |
-| 35 | Under Desk Heater | `under-desk-heater` | ✅ |
-| 36 | STEP Mat | `step-mat` | ✅ |
-| 37 | Intrinsically Safe Heating | `intrinsically-safe` | — (no source photo) |
-| 38 | Chase Plaza Thermal Verification | `chase-plaza-thermal` | ✅ + 1 inline |
-| 39 | NOAA Fisheries Research Vessels | `noaa-fisheries` | ✅ |
-| 40 | NYPD Patrol Boat Fleet | `nypd-patrol-boats` | ✅ |
-| 41 | Turquoise 77m Mega Yacht | `turquoise-yacht` | — (no editorial photo) |
-| 43 | Gladding-Hearn Shipbuilding | `gladding-hearn` | ✅ |
-| 44 | Gulf Island — Seaway Guardian | `seaway-guardian` | ✅ |
-| 45 | Conrad Shipyard (James M. Keen)¹ | `conrad-shipyard` | ✅ (FLIR) |
-| 46 | Nordhavn Explorer Yachts | `nordhavn-yacht` | ✅ |
-| 47 | SAFE Boats International | `safe-boats` | — (no source photo) |
-| 48 | Moose Boats | `moose-boats` | ✅ |
-| 50 | Ulutas Group | `ulutas-group` | ✅ |
-| 51 | Waterman Glass Restaurant | `waterman-glass-restaurant` | ✅ |
-| 54 | Florstar RV Installation | `florstar-rv` | ✅ |
-| 55 | Rogmans RV Project | `rogmans-rv` | ✅ |
-| 56 | Sokaski RV Project | `sokaski-rv` | ✅ |
+"Source photos" is the count of image files in the OneDrive source
+folder for that project (recursively, all subfolders, all formats).
+"Used in post" is hero (1) + the inline images currently in the post.
+A large gap means the post might benefit from added inline images.
+
+| # | Catalog Project | Blog Post Slug | Source photos | Used in post |
+| - | --------------- | -------------- | -------------:| ------------:|
+| 1 | Atlantis Casino Resort Spa | `atlantis-spa` | 41 | 1 |
+| 2 | Opera House | `opera-house` | 578 | 4 (incl. 3 FLIR) |
+| 3 | Electro Plastics HQ | `electro-plastics-hq` | — (own HQ) | 1 |
+| 4 | Rush Creek Spa | `rush-creek-spa` | 1 | 1 |
+| 5 | Snowbank Lake Residence (2022) | `snowbank-lake` | 13 unique (26 incl. dupes) | 3 |
+| 6 | Ohio House (2021) | `ohio-house` | 245 | 1 |
+| 7 | Jesson Residence, Michigan (2016) | `jesson-residence` | 6 | 1 |
+| 8 | John Adams Residence (2012) | `john-adams-residence` | 12 | 1 |
+| 9 | Conservatory (2008) | `conservatory` | — (no folder mapped) | 1 |
+| 10 | Butera Residence (2000) | `butera-residence` | 133 | 1 |
+| 11 | DIYnet Feature (2012) | `diynet-feature` | — (TV feature) | 1 |
+| 15 | Church Roof Deicing (Warmzone) | `church-roof-deicing` | — (external) | 1 |
+| 16 | Bruce Oswald Roof Deicing | `bruce-oswald-roof` | 27 | 5 (incl. 4 inline) |
+| 17 | Bowa Roof Deicing | `bowa-roof` | 12 | 4 (incl. 3 inline) |
+| 18 | American Dock Roof Deicing | `american-dock-roof` | 6 | 1 |
+| 19 | Gutter Deicing Systems | `gutter-deicing` | — (editorial) | 1 |
+| 20 | Vail, Colorado Snowmelt System | `vail-snowmelt` | 36 | 1 |
+| 21 | Chadfield Snowmelt | `chadfield-snowmelt` | 80 | 1 |
+| 22 | Able Electric Snowmelt | `able-electric-snowmelt` | 37 | 1 |
+| 23 | Duffy Snowmelt | `duffy-snowmelt` | 15 | 4 (incl. 3 inline) |
+| 24 | Electro Plastics Snowmelt | `electro-plastics-snowmelt` | 10 | 1 |
+| 25 | Elevation Snowmelt | `elevation-snowmelt` | 7 | 1 |
+| 26 | UNAVCO Antarctic Polar Research | `unavco-antarctic` | 5 | 1 |
+| 28 | Red Bull Custom RV | `red-bull-rv` | 7 | 1 |
+| 29 | Houseboat Heating | `dutch-houseboat` | — (no folder mapped) | 1 |
+| 30 | Animal Comfort Heating | `animal-comfort` | 53 | 1 |
+| 31 | Palm Tree Heater | `palm-tree-heater` | 1 | 1 |
+| 32 | Propane Tank Heating | `propane-tank` | 4 | 1 |
+| 33 | Battery-Powered Wearable Heaters | `wearable-heaters` | 7 | 1 |
+| 34 | Natural Current NanoHeaters | `nanoheaters` | 11 | 1 |
+| 35 | Under Desk Heater | `under-desk-heater` | 1 | 1 |
+| 36 | STEP Mat | `step-mat` | 3 | 1 |
+| 37 | Intrinsically Safe Heating | `intrinsically-safe` | 0 | 0 (gradient thumb) |
+| 38 | Chase Plaza Thermal Verification | `chase-plaza-thermal` | 37 (28 FLIR + 9 std) | 6 (incl. 5 inline) |
+| 39 | NOAA Fisheries Research Vessels | `noaa-fisheries` | 4 | 1 |
+| 40 | NYPD Patrol Boat Fleet | `nypd-patrol-boats` | — (no folder mapped) | 1 |
+| 41 | Turquoise 77m Mega Yacht | `turquoise-yacht` | — (no editorial photo) | 0 (gradient thumb) |
+| 43 | Gladding-Hearn Shipbuilding | `gladding-hearn` | 3 | 1 |
+| 44 | Gulf Island — Seaway Guardian | `seaway-guardian` | 8 | 1 |
+| 45 | Conrad Shipyard (James M. Keen)¹ | `conrad-shipyard` | 71 (incl. FLIR/Install/Shipyard) | 1 (FLIR hero) |
+| 46 | Nordhavn Explorer Yachts | `nordhavn-yacht` | 3 | 1 |
+| 47 | SAFE Boats International | `safe-boats` | 0 (PDFs only) | 0 (gradient thumb) |
+| 48 | Moose Boats | `moose-boats` | 3 | 1 |
+| 50 | Ulutas Group | `ulutas-group` | 2 | 2 (hero + 1 inline) |
+| 51 | Waterman Glass Restaurant | `waterman-glass-restaurant` | 3 | 1 |
+| 54 | Florstar RV Installation | `florstar-rv` | 9 | 1 |
+| 55 | Rogmans RV Project | `rogmans-rv` | 21 | 1 |
+| 56 | Sokaski RV Project | `sokaski-rv` | 10 | 1 |
 
 ¹ The catalog described Conrad as a Polish luxury-yacht builder in
 Gdansk. The actual OneDrive contents are for the **James M. Keen**, a

@@ -9,16 +9,16 @@ thumbIcon: "ship"
 excerpt: "International marine deliveries don't just ship product. They ship a documentation package. CE conformity, EN-standard test reports, SOLAS-rated packaging, and customs paperwork are what get the heating system to the receiving yard ready to install on day one."
 applications: ["marine"]
 heroImage: ./cover.jpg
-heroImageAlt: "A close-up of a StableHeat self-regulating heating element panel showing the conductor pattern, the 'Made in USA' marking, the ETL listing badge, and the CE conformity mark."
+heroImageAlt: "Close-up of the regulatory compliance label on an EPI-LX low-voltage power supply, showing cETLus listing, CE marking, RoHS, model and voltage specs, and manufacturer attestations."
 ---
 
 Most blog content focuses on the install. The element goes in, the deck goes down, the vessel goes to sea, and the photograph that gets shared is the finished space. That's the chapter the customer sees.
 
 Our work with the Ulutas Group is a chance to show the chapters that come first: the part of an international marine sale that actually gets the product to the shipyard in receivable, installable condition. Conformity certification. Bench testing with documented results. SOLAS-rated packaging. A commercial invoice that satisfies customs at both ends. For a U.S. manufacturer selling marine heating into international shipyards, that documentation package is half the product.
 
-## Five categories of paperwork, not five chapters of install photos
+## What ships before the hardware does
 
-Every international marine shipment we send out is built around a documentation set, not just a crate of hardware. The categories are familiar to anyone who has worked international logistics in regulated electrical equipment:
+Every international marine shipment we send out is built around a documentation set, not just a crate of hardware. The package has five parts, all familiar to anyone who has worked international logistics in regulated electrical equipment:
 
 - **CE Declarations of Conformity** for both the heating element and the low-voltage power supply, with manufacturer attestations referencing the applicable European standards.
 - **EN-standard test reports** from independent benches: EN 60335-96 for the electric surface heating system, and EN 61558-2-2 for the safety transformer / power supply. Documented pass conditions, not marketing claims.
@@ -26,7 +26,11 @@ Every international marine shipment we send out is built around a documentation 
 - **Commercial invoices** with line-item breakdowns, declared values, and country-of-origin attestations that satisfy customs at the receiving port.
 - **Regulatory markings on the hardware itself**: cETLus listing for North America, CE for the EEA, RoHS, and multilingual hazard labels. The receiving inspector reads them on the panel, not in a manual.
 
-That's the package. Five categories of paperwork, plus the hardware that's already labeled to clear inspection on arrival.
+![A close-up of a StableHeat heating element panel with conductor strips visible, captioned in five languages with 'Caution: do not damage the conductors' warnings.](./images/element-with-multilingual-warnings.jpg)
+
+*The element ships with its compliance built into the surface. Multilingual hazard text and the CE mark on the lower edge mean the receiving electrician reads the safety warnings in their own language without opening a binder.*
+
+That's the full package: the documentation set, plus the hardware that's already labeled to clear inspection on arrival.
 
 > A U.S. marine manufacturer selling internationally doesn't just ship product. We ship a documentation package that lets the receiving yard install with confidence on day one.
 
