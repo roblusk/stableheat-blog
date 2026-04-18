@@ -8,6 +8,8 @@ thumbVariant: 2
 thumbIcon: "caravan"
 excerpt: "The story behind a custom heating layout for a Red Bull promotional vehicle — and what non-standard form factors teach us."
 applications: ["rv"]
+heroImage: ./cover.jpg
+heroImageAlt: "The Red Bull promotional vehicle — a Volvo cab pulling a custom branded trailer in the Red Bull livery."
 ---
 
 Most RV heating projects we work on involve relatively predictable form factors: a Class A motorcoach, a fifth wheel, a custom van conversion. The dimensions vary, the layouts vary, but the underlying geometry is something we've seen before. Then occasionally a project comes in that breaks the mold entirely.

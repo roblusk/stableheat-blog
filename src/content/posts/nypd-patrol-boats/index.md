@@ -8,6 +8,8 @@ thumbVariant: 4
 thumbIcon: "shield-halved"
 excerpt: "How StableHeat became the standard for NYPD harbor patrol vessels across three successive shipbuilding contracts."
 applications: ["marine"]
+heroImage: ./cover.jpg
+heroImageAlt: "An NYPD CT3 patrol boat on the Hudson with the Lower Manhattan skyline behind."
 ---
 
 The boats that patrol New York Harbor through January are working in some of the harshest marine winter conditions in the United States. Wind whipping off the Atlantic, salt spray that turns to ice on impact, and crews that need to remain not just functional but *attentive* across eight-to-twelve-hour shifts. The cold isn't a comfort issue. It's an operational issue.

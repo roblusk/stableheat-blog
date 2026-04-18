@@ -8,6 +8,8 @@ thumbVariant: 4
 thumbIcon: "water"
 excerpt: "Two houseboat heating installations in the Netherlands — and what they taught us about floating residential work."
 applications: ["marine"]
+heroImage: ./cover.jpg
+heroImageAlt: "A modern wood-clad houseboat on a Dutch canal, mid-construction with a worker on a ladder finishing the upper level."
 ---
 
 The Dutch have a long tradition of living on the water. Amsterdam's canals are lined with houseboats — some converted barges, some purpose-built floating homes — that function as full-time residences for tens of thousands of people. The lifestyle is wonderful in summer. In winter, it requires a heating system that handles a set of constraints most residential installers never encounter.
