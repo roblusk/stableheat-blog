@@ -217,8 +217,38 @@
   .edge-length { font-family: var(--sh-sans); font-weight: 600; fill: var(--navy); }
 
   .clearance { fill: none; stroke: var(--cool); stroke-width: 1; stroke-dasharray: 3 3; opacity: .7; }
-  .element-strip { fill: var(--accent); opacity: .88; }
-  .element-strip-outline { fill: none; stroke: var(--accent-press); stroke-width: .6; opacity: .7; }
+  .element-strip { fill: var(--accent); opacity: .15; }
+  .element-strip-outline { display: none; }
+
+  /* Train-track rails + ties (replaces the solid element look) */
+  .element-rail { fill: none; stroke-width: 1.4; stroke-linecap: butt; }
+  .element-rail.bare { stroke: var(--accent); opacity: 0.85; }
+  .element-rail.hot { stroke: #B23A2A; }
+  .element-rail.neutral { stroke: var(--ink); opacity: 0.85; }
+  .element-tie { fill: none; stroke: var(--accent-press); stroke-width: 0.8; opacity: 0.55; }
+
+  /* Wiring overlay */
+  .wiring-pigtail { fill: none; stroke-width: 1.4; }
+  .wiring-pigtail.hot { stroke: #B23A2A; opacity: 0.9; }
+  .wiring-pigtail.neutral { stroke: var(--ink); opacity: 0.85; }
+  .wiring-bus { fill: none; stroke-width: 1; stroke-dasharray: 3 2; }
+  .wiring-bus.hot { stroke: #B23A2A; opacity: 0.85; }
+  .wiring-bus.neutral { stroke: var(--ink); opacity: 0.7; }
+  .terminal-block-rect { fill: var(--panel); stroke-width: 1.2; }
+  .terminal-block-screw-hot { fill: #B23A2A; opacity: 0.7; }
+  .terminal-block-screw-neutral { fill: var(--ink); opacity: 0.55; }
+  .power-supply-rect { fill: #FCFAF3; stroke-width: 1.5; }
+  .power-supply-label { font-family: var(--sh-sans); font-weight: 700; letter-spacing: 0.06em; }
+  .power-supply-sub { font-family: var(--sh-sans); fill: var(--ink-3); }
+
+  /* Wiring sidebar card */
+  .supply-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 13px; align-items: center; }
+  .supply-row:last-child { border-bottom: 0; }
+  .supply-row .lbl { color: var(--ink-2); display: flex; align-items: center; }
+  .supply-row .val { font-variant-numeric: tabular-nums; color: var(--navy); font-weight: 600; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .supply-swatch { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 8px; border: 1px solid rgba(20, 26, 36, 0.1); }
+  .supply-bar { height: 4px; background: var(--line-2); border-radius: 2px; margin-top: 4px; overflow: hidden; }
+  .supply-bar-fill { height: 100%; border-radius: 2px; transition: width var(--sh-dur) var(--sh-ease); }
 
   .empty-state {
     position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -302,6 +332,7 @@
       <span class="tool-label">Show</span>
       <label style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);"><input type="checkbox" id="showElements" checked=""> Heating elements</label>
       <label style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);"><input type="checkbox" id="showClearance" checked=""> Clearance</label>
+      <label style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);"><input type="checkbox" id="showWiring" checked=""> Wiring</label>
 
       <div class="hint">
         <span class="key"><kbd>Click</kbd> add vertex</span>
@@ -390,6 +421,16 @@
       </div>
     </div>
 
+    <!-- Wiring card -->
+    <div class="card">
+      <h2>Wiring</h2>
+      <div class="stat-row"><span class="lbl">Power supplies needed</span><span class="val mono" id="mSupplies">—</span></div>
+      <div id="mSuppliesBreak" style="margin-top: 8px;"></div>
+      <div class="big-sub" style="margin-top: 10px;">
+        Each EPI-LX-R supply handles up to 57 ft of element. Strips are wired in parallel.
+      </div>
+    </div>
+
     <!-- Custom quote CTA -->
     <div class="card quote-cta">
       <h2>Like the design?</h2>
@@ -424,6 +465,12 @@ const TWEAKS = /*EDITMODE-BEGIN*/{
 const IN_PER_FT = 12;
 const PX_PER_FT_DEFAULT = 40;   // initial zoom; rescales to fit
 
+/* ---------- Wiring constants ---------- */
+const SUPPLY_CAPACITY_FT = 57;
+const SUPPLY_COLORS = ['#1A2B47', '#6B8AB3', '#B88954', '#30486A', '#6B7786'];  // navy, cool, bronze, navy-3, muted
+const WIRE_HOT = '#B23A2A';      // muted brick red (electrical hot)
+const WIRE_NEUTRAL = '#141A24';  // navy-ink (electrical neutral)
+
 const state = {
   pts: [],              // vertices in inches, [{x,y}]
   finished: false,
@@ -433,6 +480,7 @@ const state = {
   units: 'ftin',        // 'ftin' | 'ft'
   showElements: true,
   showClearance: true,
+  showWiring: true,
   drag: null,           // { idx, offsetX, offsetY }
   // viewport (inches -> svg units). 1 svg unit = 1 inch.
   view: { w: 1200, h: 760, pad: 40 }
@@ -738,6 +786,133 @@ function computeElementLayout(polyIn) {
   };
 }
 
+/* ---------- Power supply allocation ----------
+   Greedy pack rows into supplies: fill each up to SUPPLY_CAPACITY_FT,
+   then start a new supply. Returns array of { strips, totalFt, color, index }. */
+function allocateSupplies(rows) {
+  const supplies = [];
+  let current = { strips: [], totalFt: 0 };
+  for (const row of rows) {
+    const lenFt = row.lengthIn / 12;
+    if (current.totalFt + lenFt > SUPPLY_CAPACITY_FT && current.strips.length > 0) {
+      supplies.push(current);
+      current = { strips: [], totalFt: 0 };
+    }
+    current.strips.push(row);
+    current.totalFt += lenFt;
+  }
+  if (current.strips.length > 0) supplies.push(current);
+  supplies.forEach((s, i) => { s.color = SUPPLY_COLORS[i % SUPPLY_COLORS.length]; s.index = i + 1; });
+  return supplies;
+}
+
+/* ---------- Wiring overlay rendering ----------
+   For each supply: place a terminal block near the strip cluster, place a power
+   supply icon outside the room, run pigtails (solid red/black) from each strip
+   to its terminal block, and dashed red/black bus from terminal to supply. */
+function renderWiring(svg, supplies, layout, roomBbox, fontIn) {
+  if (!supplies.length) return;
+  const angle = layout.angle;
+  const tbW = 14, tbH = 8;
+  const psW = 28, psH = 18;
+  const psOffsetX = 18;     // inches outside room bbox
+  const psSpacingY = psH + 6;
+
+  const wiringG = el('g');
+
+  supplies.forEach((supply, sIdx) => {
+    const color = supply.color;
+
+    // Terminal block in rotated space: just past the right end of this supply's strips.
+    let xMaxRot = -Infinity, ySumRot = 0;
+    supply.strips.forEach(s => {
+      xMaxRot = Math.max(xMaxRot, s.polyRotated[1].x);
+      ySumRot += (s.polyRotated[0].y + s.polyRotated[2].y) / 2;
+    });
+    const yAvgRot = ySumRot / supply.strips.length;
+    const termRot = { x: xMaxRot + 8, y: yAvgRot };
+    const termOrig = rot(termRot, angle);
+
+    // Power supply position outside room bbox (right edge, stacked)
+    const psOrigin = {
+      x: roomBbox.maxX + psOffsetX,
+      y: roomBbox.minY + (sIdx + 0.5) * psSpacingY
+    };
+    const psCenter = { x: psOrigin.x + psW / 2, y: psOrigin.y };
+
+    // Pigtail/bus runs from each strip's right end to the terminal block
+    supply.strips.forEach(strip => {
+      const topRight = strip.polyOriginal[1];  // hot
+      const botRight = strip.polyOriginal[2];  // neutral
+      wiringG.appendChild(el('line', {
+        x1: topRight.x, y1: topRight.y,
+        x2: termOrig.x, y2: termOrig.y - tbH * 0.25,
+        class: 'wiring-pigtail hot'
+      }));
+      wiringG.appendChild(el('line', {
+        x1: botRight.x, y1: botRight.y,
+        x2: termOrig.x, y2: termOrig.y + tbH * 0.25,
+        class: 'wiring-pigtail neutral'
+      }));
+    });
+
+    // Terminal block (small white box, colored border)
+    wiringG.appendChild(el('rect', {
+      x: termOrig.x - tbW / 2, y: termOrig.y - tbH / 2,
+      width: tbW, height: tbH,
+      rx: 1.2, ry: 1.2,
+      class: 'terminal-block-rect',
+      stroke: color
+    }));
+    wiringG.appendChild(el('circle', {
+      cx: termOrig.x - tbW * 0.22, cy: termOrig.y, r: 1,
+      class: 'terminal-block-screw-hot'
+    }));
+    wiringG.appendChild(el('circle', {
+      cx: termOrig.x + tbW * 0.22, cy: termOrig.y, r: 1,
+      class: 'terminal-block-screw-neutral'
+    }));
+
+    // Dashed red/black bus from terminal block to power supply
+    wiringG.appendChild(el('line', {
+      x1: termOrig.x + tbW / 2, y1: termOrig.y - 1.5,
+      x2: psOrigin.x, y2: psOrigin.y - psH * 0.18,
+      class: 'wiring-bus hot'
+    }));
+    wiringG.appendChild(el('line', {
+      x1: termOrig.x + tbW / 2, y1: termOrig.y + 1.5,
+      x2: psOrigin.x, y2: psOrigin.y + psH * 0.18,
+      class: 'wiring-bus neutral'
+    }));
+
+    // Power supply icon (rectangle + label + capacity readout)
+    wiringG.appendChild(el('rect', {
+      x: psOrigin.x, y: psOrigin.y - psH / 2,
+      width: psW, height: psH,
+      rx: 2, ry: 2,
+      class: 'power-supply-rect',
+      stroke: color
+    }));
+    const labelFontIn = (fontIn || 4) * 0.85;
+    const subFontIn = (fontIn || 4) * 0.7;
+    wiringG.appendChild(el('text', {
+      x: psCenter.x, y: psOrigin.y - 0.5,
+      'text-anchor': 'middle',
+      'font-size': labelFontIn,
+      class: 'power-supply-label',
+      fill: color
+    }, document.createTextNode('SUPPLY ' + supply.index)));
+    wiringG.appendChild(el('text', {
+      x: psCenter.x, y: psOrigin.y + subFontIn * 1.4,
+      'text-anchor': 'middle',
+      'font-size': subFontIn,
+      class: 'power-supply-sub'
+    }, document.createTextNode(supply.totalFt.toFixed(1) + ' / ' + SUPPLY_CAPACITY_FT + ' ft')));
+  });
+
+  svg.appendChild(wiringG);
+}
+
 /* ---------- Rendering ---------- */
 function el(name, attrs = {}, children = []) {
   const n = document.createElementNS('http://www.w3.org/2000/svg', name);
@@ -799,14 +974,47 @@ function render() {
     }
     if (state.showElements) {
       const gEl = el('g');
+      const tieSpacing = 4, tieInset = 2;
       layout.rows.forEach(r => {
         const poly = r.polyOriginal;
         if (poly.length < 3) return;
         const pAttr = poly.map(p => `${p.x},${p.y}`).join(' ');
+
+        // Light "ballast" fill between rails
         gEl.appendChild(el('polygon', { points: pAttr, class: 'element-strip' }));
-        gEl.appendChild(el('polygon', { points: pAttr, class: 'element-strip-outline' }));
+
+        // Two long rails along the strip's long edges (red/black if wiring on, else bronze)
+        const railClass = state.showWiring ? null : 'element-rail bare';
+        const topClass = state.showWiring ? 'element-rail hot' : railClass;
+        const botClass = state.showWiring ? 'element-rail neutral' : railClass;
+        const topA = r.polyOriginal[0], topB = r.polyOriginal[1];
+        const botA = r.polyOriginal[3], botB = r.polyOriginal[2];
+        gEl.appendChild(el('line', {
+          x1: topA.x, y1: topA.y, x2: topB.x, y2: topB.y, class: topClass
+        }));
+        gEl.appendChild(el('line', {
+          x1: botA.x, y1: botA.y, x2: botB.x, y2: botB.y, class: botClass
+        }));
+
+        // Cross-ties (perpendicular rungs), computed in rotated space and rotated back
+        const xs = r.polyRotated[0].x, xe = r.polyRotated[1].x;
+        const y0 = r.polyRotated[0].y, y1 = r.polyRotated[2].y;
+        for (let x = xs + tieInset; x < xe - tieInset + 0.01; x += tieSpacing) {
+          const a = rot({ x, y: y0 + 1 }, layout.angle);
+          const b = rot({ x, y: y1 - 1 }, layout.angle);
+          gEl.appendChild(el('line', {
+            x1: a.x, y1: a.y, x2: b.x, y2: b.y, class: 'element-tie'
+          }));
+        }
       });
       svg.appendChild(gEl);
+
+      // Wiring overlay (terminal blocks, power supplies, bus runs)
+      if (state.showWiring && layout.rows.length) {
+        const supplies = allocateSupplies(layout.rows);
+        const roomBbox = bbox(state.pts);
+        renderWiring(svg, supplies, layout, roomBbox, fontIn);
+      }
     }
 
     // Room edge on top
@@ -910,6 +1118,30 @@ function updateStats() {
     document.getElementById('mCost').textContent = fmtMoney(cost);
     document.getElementById('mCostBreakdown').textContent = `${ftNeeded.toFixed(1)} ft × $${TWEAKS.costPerFoot.toFixed(2)} / ft`;
 
+    // Wiring card
+    const supplies = allocateSupplies(layout.rows);
+    document.getElementById('mSupplies').textContent = supplies.length;
+    const breakEl = document.getElementById('mSuppliesBreak');
+    breakEl.innerHTML = '';
+    supplies.forEach(s => {
+      const pct = Math.min(100, (s.totalFt / SUPPLY_CAPACITY_FT) * 100);
+      const row = document.createElement('div');
+      row.className = 'supply-row';
+      row.innerHTML =
+        '<span class="lbl"><span class="supply-swatch" style="background:' + s.color + '"></span>Supply ' + s.index + '</span>' +
+        '<span class="val">' + s.totalFt.toFixed(1) + ' / ' + SUPPLY_CAPACITY_FT + ' ft</span>';
+      const bar = document.createElement('div');
+      bar.style.gridColumn = '1 / -1';
+      bar.className = 'supply-bar';
+      const fill = document.createElement('div');
+      fill.className = 'supply-bar-fill';
+      fill.style.width = pct + '%';
+      fill.style.background = s.color;
+      bar.appendChild(fill);
+      breakEl.appendChild(row);
+      breakEl.appendChild(bar);
+    });
+
     computeSavings(sqft);
     buildQuoteMailto();
   } else {
@@ -927,6 +1159,8 @@ function updateStats() {
     document.getElementById('mSavingsBreak').textContent = '—';
     document.getElementById('mElec').textContent = '—';
     document.getElementById('mGas').textContent = '—';
+    document.getElementById('mSupplies').textContent = '0';
+    document.getElementById('mSuppliesBreak').innerHTML = '';
     buildQuoteMailto();
   }
 }
@@ -1132,6 +1366,7 @@ document.getElementById('snapOn').addEventListener('click', () => { state.snap =
 document.getElementById('snapOff').addEventListener('click', () => { state.snap = false; setSeg('snapOff', ['snapOn']); render(); });
 document.getElementById('showElements').addEventListener('change', (e) => { state.showElements = e.target.checked; render(); });
 document.getElementById('showClearance').addEventListener('change', (e) => { state.showClearance = e.target.checked; render(); });
+document.getElementById('showWiring').addEventListener('change', (e) => { state.showWiring = e.target.checked; render(); });
 
 /* ---------- Seed with a friendly example? No — start empty per spec ---------- */
 render();
