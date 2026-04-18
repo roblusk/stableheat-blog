@@ -8,6 +8,8 @@ thumbVariant: 6
 thumbIcon: "spa"
 excerpt: "30,000 sq ft of self-regulating radiant beneath tile and stone — the engineering and design story behind our largest spa installation."
 applications: ["commercial"]
+heroImage: ./cover.jpg
+heroImageAlt: "The brine inhalation room at Spa Atlantis — curved teal walls, mosaic-tiled bench, warm amber lighting nooks, and natural stone flooring."
 ---
 
 When the team at Spa Atlantis at the Atlantis Casino Resort in Reno set out to design what would become one of the most ambitious wellness installations in the western United States, they came to us with a deceptively simple problem statement: every surface a guest touches should feel intentional. Not just the soaking tubs. Not just the relaxation lounges. *Every* surface.
