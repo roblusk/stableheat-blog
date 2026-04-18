@@ -676,6 +676,37 @@ a:hover { color: var(--accent); }
 .cta-band .btn-primary { background: var(--accent); }
 .cta-band .btn-primary:hover { background: #A17641; }
 
+/* ---------- Custom Design Banner ---------- */
+.custom-design-banner {
+  background: linear-gradient(135deg, #F3EADA 0%, #E8DBC2 100%);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 36px 0;
+}
+.custom-design-banner .banner-content {
+  display: grid;
+  grid-template-columns: 1.7fr auto;
+  gap: 32px;
+  align-items: center;
+}
+.custom-design-banner .banner-text .kicker { color: var(--accent); }
+.custom-design-banner .banner-text h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 6px 0 8px;
+  color: var(--navy);
+}
+.custom-design-banner .banner-text p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink-2);
+  max-width: 60ch;
+}
+.custom-design-banner .banner-cta { white-space: nowrap; }
+
 /* ---------- Footer ---------- */
 .site-footer {
   background: var(--navy);
@@ -973,6 +1004,8 @@ a:hover { color: var(--accent); }
   .feature-card .post-body { padding: 28px; }
   .post-list { grid-template-columns: 1fr; gap: 0; }
   .cta-band .container { grid-template-columns: 1fr; }
+  .custom-design-banner .banner-content { grid-template-columns: 1fr; }
+  .custom-design-banner .banner-cta { justify-self: start; }
   .site-footer .container { grid-template-columns: 1fr 1fr; }
   .about-grid { grid-template-columns: 1fr; }
 }

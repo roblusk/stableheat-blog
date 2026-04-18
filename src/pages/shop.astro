@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { path } from '../utils/url';
 
 const kits = [
   {
@@ -58,6 +59,19 @@ const fmt = (n: number) => `$${n.toLocaleString('en-US')}`;
     </div>
   </section>
 
+  <section class="custom-design-banner">
+    <div class="container">
+      <div class="banner-content">
+        <div class="banner-text">
+          <span class="kicker">Custom design</span>
+          <h2>Don't see the right kit? Design your own.</h2>
+          <p>Sketch your actual room — any shape, any size — and our planner shows you exact coverage, linear footage, and a 10-year savings projection vs gas. Send us the design and we'll quote it.</p>
+        </div>
+        <a class="btn btn-primary banner-cta" href={path('/floor-planner/')}>Open the floor planner →</a>
+      </div>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <div class="kit-grid">
@@ -80,7 +94,7 @@ const fmt = (n: number) => `$${n.toLocaleString('en-US')}`;
       </div>
 
       <p class="kit-footnote">
-        Need a different size, a commercial scope, or a snowmelt / marine / industrial system? <a href="mailto:sales@stableheat.com">Email our team</a> or call <a href="tel:+13142025540">314.202.5540</a> — we'll size your project in about five minutes.
+        Need a different size, a commercial scope, or a snowmelt / marine / industrial system? <a href={path('/floor-planner/')}>Try the floor planner</a>, <a href="mailto:sales@stableheat.com">email our team</a>, or call <a href="tel:+13142025540">314.202.5540</a> — we'll size your project in about five minutes.
       </p>
     </div>
   </section>

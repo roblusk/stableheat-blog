@@ -1,0 +1,1142 @@
+<!DOCTYPE html><html lang="en"><head>
+
+
+<meta charset="utf-8">
+<title>StableHeat — Floor Planner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    /* StableHeat tokens (inlined) */
+    --sh-navy:       #1A2B47;
+    --sh-navy-2:     #243853;
+    --sh-navy-3:     #30486A;
+    --sh-cool:       #6B8AB3;
+    --sh-cool-2:     #9CB2CE;
+    --sh-accent:     #B88954;
+    --sh-accent-2:   #D9B584;
+    --sh-accent-press:#A17641;
+    --sh-warm:       #F3EADA;
+    --sh-warm-2:     #E8DBC2;
+    --sh-bg:         #F9F6EF;
+    --sh-surface:    #FFFFFF;
+    --sh-ink:        #141A24;
+    --sh-ink-2:      #3A4556;
+    --sh-muted:      #6B7786;
+    --sh-line:       #E5E0D3;
+    --sh-gradient-mark: linear-gradient(135deg, #6B8AB3, #B88954);
+    --sh-serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sh-sans:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --sh-radius-sm: 8px;
+    --sh-radius:    14px;
+    --sh-shadow:    0 1px 2px rgba(26, 43, 71, 0.05), 0 8px 24px rgba(26, 43, 71, 0.07);
+    --sh-shadow-lg: 0 1px 2px rgba(26, 43, 71, 0.06), 0 20px 48px rgba(26, 43, 71, 0.10);
+    --sh-ease:     cubic-bezier(0.4, 0, 0.2, 1);
+    --sh-dur-fast: 150ms;
+    --sh-dur:      200ms;
+    --sh-lift:     translateY(-1px);
+
+    /* Planner aliases */
+    --bg: var(--sh-bg);
+    --panel: var(--sh-surface);
+    --ink: var(--sh-ink);
+    --ink-2: var(--sh-ink-2);
+    --ink-3: var(--sh-muted);
+    --line: var(--sh-line);
+    --line-2: #EFEADD;
+    --accent: var(--sh-accent);
+    --accent-press: var(--sh-accent-press);
+    --accent-2: var(--sh-accent-2);
+    --cool: var(--sh-cool);
+    --cool-2: var(--sh-cool-2);
+    --navy: var(--sh-navy);
+    --ok: #4A6554;
+    --grid: #ECE6D6;
+    --grid-strong: #D9D1BD;
+    --shadow: var(--sh-shadow);
+    --shadow-lg: var(--sh-shadow-lg);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sh-sans); font-size: 14px; line-height: 1.5;
+    height: 100vh; overflow: hidden;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  .serif { font-family: var(--sh-serif); font-weight: 500; letter-spacing: -0.01em; }
+  .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+  .kicker { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+
+  .app { display: grid; grid-template-columns: 1fr 340px; grid-template-rows: auto 1fr; gap: 12px; padding: 12px; height: 100vh; box-sizing: border-box; }
+  @media (max-width: 1000px) { .app { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr; height: auto; overflow: auto; } html, body { overflow: auto; height: auto; } }
+
+  /* Header */
+  header.top {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 14px; background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--sh-radius); box-shadow: var(--shadow);
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark { width: 34px; height: 34px; display: block; }
+  .brand h1 { font-family: var(--sh-serif); font-weight: 500; font-size: 18px; line-height: 1.15; letter-spacing: -0.01em; margin: 0; color: var(--navy); }
+  .brand h1 em { color: var(--accent); font-style: italic; }
+  .brand .sub { font-size: 12px; color: var(--ink-3); letter-spacing: .02em; margin-top: 2px; }
+  .top-actions { display: flex; gap: 8px; align-items: center; }
+
+  /* Buttons */
+  .btn {
+    appearance: none; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    padding: 8px 14px; border-radius: var(--sh-radius-sm); font: inherit; font-weight: 500; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px; transition: all var(--sh-dur) var(--sh-ease);
+  }
+  .btn:hover { background: var(--sh-warm); border-color: var(--sh-warm-2); transform: var(--sh-lift); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+  .btn.primary { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .btn.primary:hover { background: var(--sh-navy-2); border-color: var(--sh-navy-2); }
+  .btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.accent:hover { background: var(--accent-press); border-color: var(--accent-press); }
+  .btn.ghost { background: transparent; }
+  .btn.danger { color: var(--accent-press); border-color: #E3D2BB; background: transparent; }
+  .btn.danger:hover { background: var(--sh-warm); }
+  .btn.sm { padding: 5px 9px; font-size: 12px; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--sh-radius-sm); overflow: hidden; background: var(--panel); white-space: nowrap; }
+  .seg button { border: 0; background: transparent; padding: 7px 11px; font: inherit; font-weight: 500; font-size: 12px; cursor: pointer; color: var(--ink-2); border-right: 1px solid var(--line); transition: all var(--sh-dur-fast) var(--sh-ease); white-space: nowrap; }
+  .seg button:last-child { border-right: 0; }
+  .seg button.on { background: var(--navy); color: #fff; }
+  .seg button:not(.on):hover { background: var(--sh-warm); }
+
+  /* Canvas card */
+  .canvas-wrap {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--sh-radius);
+    box-shadow: var(--shadow); display: flex; flex-direction: column; overflow: hidden;
+  }
+  .toolbar {
+    display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+    border-bottom: 1px solid var(--line-2); flex-wrap: wrap;
+    background: linear-gradient(180deg, #FCFAF3 0%, var(--panel) 100%);
+  }
+  .toolbar .divider { width: 1px; height: 22px; background: var(--line); margin: 0 2px; }
+  .tool-label { color: var(--accent); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+  .hint {
+    margin-left: auto; font-size: 12px; color: var(--ink-3);
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .hint kbd { font: inherit; font-family: ui-monospace, monospace; font-size: 11px;
+    border: 1px solid var(--line); border-bottom-width: 2px; padding: 1px 5px; border-radius: 4px; background: var(--sh-warm); color: var(--navy); }
+
+  .stage {
+    position: relative; background: var(--panel);
+    flex: 1; min-height: 0; overflow: hidden; cursor: crosshair;
+  }
+  .stage.mode-idle { cursor: default; }
+  .stage.mode-edit { cursor: default; }
+  .stage svg { display: block; width: 100%; height: 100%; user-select: none; }
+
+  .status {
+    display: flex; gap: 16px; padding: 10px 14px; border-top: 1px solid var(--line-2);
+    font-size: 12px; color: var(--ink-2); background: #FCFAF3;
+  }
+  .status .k { color: var(--ink-3); letter-spacing: .06em; text-transform: uppercase; font-size: 10px; font-weight: 600; }
+  .status .v { color: var(--navy); }
+
+  /* Right rail */
+  aside.rail { display: flex; flex-direction: column; gap: 12px; min-width: 0; min-height: 0; overflow-y: auto; padding-right: 2px; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--sh-radius);
+    box-shadow: var(--shadow); padding: 14px 16px;
+  }
+  .card h2 {
+    font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
+    margin: 0 0 10px; font-weight: 700;
+  }
+  .stat-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 13px; }
+  .stat-row:last-child { border-bottom: 0; }
+  .stat-row .lbl { color: var(--ink-2); }
+  .stat-row .val { font-variant-numeric: tabular-nums; color: var(--navy); font-weight: 600; }
+  .big-number { font-family: var(--sh-serif); font-size: 30px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.05; color: var(--navy); }
+  .big-number .unit { font-size: 13px; color: var(--ink-3); font-weight: 500; font-family: var(--sh-sans); letter-spacing: 0; margin-left: 4px; }
+  .big-sub { font-size: 11px; color: var(--ink-3); margin-top: 3px; }
+
+  .cost-box {
+    margin-top: 12px; padding: 14px 16px; border-radius: var(--sh-radius-sm);
+    background: var(--sh-warm);
+    border: 1px solid var(--sh-warm-2);
+  }
+  .cost-box .big-sub { color: var(--accent-press); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
+  .cost-box .big-number { color: var(--accent-press); }
+
+  .savings-box {
+    margin-top: 12px; padding: 14px 16px; border-radius: var(--sh-radius-sm);
+    background: linear-gradient(135deg, #EEF1F5 0%, #F3EADA 100%);
+    border: 1px solid #D6DBE2;
+  }
+  .savings-box .big-sub { color: var(--navy); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; font-size: 10px; }
+  .savings-box .big-number { background: var(--sh-gradient-mark); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* Form controls */
+  .row { display: grid; grid-template-columns: 1fr 100px; gap: 8px; align-items: center; padding: 6px 0; }
+  .row label { font-size: 13px; color: var(--ink-2); }
+  .row input[type="number"], .row input[type="text"] {
+    width: 100%; padding: 7px 9px; border: 1px solid var(--line); border-radius: var(--sh-radius-sm);
+    font: inherit; background: var(--panel); text-align: right; font-variant-numeric: tabular-nums; color: var(--navy);
+  }
+  .row input:focus { outline: 2px solid var(--sh-cool-2); outline-offset: 0; border-color: var(--sh-cool); }
+  details { border-top: 1px dashed var(--line); padding-top: 10px; margin-top: 8px; }
+  summary { cursor: pointer; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; user-select: none; padding: 4px 0; }
+  summary::-webkit-details-marker { color: var(--accent); }
+
+  /* Tweaks overlay */
+  .tweaks {
+    position: fixed; right: 14px; bottom: 14px; width: 300px;
+    background: var(--navy); color: #E6E9EE; border-radius: var(--sh-radius); padding: 14px 16px;
+    box-shadow: var(--shadow-lg);
+    font-size: 13px; display: none; z-index: 50;
+  }
+  .tweaks.show { display: block; }
+  .tweaks h3 { margin: 0 0 10px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-2); font-weight: 700; }
+  .tweaks .row { border-top: 1px solid rgba(255,255,255,.08); }
+  .tweaks .row:first-of-type { border-top: 0; }
+  .tweaks label { color: #C7CDD6; }
+  .tweaks input { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: #fff; }
+  .tweaks .tweak-close { position: absolute; top: 10px; right: 12px; background: transparent; border: 0; color: var(--accent-2); cursor: pointer; font-size: 18px; }
+
+  /* SVG element styles */
+  .grid-line { stroke: var(--grid); stroke-width: 1; }
+  .grid-line.strong { stroke: var(--grid-strong); }
+  .grid-axis { stroke: var(--ink-3); stroke-dasharray: 2 3; }
+  .ruler-text { font-family: var(--sh-sans); font-weight: 600; fill: var(--ink-3); letter-spacing: .06em; }
+
+  .room-fill { fill: rgba(249, 246, 239, .9); stroke: none; }
+  .room-edge { fill: none; stroke: var(--navy); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+  .room-preview { fill: none; stroke: var(--cool); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .vertex { fill: var(--panel); stroke: var(--navy); stroke-width: 2; cursor: grab; }
+  .vertex:hover { fill: var(--sh-warm); }
+  .vertex.dragging { cursor: grabbing; }
+  .vertex-first { fill: var(--accent); stroke: var(--accent); }
+  .edge-length { font-family: var(--sh-sans); font-weight: 600; fill: var(--navy); }
+
+  .clearance { fill: none; stroke: var(--cool); stroke-width: 1; stroke-dasharray: 3 3; opacity: .7; }
+  .element-strip { fill: var(--accent); opacity: .88; }
+  .element-strip-outline { fill: none; stroke: var(--accent-press); stroke-width: .6; opacity: .7; }
+
+  .empty-state {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    pointer-events: none; color: var(--ink-3); gap: 6px;
+  }
+  .empty-state .big { font-size: 16px; color: var(--ink-2); font-weight: 500; }
+  .empty-state .small { font-size: 13px; }
+  .empty-state .key { display: inline-flex; gap: 4px; align-items: center; }
+  .empty-state kbd { font: inherit; font-family: ui-monospace, monospace; font-size: 11px;
+    border: 1px solid var(--line); border-bottom-width: 2px; padding: 1px 6px; border-radius: 4px; background: #fafbfc; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px; padding: 2px 7px; border-radius: 999px;
+    background: #eef1f5; color: var(--ink-2); font-size: 11px; font-weight: 500;
+  }
+  .badge.hot { background: #fde8e4; color: #7a1f13; }
+  .badge.dot::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  .mode-pill { display: inline-flex; gap: 4px; align-items: center; padding: 5px 11px; border-radius: 999px;
+    background: var(--sh-warm); color: var(--accent-press); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--ink-2); }
+  .legend .sw { width: 14px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 6px; vertical-align: middle; }
+  .legend .sw.el { background: var(--accent); }
+  .legend .sw.cl { background: transparent; border: 1px dashed var(--cool); height: 0; border-radius: 0; width: 16px; }
+  .legend .sw.rm { background: var(--navy); border-radius: 2px; height: 2px; width: 16px; }
+
+  .empty-state .big { font-family: var(--sh-serif); font-weight: 500; font-size: 22px; color: var(--navy); letter-spacing: -0.01em; }
+  .empty-state .small { color: var(--ink-2); }
+
+  .back-link { color: var(--accent); text-decoration: none; font-weight: 600; transition: color var(--sh-dur-fast); }
+  .back-link:hover { color: var(--accent-press); text-decoration: underline; }
+  .quote-cta { margin-top: 12px; }
+  .quote-cta .btn { width: 100%; justify-content: center; padding: 12px 16px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="shMark" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#6B8AB3"></stop>
+            <stop offset="1" stop-color="#B88954"></stop>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="16" fill="url(#shMark)"></rect>
+        <path d="M32 14a5 5 0 0 0-5 5v20.2a9 9 0 1 0 10 0V19a5 5 0 0 0-5-5zm0 4a1 1 0 0 1 1 1v21.6a5 5 0 1 1-2 0V19a1 1 0 0 1 1-1z" fill="#fff" opacity="0.95"></path>
+        <circle cx="32" cy="46" r="4" fill="#F3EADA"></circle>
+      </svg>
+      <div>
+        <h1>Stable<em>Heat</em> &middot; Floor Planner</h1>
+        <div class="sub"><a href="../shop/" class="back-link">← Shop</a> · Draw your room — see coverage, cost, and 10-year savings vs gas.</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span id="modePill" class="mode-pill">Edit mode</span>
+      <button class="btn" id="btnUndo" title="Undo last point (Z)" disabled="">Undo</button>
+      <button class="btn danger" id="btnClear">Clear</button>
+      <button class="btn primary" id="btnFinish" disabled="">Finish shape</button>
+    </div>
+  </header>
+
+  <!-- Canvas -->
+  <section class="canvas-wrap">
+    <div class="toolbar">
+      <span class="tool-label">Units</span>
+      <div class="seg" role="tablist" aria-label="Units">
+        <button id="unitFtIn" class="on">ft &amp; in</button>
+        <button id="unitFt">decimal ft</button>
+      </div>
+      <div class="divider"></div>
+      <span class="tool-label">Snap</span>
+      <div class="seg">
+        <button id="snapOn" class="on">On (6")</button>
+        <button id="snapOff">Off</button>
+      </div>
+      <div class="divider"></div>
+      <span class="tool-label">Show</span>
+      <label style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);"><input type="checkbox" id="showElements" checked=""> Heating elements</label>
+      <label style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);"><input type="checkbox" id="showClearance" checked=""> Clearance</label>
+
+      <div class="hint">
+        <span class="key"><kbd>Click</kbd> add vertex</span>
+        <span class="key"><kbd>Enter</kbd> finish</span>
+        <span class="key"><kbd>Z</kbd> undo</span>
+      </div>
+    </div>
+
+    <div class="stage" id="stage">
+      <svg id="svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" viewBox="12 12.651550131926143 246 298.6968997361477"><g><line x1="12" y1="12.651550131926143" x2="12" y2="311.3484498680739" class="grid-line"></line><line x1="24" y1="12.651550131926143" x2="24" y2="311.3484498680739" class="grid-line"></line><line x1="36" y1="12.651550131926143" x2="36" y2="311.3484498680739" class="grid-line"></line><line x1="48" y1="12.651550131926143" x2="48" y2="311.3484498680739" class="grid-line"></line><line x1="60" y1="12.651550131926143" x2="60" y2="311.3484498680739" class="grid-line strong"></line><line x1="72" y1="12.651550131926143" x2="72" y2="311.3484498680739" class="grid-line"></line><line x1="84" y1="12.651550131926143" x2="84" y2="311.3484498680739" class="grid-line"></line><line x1="96" y1="12.651550131926143" x2="96" y2="311.3484498680739" class="grid-line"></line><line x1="108" y1="12.651550131926143" x2="108" y2="311.3484498680739" class="grid-line"></line><line x1="120" y1="12.651550131926143" x2="120" y2="311.3484498680739" class="grid-line strong"></line><line x1="132" y1="12.651550131926143" x2="132" y2="311.3484498680739" class="grid-line"></line><line x1="144" y1="12.651550131926143" x2="144" y2="311.3484498680739" class="grid-line"></line><line x1="156" y1="12.651550131926143" x2="156" y2="311.3484498680739" class="grid-line"></line><line x1="168" y1="12.651550131926143" x2="168" y2="311.3484498680739" class="grid-line"></line><line x1="180" y1="12.651550131926143" x2="180" y2="311.3484498680739" class="grid-line strong"></line><line x1="192" y1="12.651550131926143" x2="192" y2="311.3484498680739" class="grid-line"></line><line x1="204" y1="12.651550131926143" x2="204" y2="311.3484498680739" class="grid-line"></line><line x1="216" y1="12.651550131926143" x2="216" y2="311.3484498680739" class="grid-line"></line><line x1="228" y1="12.651550131926143" x2="228" y2="311.3484498680739" class="grid-line"></line><line x1="240" y1="12.651550131926143" x2="240" y2="311.3484498680739" class="grid-line strong"></line><line x1="252" y1="12.651550131926143" x2="252" y2="311.3484498680739" class="grid-line"></line><line x1="12" y1="12" x2="258" y2="12" class="grid-line"></line><line x1="12" y1="24" x2="258" y2="24" class="grid-line"></line><line x1="12" y1="36" x2="258" y2="36" class="grid-line"></line><line x1="12" y1="48" x2="258" y2="48" class="grid-line"></line><line x1="12" y1="60" x2="258" y2="60" class="grid-line strong"></line><line x1="12" y1="72" x2="258" y2="72" class="grid-line"></line><line x1="12" y1="84" x2="258" y2="84" class="grid-line"></line><line x1="12" y1="96" x2="258" y2="96" class="grid-line"></line><line x1="12" y1="108" x2="258" y2="108" class="grid-line"></line><line x1="12" y1="120" x2="258" y2="120" class="grid-line strong"></line><line x1="12" y1="132" x2="258" y2="132" class="grid-line"></line><line x1="12" y1="144" x2="258" y2="144" class="grid-line"></line><line x1="12" y1="156" x2="258" y2="156" class="grid-line"></line><line x1="12" y1="168" x2="258" y2="168" class="grid-line"></line><line x1="12" y1="180" x2="258" y2="180" class="grid-line strong"></line><line x1="12" y1="192" x2="258" y2="192" class="grid-line"></line><line x1="12" y1="204" x2="258" y2="204" class="grid-line"></line><line x1="12" y1="216" x2="258" y2="216" class="grid-line"></line><line x1="12" y1="228" x2="258" y2="228" class="grid-line"></line><line x1="12" y1="240" x2="258" y2="240" class="grid-line strong"></line><line x1="12" y1="252" x2="258" y2="252" class="grid-line"></line><line x1="12" y1="264" x2="258" y2="264" class="grid-line"></line><line x1="12" y1="276" x2="258" y2="276" class="grid-line"></line><line x1="12" y1="288" x2="258" y2="288" class="grid-line"></line><line x1="12" y1="300" x2="258" y2="300" class="grid-line strong"></line></g><g><text x="62" y="26.651550131926143" class="ruler-text">5′</text><text x="122" y="26.651550131926143" class="ruler-text">10′</text><text x="182" y="26.651550131926143" class="ruler-text">15′</text><text x="242" y="26.651550131926143" class="ruler-text">20′</text></g><polygon points="60,96 60,228 210,228 210,96" class="room-fill"></polygon><polygon points="63,99 63,225 207,225 207,99" class="clearance"></polygon><g><polygon points="69,99 201,99 201,111 69,111" class="element-strip"></polygon><polygon points="69,99 201,99 201,111 69,111" class="element-strip-outline"></polygon><polygon points="69,114 201,114 201,126 69,126" class="element-strip"></polygon><polygon points="69,114 201,114 201,126 69,126" class="element-strip-outline"></polygon><polygon points="69,129 201,129 201,141 69,141" class="element-strip"></polygon><polygon points="69,129 201,129 201,141 69,141" class="element-strip-outline"></polygon><polygon points="69,144 201,144 201,156 69,156" class="element-strip"></polygon><polygon points="69,144 201,144 201,156 69,156" class="element-strip-outline"></polygon><polygon points="69,159 201,159 201,171 69,171" class="element-strip"></polygon><polygon points="69,159 201,159 201,171 69,171" class="element-strip-outline"></polygon><polygon points="69,174 201,174 201,186 69,186" class="element-strip"></polygon><polygon points="69,174 201,174 201,186 69,186" class="element-strip-outline"></polygon><polygon points="69,189 201,189 201,201 69,201" class="element-strip"></polygon><polygon points="69,189 201,189 201,201 69,201" class="element-strip-outline"></polygon><polygon points="69,204 201,204 201,216 69,216" class="element-strip"></polygon><polygon points="69,204 201,204 201,216 69,216" class="element-strip-outline"></polygon></g><polygon points="60,96 60,228 210,228 210,96" class="room-edge"></polygon><g><text x="46" y="166" class="edge-length" text-anchor="middle">11′ 0″</text><text x="135" y="246" class="edge-length" text-anchor="middle">12′ 6″</text><text x="224" y="166" class="edge-length" text-anchor="middle">11′ 0″</text><text x="135" y="86" class="edge-length" text-anchor="middle">12′ 6″</text></g><g><circle cx="60" cy="96" r="5" class="vertex" data-idx="0"></circle><circle cx="60" cy="228" r="5" class="vertex" data-idx="1"></circle><circle cx="210" cy="228" r="5" class="vertex" data-idx="2"></circle><circle cx="210" cy="96" r="5" class="vertex" data-idx="3"></circle></g></svg>
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="big">Click anywhere to start drawing your room</div>
+        <div class="small">Click to add corners. Press <kbd>Enter</kbd> or click the first point to close the shape.</div>
+        <div class="small" style="margin-top:10px; opacity:.85;">Examples: rectangles, L-shapes, rooms with nooks — any polygon.</div>
+      </div>
+    </div>
+
+    <div class="status">
+      <span><span class="k">Mouse:</span> <span class="v mono" id="statMouse">—</span></span>
+      <span><span class="k">Vertices:</span> <span class="v mono" id="statVerts">4</span></span>
+      <span><span class="k">Perimeter:</span> <span class="v mono" id="statPerim">47′ 0″</span></span>
+      <span style="margin-left:auto;" class="legend">
+        <span><span class="sw rm"></span>Room</span>
+        <span><span class="sw el"></span>Heating element</span>
+        <span><span class="sw cl"></span>3″ clearance</span>
+      </span>
+    </div>
+  </section>
+
+  <!-- Right rail -->
+  <aside class="rail">
+    <!-- Measurements card -->
+    <div class="card">
+      <h2>Room measurements</h2>
+      <div class="big-number" id="areaSqFt">137.5 <span class="unit">sq ft</span></div>
+      <div class="big-sub" id="areaSub">4-sided polygon · 19800 sq in</div>
+      <div style="margin-top:10px;">
+        <div class="stat-row"><span class="lbl">Perimeter</span><span class="val mono" id="mPerim">47′ 0″</span></div>
+        <div class="stat-row"><span class="lbl">Bounding box</span><span class="val mono" id="mBbox">12′ 6″ × 11′ 0″</span></div>
+        <div class="stat-row"><span class="lbl">Longest wall</span><span class="val mono" id="mLongest">12′ 6″</span></div>
+      </div>
+    </div>
+
+    <!-- Element / cost card -->
+    <div class="card">
+      <h2>Heating element</h2>
+      <div class="stat-row"><span class="lbl">Element width</span><span class="val mono" id="mElWidth">12″</span></div>
+      <div class="stat-row"><span class="lbl">Rows</span><span class="val mono" id="mRows">8</span></div>
+      <div class="stat-row"><span class="lbl">Coverage</span><span class="val mono" id="mCoverage">88.0 sq ft (64%)</span></div>
+      <div class="stat-row"><span class="lbl">Linear footage</span><span class="val mono" id="mLinFt">88.0 ft</span></div>
+
+      <div class="cost-box">
+        <div class="big-sub">Estimated material cost</div>
+        <div class="big-number" id="mCost">$1,320</div>
+        <div class="big-sub mono" id="mCostBreakdown">88.0 ft × $15.00 / ft</div>
+      </div>
+    </div>
+
+    <!-- Savings card -->
+    <div class="card">
+      <h2>10-year savings vs. gas</h2>
+      <div class="savings-box">
+        <div class="big-sub">Projected savings</div>
+        <div class="big-number" id="mSavings">$673</div>
+        <div class="big-sub mono" id="mSavingsBreak">10 yr · 138 sq ft · 8h × 180d/yr</div>
+      </div>
+      <div class="stat-row" style="margin-top:8px;"><span class="lbl">Electric (10 yr)</span><span class="val mono" id="mElec">$1,109</span></div>
+      <div class="stat-row"><span class="lbl">Gas (10 yr)</span><span class="val mono" id="mGas">$1,782</span></div>
+
+      <details id="advancedDetails">
+        <summary>Advanced assumptions</summary>
+        <div class="row"><label for="inHoursDay">Heat hours / day</label><input id="inHoursDay" type="number" step="0.5" min="0" value="8"></div>
+        <div class="row"><label for="inDaysYr">Heat days / year</label><input id="inDaysYr" type="number" step="1" min="0" value="180"></div>
+        <div class="row"><label for="inElecRate">Electric ($/kWh)</label><input id="inElecRate" type="number" step="0.01" min="0" value="0.14"></div>
+        <div class="row"><label for="inWattsSqft">Watts / sq ft (STEP)</label><input id="inWattsSqft" type="number" step="1" min="0" value="10"></div>
+        <div class="row"><label for="inDutyCycle">Duty cycle (STEP)</label><input id="inDutyCycle" type="number" step="0.05" min="0.1" max="1" value="0.40"></div>
+        <div class="row"><label for="inGasRate">Gas ($/therm)</label><input id="inGasRate" type="number" step="0.05" min="0" value="1.80"></div>
+        <div class="row"><label for="inGasBtu">Gas BTU / sq ft / hr</label><input id="inGasBtu" type="number" step="1" min="0" value="40"></div>
+        <div class="row"><label for="inGasEff">Gas efficiency</label><input id="inGasEff" type="number" step="0.01" min="0.1" max="1" value="0.80"></div>
+        <div class="row"><label for="inYears">Years</label><input id="inYears" type="number" step="1" min="1" value="10"></div>
+        <button class="btn sm" id="btnResetAdv" style="margin-top:6px;">Reset to defaults</button>
+      </details>
+
+      <div class="big-sub" style="margin-top:10px;">
+        Estimate only. Actual usage varies by climate, insulation, and thermostat behavior.
+      </div>
+    </div>
+
+    <!-- Custom quote CTA -->
+    <div class="card quote-cta">
+      <h2>Like the design?</h2>
+      <p style="margin: 0 0 12px; font-size: 13px; color: var(--ink-2);">Send us your room measurements and we'll come back with a quote, kit recommendation, and any sizing notes specific to your space.</p>
+      <a id="btnQuote" class="btn accent" href="mailto:sales@stableheat.com?subject=Custom+floor-heating+quote&amp;body=I+haven%27t+drawn+a+room+yet.+Please+open+the+floor+planner+at+https%3A%2F%2Froblusk.github.io%2Fstableheat-blog%2Ffloor-planner%2F+to+design+a+layout%2C+then+come+back+to+request+a+quote." rel="noopener">
+        Get a custom quote &rarr;
+      </a>
+    </div>
+  </aside>
+</div>
+
+<script>
+/* ============================================================
+   Heated Floor Planner
+   - Freeform polygon drawing (click vertices)
+   - Grid snap (6" default)
+   - Area via shoelace; perimeter from edges
+   - Heating element: 12" rows along longest wall, 3" wall + row gap
+   - Cost & 10-yr savings estimate
+============================================================ */
+
+/* ---------- Tweakable defaults ---------- */
+const TWEAKS = /*EDITMODE-BEGIN*/{
+  "costPerFoot": 15,
+  "elementWidthIn": 12,
+  "wallClearanceIn": 3,
+  "rowSpacingIn": 3,
+  "snapGridIn": 6
+}/*EDITMODE-END*/;
+
+/* ---------- Constants / state ---------- */
+const IN_PER_FT = 12;
+const PX_PER_FT_DEFAULT = 40;   // initial zoom; rescales to fit
+
+const state = {
+  pts: [],              // vertices in inches, [{x,y}]
+  finished: false,
+  hover: null,          // current mouse pos in inches for rubber band
+  mouseSvg: null,       // mouse in svg px
+  snap: true,
+  units: 'ftin',        // 'ftin' | 'ft'
+  showElements: true,
+  showClearance: true,
+  drag: null,           // { idx, offsetX, offsetY }
+  // viewport (inches -> svg units). 1 svg unit = 1 inch.
+  view: { w: 1200, h: 760, pad: 40 }
+};
+
+/* ---------- Formatting helpers ---------- */
+function fmtFtIn(inches, { signed = false } = {}) {
+  const neg = inches < 0;
+  const v = Math.abs(inches);
+  const ft = Math.floor(v / 12);
+  const inRem = v - ft * 12;
+  const inStr = (Math.round(inRem * 10) / 10).toFixed(inRem % 1 === 0 ? 0 : 1).replace(/\.0$/, '');
+  const s = `${ft}′ ${inStr}″`;
+  return (neg ? '-' : (signed ? '+' : '')) + s;
+}
+function fmtFtDec(inches) {
+  return (inches / 12).toFixed(2) + "′";
+}
+function fmt(inches) { return state.units === 'ftin' ? fmtFtIn(inches) : fmtFtDec(inches); }
+function fmtMoney(n) {
+  if (!isFinite(n)) return '$0';
+  const sign = n < 0 ? '-' : '';
+  const v = Math.abs(n);
+  return sign + '$' + v.toLocaleString(undefined, { maximumFractionDigits: 0 });
+}
+function fmtFt(inches) { return (inches / 12).toFixed(1) + ' ft'; }
+
+/* ---------- DOM ---------- */
+const svg = document.getElementById('svg');
+const stage = document.getElementById('stage');
+const emptyState = document.getElementById('emptyState');
+const modePill = document.getElementById('modePill');
+
+/* ---------- Coordinate system ----------
+   SVG viewBox is in inches. We fit content into the stage element's pixel size.
+*/
+function resizeViewBox() {
+  const r = stage.getBoundingClientRect();
+  const aspect = r.width / r.height || 1.5;
+  // Default viewport: ~30 ft wide — stable while drawing
+  let w = 30 * IN_PER_FT;
+  let h = w / aspect;
+
+  // Only auto-fit once the polygon is finished (stable coordinates while drawing).
+  if (state.finished && state.pts.length >= 2) {
+    const bb = bbox(state.pts);
+    const padIn = 48;
+    const needW = bb.w + padIn * 2;
+    const needH = bb.h + padIn * 2;
+    if (needW / needH > aspect) { w = needW; h = needW / aspect; }
+    else { h = needH; w = needH * aspect; }
+    state.view.originX = bb.minX - (w - bb.w) / 2;
+    state.view.originY = bb.minY - (h - bb.h) / 2;
+  } else {
+    // Center the empty canvas so (0,0) is top-left-ish but with headroom
+    state.view.originX = -24;
+    state.view.originY = -24;
+  }
+  state.view.w = w; state.view.h = h;
+  svg.setAttribute('viewBox', `${state.view.originX} ${state.view.originY} ${w} ${h}`);
+}
+window.addEventListener('resize', () => { resizeViewBox(); render(); });
+
+function svgPointFromEvent(e) {
+  const pt = svg.createSVGPoint();
+  pt.x = e.clientX; pt.y = e.clientY;
+  const ctm = svg.getScreenCTM();
+  if (!ctm) return { x: 0, y: 0 };
+  const inv = ctm.inverse();
+  const p = pt.matrixTransform(inv);
+  return { x: p.x, y: p.y };
+}
+function snap(v) {
+  if (!state.snap) return v;
+  const g = TWEAKS.snapGridIn;
+  return Math.round(v / g) * g;
+}
+function snapPt(p) { return { x: snap(p.x), y: snap(p.y) }; }
+
+/* ---------- Geometry ---------- */
+function bbox(pts) {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  pts.forEach(p => { minX = Math.min(minX, p.x); minY = Math.min(minY, p.y); maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y); });
+  return { minX, minY, maxX, maxY, w: maxX - minX, h: maxY - minY };
+}
+function polyArea(pts) {
+  if (pts.length < 3) return 0;
+  let s = 0;
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[i], b = pts[(i + 1) % pts.length];
+    s += a.x * b.y - b.x * a.y;
+  }
+  return Math.abs(s) / 2; // sq inches
+}
+function polyPerim(pts, closed = true) {
+  let p = 0;
+  const n = pts.length;
+  for (let i = 0; i < n - (closed ? 0 : 1); i++) {
+    const a = pts[i], b = pts[(i + 1) % n];
+    p += Math.hypot(b.x - a.x, b.y - a.y);
+  }
+  return p;
+}
+function longestEdge(pts) {
+  let best = { len: 0, a: null, b: null };
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[i], b = pts[(i + 1) % pts.length];
+    const len = Math.hypot(b.x - a.x, b.y - a.y);
+    if (len > best.len) best = { len, a, b };
+  }
+  return best;
+}
+function pointInPoly(p, poly) {
+  let inside = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const xi = poly[i].x, yi = poly[i].y, xj = poly[j].x, yj = poly[j].y;
+    const intersect = ((yi > p.y) !== (yj > p.y)) &&
+      (p.x < (xj - xi) * (p.y - yi) / (yj - yi + 1e-9) + xi);
+    if (intersect) inside = !inside;
+  }
+  return inside;
+}
+// Sutherland–Hodgman polygon clip against an axis-aligned rect [xmin,ymin,xmax,ymax]
+function clipPolyToRect(poly, rect) {
+  const [xmin, ymin, xmax, ymax] = rect;
+  function clipEdge(input, inside, intersect) {
+    const out = [];
+    for (let i = 0; i < input.length; i++) {
+      const curr = input[i], prev = input[(i - 1 + input.length) % input.length];
+      const cIn = inside(curr), pIn = inside(prev);
+      if (cIn) {
+        if (!pIn) out.push(intersect(prev, curr));
+        out.push(curr);
+      } else if (pIn) {
+        out.push(intersect(prev, curr));
+      }
+    }
+    return out;
+  }
+  let p = poly.slice();
+  // left
+  p = clipEdge(p, q => q.x >= xmin, (a, b) => ({ x: xmin, y: a.y + (b.y - a.y) * (xmin - a.x) / (b.x - a.x) }));
+  if (!p.length) return p;
+  // right
+  p = clipEdge(p, q => q.x <= xmax, (a, b) => ({ x: xmax, y: a.y + (b.y - a.y) * (xmax - a.x) / (b.x - a.x) }));
+  if (!p.length) return p;
+  // top (y >= ymin)
+  p = clipEdge(p, q => q.y >= ymin, (a, b) => ({ x: a.x + (b.x - a.x) * (ymin - a.y) / (b.y - a.y), y: ymin }));
+  if (!p.length) return p;
+  // bottom (y <= ymax)
+  p = clipEdge(p, q => q.y <= ymax, (a, b) => ({ x: a.x + (b.x - a.x) * (ymax - a.y) / (b.y - a.y), y: ymax }));
+  return p;
+}
+/* Rotate / unrotate points around origin by angle (rad). */
+function rot(p, a) { const c = Math.cos(a), s = Math.sin(a); return { x: p.x * c - p.y * s, y: p.x * s + p.y * c }; }
+function rotPoly(poly, a) { return poly.map(p => rot(p, a)); }
+
+/* ---------- Heating element layout ----------
+   1) Find longest edge; rotate polygon so that edge is horizontal (angle = edge direction).
+   2) Inset polygon by wallClearance — approximated by clipping to bbox inset AND
+      intersecting with the original polygon (safe approximation for near-convex rooms).
+      Better: compute Minkowski inset per edge — but for speed we clip against each
+      original edge's inward-offset halfplane. This gives correct inset for convex
+      and reasonable results for mildly concave rooms.
+   3) In rotated space, lay horizontal strips of `width` every (width + rowGap),
+      starting at inset top. For each strip, clip against the inset polygon to
+      get run segments (snake-runs). Sum their lengths for linear footage.
+*/
+/* Distance from point to a line segment */
+function distToSeg(p, a, b) {
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const L2 = dx*dx + dy*dy;
+  if (L2 < 1e-9) return Math.hypot(p.x - a.x, p.y - a.y);
+  let t = ((p.x - a.x) * dx + (p.y - a.y) * dy) / L2;
+  t = Math.max(0, Math.min(1, t));
+  return Math.hypot(p.x - (a.x + t*dx), p.y - (a.y + t*dy));
+}
+function distToPolyBoundary(p, poly) {
+  let d = Infinity;
+  for (let i = 0; i < poly.length; i++) {
+    const a = poly[i], b = poly[(i + 1) % poly.length];
+    d = Math.min(d, distToSeg(p, a, b));
+  }
+  return d;
+}
+/* Test: is point `inside polygon AND at least `inset` from any edge */
+function isInsetInterior(p, poly, inset) {
+  return pointInPoly(p, poly) && distToPolyBoundary(p, poly) >= inset - 1e-6;
+}
+
+/* Build visual inset polygon for display (concave-safe).
+   Approach: rasterize at coarse resolution, march cells, approximate contour
+   by offsetting each edge inward by `inset` and trimming self-intersections.
+   For display-only we use a simpler halfplane union-approach: offset each
+   edge and reconstruct via edge intersections. Works for simple polygons
+   (convex or concave with > inset-wide corridors). */
+function insetPolygonForDisplay(poly, inset) {
+  if (poly.length < 3) return [];
+  // Determine orientation (signed area in SVG y-down: positive = CW)
+  let signed = 0;
+  for (let i = 0; i < poly.length; i++) {
+    const a = poly[i], b = poly[(i + 1) % poly.length];
+    signed += (b.x - a.x) * (b.y + a.y);
+  }
+  const cw = signed > 0;
+
+  // Offset each edge inward; then find intersections of consecutive offset lines.
+  const n = poly.length;
+  const lines = [];
+  for (let i = 0; i < n; i++) {
+    const a = poly[i], b = poly[(i + 1) % n];
+    const ex = b.x - a.x, ey = b.y - a.y;
+    const len = Math.hypot(ex, ey) || 1;
+    let nx = ey / len, ny = -ex / len;
+    if (!cw) { nx = -nx; ny = -ny; }
+    const ax = a.x + nx * inset, ay = a.y + ny * inset;
+    const bx = b.x + nx * inset, by = b.y + ny * inset;
+    lines.push({ ax, ay, bx, by, dx: bx - ax, dy: by - ay });
+  }
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const L1 = lines[(i - 1 + n) % n], L2 = lines[i];
+    const denom = L1.dx * L2.dy - L1.dy * L2.dx;
+    if (Math.abs(denom) < 1e-6) { out.push({ x: L2.ax, y: L2.ay }); continue; }
+    const t = ((L2.ax - L1.ax) * L2.dy - (L2.ay - L1.ay) * L2.dx) / denom;
+    out.push({ x: L1.ax + t * L1.dx, y: L1.ay + t * L1.dy });
+  }
+  return out;
+}
+
+function computeElementLayout(polyIn) {
+  const result = {
+    rows: [], totalInches: 0, totalFt: 0, angle: 0,
+    coverageSqIn: 0, insetPoly: [], wallClearance: TWEAKS.wallClearanceIn,
+    elementWidth: TWEAKS.elementWidthIn
+  };
+  if (polyIn.length < 3) return result;
+
+  const le = longestEdge(polyIn);
+  if (!le.a) return result;
+  const angle = Math.atan2(le.b.y - le.a.y, le.b.x - le.a.x);
+  const rotated = rotPoly(polyIn, -angle);
+
+  const inset = TWEAKS.wallClearanceIn;
+  const width = TWEAKS.elementWidthIn;
+  const gap = TWEAKS.rowSpacingIn;
+  const pitch = width + gap;
+
+  const bb = bbox(rotated);
+  // Start strips so first strip center is at bb.minY + inset + width/2
+  const firstTop = bb.minY + inset;
+  const rows = [];
+  const stepX = 1; // inch resolution for scanning
+  let k = 0;
+  while (true) {
+    const y0 = firstTop + k * pitch;
+    const y1 = y0 + width;
+    if (y1 > bb.maxY - inset + 1e-6) break;
+    const yc = (y0 + y1) / 2;
+
+    // Scan x across bb; for each x, test center + top/bottom strip edges are inside with inset.
+    // Break into runs where the strip is fully clear (center inside poly AND dist to boundary >= inset, considering strip half-width).
+    const runs = [];
+    let inRun = false, runStart = 0;
+    for (let x = bb.minX; x <= bb.maxX; x += stepX) {
+      const cPt = { x, y: yc };
+      // Quick check: center inside polygon AND distance from strip edges >= inset from walls.
+      // Effective constraint: distance from boundary to center >= inset + width/2 (so strip edge is >= inset from wall).
+      const inside = pointInPoly(cPt, rotated);
+      const d = inside ? distToPolyBoundary(cPt, rotated) : 0;
+      const ok = inside && d >= inset + width / 2 - 0.5;
+      if (ok && !inRun) { inRun = true; runStart = x; }
+      else if (!ok && inRun) { inRun = false; runs.push([runStart, x - stepX]); }
+    }
+    if (inRun) runs.push([runStart, bb.maxX]);
+
+    // Keep runs with a minimum useful length
+    const kept = runs.filter(([a, b]) => (b - a) >= 6);
+    kept.forEach(([xs, xe]) => {
+      const poly = [
+        { x: xs, y: y0 }, { x: xe, y: y0 },
+        { x: xe, y: y1 }, { x: xs, y: y1 }
+      ];
+      rows.push({
+        index: rows.length,
+        lengthIn: xe - xs,
+        polyRotated: poly,
+        polyOriginal: rotPoly(poly, angle),
+        yCenter: yc
+      });
+    });
+    k++;
+    if (k > 1000) break; // safety
+  }
+
+  const totalIn = rows.reduce((s, r) => s + r.lengthIn, 0);
+  const coverageSqIn = rows.reduce((s, r) => s + r.lengthIn * width, 0);
+  const insetPoly = insetPolygonForDisplay(polyIn, inset);
+
+  return {
+    rows, totalInches: totalIn, totalFt: totalIn / 12, angle,
+    coverageSqIn, insetPoly, wallClearance: inset, elementWidth: width
+  };
+}
+
+/* ---------- Rendering ---------- */
+function el(name, attrs = {}, children = []) {
+  const n = document.createElementNS('http://www.w3.org/2000/svg', name);
+  for (const k in attrs) {
+    if (attrs[k] == null) continue;
+    n.setAttribute(k, attrs[k]);
+  }
+  (Array.isArray(children) ? children : [children]).forEach(c => c && n.appendChild(c));
+  return n;
+}
+
+function render() {
+  resizeViewBox();
+  // Scale text size to viewBox so labels read ~13 px on screen regardless of zoom.
+  const stageW = stage.getBoundingClientRect().width || 900;
+  const inchesPerPx = state.view.w / stageW;
+  const fontIn = 13 * inchesPerPx;       // body labels ~13 px
+  const fontRulerIn = 11 * inchesPerPx;  // ruler ticks ~11 px
+  state.fontIn = fontIn;
+  state.fontRulerIn = fontRulerIn;
+  state.vtxR = 5 * inchesPerPx;          // vertex handle 5 px
+  // Clear svg
+  while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+  // ---- Grid (in inches) ----
+  const g = el('g');
+  const { originX, originY, w, h } = state.view;
+  const gridIn = 12; // 1 ft minor lines
+  const strongIn = 60; // 5 ft lines
+  const x0 = Math.floor(originX / gridIn) * gridIn;
+  const y0 = Math.floor(originY / gridIn) * gridIn;
+  for (let x = x0; x <= originX + w; x += gridIn) {
+    const strong = Math.abs(x % strongIn) < 1e-6;
+    g.appendChild(el('line', { x1: x, y1: originY, x2: x, y2: originY + h, class: 'grid-line' + (strong ? ' strong' : '') }));
+  }
+  for (let y = y0; y <= originY + h; y += gridIn) {
+    const strong = Math.abs(y % strongIn) < 1e-6;
+    g.appendChild(el('line', { x1: originX, y1: y, x2: originX + w, y2: y, class: 'grid-line' + (strong ? ' strong' : '') }));
+  }
+  svg.appendChild(g);
+
+  // ---- Ruler ticks (every 5 ft along top/left) ----
+  const rulerG = el('g');
+  for (let x = Math.ceil(originX / strongIn) * strongIn; x <= originX + w; x += strongIn) {
+    rulerG.appendChild(el('text', { x: x + fontRulerIn * 0.4, y: originY + fontRulerIn * 1.4, class: 'ruler-text', 'font-size': fontRulerIn }, document.createTextNode(fmtFtIn(x).replace(' 0″', ''))));
+  }
+  svg.appendChild(rulerG);
+
+  // ---- Finished polygon ----
+  if (state.pts.length >= 3 && state.finished) {
+    const ptsAttr = state.pts.map(p => `${p.x},${p.y}`).join(' ');
+    svg.appendChild(el('polygon', { points: ptsAttr, class: 'room-fill' }));
+
+    // Heating layout
+    const layout = computeElementLayout(state.pts);
+    if (state.showClearance && layout.insetPoly.length >= 3) {
+      const insetAttr = layout.insetPoly.map(p => `${p.x},${p.y}`).join(' ');
+      svg.appendChild(el('polygon', { points: insetAttr, class: 'clearance' }));
+    }
+    if (state.showElements) {
+      const gEl = el('g');
+      layout.rows.forEach(r => {
+        const poly = r.polyOriginal;
+        if (poly.length < 3) return;
+        const pAttr = poly.map(p => `${p.x},${p.y}`).join(' ');
+        gEl.appendChild(el('polygon', { points: pAttr, class: 'element-strip' }));
+        gEl.appendChild(el('polygon', { points: pAttr, class: 'element-strip-outline' }));
+      });
+      svg.appendChild(gEl);
+    }
+
+    // Room edge on top
+    svg.appendChild(el('polygon', { points: ptsAttr, class: 'room-edge' }));
+
+    // Edge labels
+    const labels = el('g');
+    for (let i = 0; i < state.pts.length; i++) {
+      const a = state.pts[i], b = state.pts[(i + 1) % state.pts.length];
+      const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      const len = Math.hypot(b.x - a.x, b.y - a.y);
+      // offset label outward (perpendicular)
+      const nx = -(b.y - a.y) / (len || 1), ny = (b.x - a.x) / (len || 1);
+      // determine outward direction: move test pt along n; if inside poly, flip
+      const testIn = pointInPoly({ x: mx + nx * 5, y: my + ny * 5 }, state.pts);
+      const sign = testIn ? -1 : 1;
+      const off = fontIn * 1.4;
+      const lx = mx + nx * off * sign, ly = my + ny * off * sign + fontIn * 0.35;
+      labels.appendChild(el('text', { x: lx, y: ly, class: 'edge-length', 'text-anchor': 'middle', 'font-size': fontIn },
+        document.createTextNode(fmt(len))));
+    }
+    svg.appendChild(labels);
+
+    // Vertex handles (for edit)
+    const vg = el('g');
+    state.pts.forEach((p, i) => {
+      vg.appendChild(el('circle', { cx: p.x, cy: p.y, r: state.vtxR, class: 'vertex', 'stroke-width': state.vtxR * 0.4, 'data-idx': i }));
+    });
+    svg.appendChild(vg);
+  } else if (state.pts.length >= 1 && !state.finished) {
+    // In-progress polyline
+    const ptsStr = state.pts.map(p => `${p.x},${p.y}`).join(' ');
+    svg.appendChild(el('polyline', { points: ptsStr, class: 'room-edge' }));
+
+    // Rubber band to hover
+    if (state.hover) {
+      const last = state.pts[state.pts.length - 1];
+      svg.appendChild(el('line', {
+        x1: last.x, y1: last.y, x2: state.hover.x, y2: state.hover.y, class: 'room-preview'
+      }));
+      // In-progress edge length
+      const mx = (last.x + state.hover.x) / 2, my = (last.y + state.hover.y) / 2;
+      const len = Math.hypot(state.hover.x - last.x, state.hover.y - last.y);
+      if (len > 6) {
+        svg.appendChild(el('text', { x: mx, y: my - fontIn * 0.5, class: 'edge-length', 'text-anchor': 'middle', 'font-size': fontIn }, document.createTextNode(fmt(len))));
+      }
+    }
+    // Points
+    state.pts.forEach((p, i) => {
+      svg.appendChild(el('circle', {
+        cx: p.x, cy: p.y, r: (i === 0 ? 7 : 4) * inchesPerPx,
+        'stroke-width': state.vtxR * 0.4,
+        class: 'vertex' + (i === 0 ? ' vertex-first' : '')
+      }));
+    });
+
+    // Show edge lengths for already-placed edges
+    for (let i = 0; i < state.pts.length - 1; i++) {
+      const a = state.pts[i], b = state.pts[i + 1];
+      const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+      const len = Math.hypot(b.x - a.x, b.y - a.y);
+      svg.appendChild(el('text', { x: mx + fontIn * 0.7, y: my - fontIn * 0.3, class: 'edge-length', 'font-size': fontIn }, document.createTextNode(fmt(len))));
+    }
+  }
+
+  emptyState.style.display = state.pts.length === 0 && !state.finished ? 'flex' : 'none';
+  modePill.textContent = state.finished ? 'Edit mode' : (state.pts.length ? 'Drawing…' : 'Draw mode');
+  document.getElementById('btnFinish').disabled = !(state.pts.length >= 3 && !state.finished);
+  document.getElementById('btnUndo').disabled = state.finished || state.pts.length === 0;
+
+  updateStats();
+  attachVertexHandlers();
+}
+
+/* ---------- Stats panel ---------- */
+function updateStats() {
+  const n = state.pts.length;
+  document.getElementById('statVerts').textContent = n;
+  const perim = state.finished ? polyPerim(state.pts, true) : polyPerim(state.pts, false);
+  document.getElementById('statPerim').textContent = fmt(perim);
+
+  if (state.finished && n >= 3) {
+    const areaInSq = polyArea(state.pts);
+    const sqft = areaInSq / 144;
+    document.getElementById('areaSqFt').innerHTML = `${sqft.toFixed(1)} <span class="unit">sq ft</span>`;
+    const bb = bbox(state.pts);
+    document.getElementById('areaSub').textContent = `${n}-sided polygon · ${(areaInSq).toFixed(0).toLocaleString()} sq in`;
+    document.getElementById('mPerim').textContent = fmt(perim);
+    document.getElementById('mBbox').textContent = `${fmt(bb.w)} × ${fmt(bb.h)}`;
+    const le = longestEdge(state.pts);
+    document.getElementById('mLongest').textContent = fmt(le.len);
+
+    const layout = computeElementLayout(state.pts);
+    document.getElementById('mElWidth').textContent = `${TWEAKS.elementWidthIn}″`;
+    document.getElementById('mRows').textContent = layout.rows.length;
+    const covSqft = layout.coverageSqIn / 144;
+    document.getElementById('mCoverage').textContent = `${covSqft.toFixed(1)} sq ft (${Math.round((covSqft / sqft) * 100)}%)`;
+    const ftNeeded = layout.totalFt;
+    document.getElementById('mLinFt').textContent = `${ftNeeded.toFixed(1)} ft`;
+    const cost = ftNeeded * TWEAKS.costPerFoot;
+    document.getElementById('mCost').textContent = fmtMoney(cost);
+    document.getElementById('mCostBreakdown').textContent = `${ftNeeded.toFixed(1)} ft × $${TWEAKS.costPerFoot.toFixed(2)} / ft`;
+
+    computeSavings(sqft);
+    buildQuoteMailto();
+  } else {
+    document.getElementById('areaSqFt').innerHTML = `0 <span class="unit">sq ft</span>`;
+    document.getElementById('areaSub').textContent = state.pts.length ? 'Keep adding corners…' : 'Draw a room to begin.';
+    document.getElementById('mPerim').textContent = '—';
+    document.getElementById('mBbox').textContent = '—';
+    document.getElementById('mLongest').textContent = '—';
+    document.getElementById('mRows').textContent = '0';
+    document.getElementById('mCoverage').textContent = '—';
+    document.getElementById('mLinFt').textContent = '0 ft';
+    document.getElementById('mCost').textContent = '$0';
+    document.getElementById('mCostBreakdown').textContent = `0 ft × $${TWEAKS.costPerFoot.toFixed(2)} / ft`;
+    document.getElementById('mSavings').textContent = '$0';
+    document.getElementById('mSavingsBreak').textContent = '—';
+    document.getElementById('mElec').textContent = '—';
+    document.getElementById('mGas').textContent = '—';
+    buildQuoteMailto();
+  }
+}
+
+/* ---------- Savings ---------- */
+function readAdv() {
+  return {
+    hoursDay: +document.getElementById('inHoursDay').value || 0,
+    daysYr: +document.getElementById('inDaysYr').value || 0,
+    elecRate: +document.getElementById('inElecRate').value || 0,
+    wattsSqft: +document.getElementById('inWattsSqft').value || 0,
+    dutyCycle: +document.getElementById('inDutyCycle').value || 1,
+    gasRate: +document.getElementById('inGasRate').value || 0,
+    gasBtu: +document.getElementById('inGasBtu').value || 0,
+    gasEff: +document.getElementById('inGasEff').value || 1,
+    years: +document.getElementById('inYears').value || 10
+  };
+}
+function computeSavings(sqft) {
+  const a = readAdv();
+  const hoursPerYear = a.hoursDay * a.daysYr;
+  // STEP runs on a thermostat — apply duty cycle (typical 30–50%).
+  const kWhYear = (sqft * a.wattsSqft * hoursPerYear * a.dutyCycle) / 1000;
+  const elecCostYr = kWhYear * a.elecRate;
+  // Gas forced-air equivalent: same heat demand, poorer room-level efficiency.
+  const thermsYr = (a.gasBtu * sqft * hoursPerYear) / (a.gasEff * 100000);
+  const gasCostYr = thermsYr * a.gasRate;
+
+  const elecTotal = elecCostYr * a.years;
+  const gasTotal = gasCostYr * a.years;
+  const savings = gasTotal - elecTotal;
+
+  document.getElementById('mElec').textContent = fmtMoney(elecTotal);
+  document.getElementById('mGas').textContent = fmtMoney(gasTotal);
+  document.getElementById('mSavings').textContent = fmtMoney(Math.max(0, savings));
+  document.getElementById('mSavingsBreak').textContent =
+    `${a.years} yr · ${Math.round(sqft)} sq ft · ${a.hoursDay}h × ${a.daysYr}d/yr`;
+}
+
+
+/* ---------- Custom quote mailto ---------- */
+function buildQuoteMailto() {
+  const btn = document.getElementById('btnQuote');
+  if (!btn) return;
+  const SITE = 'https://roblusk.github.io/stableheat-blog/floor-planner/';
+  if (!state.finished || state.pts.length < 3) {
+    const subj = encodeURIComponent('Custom floor-heating quote');
+    const body = encodeURIComponent(
+      "I haven't finished drawing a room yet. Please open the floor planner at " +
+      SITE + " to design a layout, then come back to request a quote."
+    );
+    btn.href = 'mailto:sales@stableheat.com?subject=' + subj + '&body=' + body;
+    return;
+  }
+  const sqft = polyArea(state.pts) / 144;
+  const perim = polyPerim(state.pts, true);
+  const le = longestEdge(state.pts);
+  const layout = computeElementLayout(state.pts);
+  const ftNeeded = layout.totalFt;
+  const cost = ftNeeded * TWEAKS.costPerFoot;
+  const a = readAdv();
+  const hoursPerYear = a.hoursDay * a.daysYr;
+  const kWhYear = (sqft * a.wattsSqft * hoursPerYear * a.dutyCycle) / 1000;
+  const elecCostYr = kWhYear * a.elecRate;
+  const thermsYr = (a.gasBtu * sqft * hoursPerYear) / (a.gasEff * 100000);
+  const gasCostYr = thermsYr * a.gasRate;
+  const savings = Math.max(0, (gasCostYr - elecCostYr) * a.years);
+  const subj = encodeURIComponent('Custom floor-heating quote — ' + sqft.toFixed(1) + ' sq ft');
+  const lines = [
+    'I designed a custom heating layout in your floor planner.',
+    '',
+    'Room area:        ' + sqft.toFixed(1) + ' sq ft',
+    'Perimeter:        ' + fmtFtIn(perim),
+    'Longest wall:     ' + fmtFtIn(le.len) + '  (heating runs along this wall)',
+    'Heating element:  ' + ftNeeded.toFixed(1) + ' linear ft',
+    'Estimated cost:   ' + fmtMoney(cost) + ' (material only, at $' + TWEAKS.costPerFoot.toFixed(2) + '/ft)',
+    'Projected savings: ' + fmtMoney(savings) + ' over ' + a.years + ' years vs gas',
+    '',
+    'Designed at ' + SITE,
+    'Please send a quote for this layout.'
+  ];
+  const body = encodeURIComponent(lines.join('\n'));
+  btn.href = 'mailto:sales@stableheat.com?subject=' + subj + '&body=' + body;
+}
+
+['inHoursDay','inDaysYr','inElecRate','inWattsSqft','inDutyCycle','inGasRate','inGasBtu','inGasEff','inYears']
+  .forEach(id => document.getElementById(id).addEventListener('input', () => {
+    if (state.finished && state.pts.length >= 3) {
+      computeSavings(polyArea(state.pts) / 144);
+      buildQuoteMailto();
+    }
+  }));
+document.getElementById('btnResetAdv').addEventListener('click', (e) => {
+  e.preventDefault();
+  const defaults = { inHoursDay: 8, inDaysYr: 180, inElecRate: 0.14, inWattsSqft: 10, inDutyCycle: 0.40, inGasRate: 1.80, inGasBtu: 40, inGasEff: 0.80, inYears: 10 };
+  Object.entries(defaults).forEach(([k,v]) => document.getElementById(k).value = v);
+  if (state.finished && state.pts.length >= 3) computeSavings(polyArea(state.pts) / 144);
+});
+
+/* ---------- Interaction ---------- */
+stage.addEventListener('mousemove', (e) => {
+  const p = svgPointFromEvent(e);
+  state.mouseSvg = p;
+  document.getElementById('statMouse').textContent = `${fmt(p.x - 0)}, ${fmt(p.y - 0)}`;
+  if (!state.finished) {
+    state.hover = snapPt(p);
+    render();
+  }
+  if (state.drag) {
+    const raw = svgPointFromEvent(e);
+    state.pts[state.drag.idx] = snapPt({ x: raw.x, y: raw.y });
+    render();
+  }
+});
+stage.addEventListener('mouseleave', () => {
+  state.hover = null;
+  document.getElementById('statMouse').textContent = '—';
+  if (!state.finished) render();
+});
+
+stage.addEventListener('click', (e) => {
+  if (state.drag) return;
+  if (state.finished) return;
+  const p = snapPt(svgPointFromEvent(e));
+  // click near first point to close
+  if (state.pts.length >= 3) {
+    const first = state.pts[0];
+    if (Math.hypot(p.x - first.x, p.y - first.y) < 10) {
+      finishShape();
+      return;
+    }
+  }
+  // avoid duplicate
+  const last = state.pts[state.pts.length - 1];
+  if (last && last.x === p.x && last.y === p.y) return;
+  state.pts.push(p);
+  render();
+});
+
+stage.addEventListener('dblclick', (e) => {
+  if (!state.finished && state.pts.length >= 3) { finishShape(); e.preventDefault(); }
+});
+
+document.addEventListener('keydown', (e) => {
+  const tgt = e.target;
+  if (tgt && tgt.matches && tgt.matches('input, textarea')) return;
+  if (e.key === 'Enter' && !state.finished && state.pts.length >= 3) { finishShape(); }
+  if (e.key === 'Escape') { state.drag = null; }
+  if ((e.key === 'z' || e.key === 'Z') && !state.finished) {
+    state.pts.pop(); render();
+  }
+  if (e.key === 'Backspace' && !state.finished) {
+    state.pts.pop(); render();
+  }
+});
+
+function finishShape() {
+  if (state.pts.length < 3) return;
+  // Remove exact-duplicate closing click
+  const first = state.pts[0], last = state.pts[state.pts.length - 1];
+  if (Math.hypot(first.x - last.x, first.y - last.y) < 6) state.pts.pop();
+  if (state.pts.length < 3) return;
+  state.finished = true;
+  state.hover = null;
+  render();
+}
+
+/* Vertex drag (in edit mode) */
+function attachVertexHandlers() {
+  svg.querySelectorAll('.vertex[data-idx]').forEach(circle => {
+    circle.addEventListener('mousedown', (e) => {
+      if (!state.finished) return;
+      const idx = +circle.getAttribute('data-idx');
+      state.drag = { idx };
+      circle.classList.add('dragging');
+      e.stopPropagation();
+    });
+  });
+}
+window.addEventListener('mouseup', () => {
+  if (state.drag) {
+    state.drag = null;
+    svg.querySelectorAll('.vertex.dragging').forEach(c => c.classList.remove('dragging'));
+  }
+});
+
+/* Toolbar */
+document.getElementById('btnFinish').addEventListener('click', finishShape);
+document.getElementById('btnClear').addEventListener('click', () => {
+  state.pts = []; state.finished = false; state.hover = null; render();
+});
+document.getElementById('btnUndo').addEventListener('click', () => {
+  if (state.finished) return;
+  state.pts.pop(); render();
+});
+function setSeg(onId, offIds) {
+  document.getElementById(onId).classList.add('on');
+  offIds.forEach(id => document.getElementById(id).classList.remove('on'));
+}
+document.getElementById('unitFtIn').addEventListener('click', () => { state.units = 'ftin'; setSeg('unitFtIn', ['unitFt']); render(); });
+document.getElementById('unitFt').addEventListener('click', () => { state.units = 'ft'; setSeg('unitFt', ['unitFtIn']); render(); });
+document.getElementById('snapOn').addEventListener('click', () => { state.snap = true; setSeg('snapOn', ['snapOff']); render(); });
+document.getElementById('snapOff').addEventListener('click', () => { state.snap = false; setSeg('snapOff', ['snapOn']); render(); });
+document.getElementById('showElements').addEventListener('change', (e) => { state.showElements = e.target.checked; render(); });
+document.getElementById('showClearance').addEventListener('change', (e) => { state.showClearance = e.target.checked; render(); });
+
+/* ---------- Seed with a friendly example? No — start empty per spec ---------- */
+render();
+
+</script>
+
+
+</body></html>
