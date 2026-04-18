@@ -6,13 +6,13 @@ date: 2025-12-25
 readTime: "3 min read"
 thumbVariant: 4
 thumbIcon: "anchor"
-excerpt: "The marine heating panel system aboard NOAA's fisheries research vessels — engineered for federal procurement standards and the harshest ocean conditions on the planet."
+excerpt: "The marine heating panel system aboard NOAA's fisheries research vessels: engineered for federal procurement standards and the harshest ocean conditions on the planet."
 applications: ["marine"]
 heroImage: ./cover.jpg
 heroImageAlt: "A NOAA fisheries research vessel (designation R 224) sliding sideways into the water at her christening, with bunting along the rails and spray rising from the launch ways."
 ---
 
-Federal procurement is its own kind of engineering brief. The specifications are exhaustive. The acceptance testing is rigorous. The downstream consequences of a failure — a research vessel halted in remote waters, a season of fisheries data lost, a crew exposed to conditions that would have been comfortable with a working system — are taken seriously.
+Federal procurement is its own kind of engineering brief. The specifications are exhaustive. The acceptance testing is rigorous. The downstream consequences of a failure (a research vessel halted in remote waters, a season of fisheries data lost, a crew exposed to conditions that would have been comfortable with a working system) are taken seriously.
 
 NOAA's fisheries research vessels operate in some of the toughest marine environments on Earth: the Bering Sea, the North Atlantic, polar fishery waters. Working decks need to stay clear of ice. Crew quarters need to stay dry. Below-deck spaces need consistent thermal management even when the vessel is operating in 30°F seas with 20-knot winds breaking spray over the bow.
 

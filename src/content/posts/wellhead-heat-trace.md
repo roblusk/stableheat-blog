@@ -6,7 +6,7 @@ date: 2026-02-17
 readTime: "3 min read"
 thumbVariant: 7
 thumbIcon: "oil-well"
-excerpt: "Spec considerations for wellhead heat trace — voltage, redundancy, and the self-regulating cable difference in field conditions."
+excerpt: "Spec considerations for wellhead heat trace: voltage, redundancy, and the self-regulating cable difference in field conditions."
 applications: ["oil-gas"]
 ---
 
@@ -18,11 +18,11 @@ Specifying that system correctly is the difference between insurance and theater
 
 Wellhead heat trace is conceptually simple. Specifying it well requires attention to three things that low-budget installations routinely shortcut:
 
-**1. Watt density and end-of-line behavior.** The cable at the far end of a long run is the cable doing the most work in the worst conditions. Specifying for the average loss across the run produces a system that fails at the cold end first. Self-regulating cable is forgiving here because it adjusts locally — but the spec still needs to size for the worst-case zone, not the average.
+**1. Watt density and end-of-line behavior.** The cable at the far end of a long run is the cable doing the most work in the worst conditions. Specifying for the average loss across the run produces a system that fails at the cold end first. Self-regulating cable is forgiving here because it adjusts locally, but the spec still needs to size for the worst-case zone, not the average.
 
 **2. Voltage and circuit length.** Long runs at low voltage can drop voltage at the far end below what the cable needs to function. Wellhead installations frequently push circuit lengths near the limit, and a missed calculation produces a circuit that nominally works but underperforms when you most need it.
 
-**3. Redundancy where it counts.** Critical lines — the wellhead choke, the produced-water line, instrument tubing for SCADA — should not share a single circuit with non-critical heating. A single damage point on a shared circuit takes down everything downstream. Splitting circuits costs marginal money upfront and prevents the cascading failure mode.
+**3. Redundancy where it counts.** Critical lines (the wellhead choke, the produced-water line, instrument tubing for SCADA) should not share a single circuit with non-critical heating. A single damage point on a shared circuit takes down everything downstream. Splitting circuits costs marginal money upfront and prevents the cascading failure mode.
 
 > Specify for the worst forecast on the worst night, not the average forecast on the average night.
 

@@ -10,7 +10,7 @@ excerpt: "A practical guide to sizing array heat trace by climate, panel type, a
 applications: ["solar"]
 ---
 
-When solar installers first start spec'ing panel heating for cold-climate arrays, the most common question we get is about wattage: how much heat trace do you actually need per panel? The intuitive answer — "enough to melt the worst snow you'll see" — leads to over-spec'd, over-priced installations that homeowners and developers alike push back on.
+When solar installers first start spec'ing panel heating for cold-climate arrays, the most common question we get is about wattage: how much heat trace do you actually need per panel? The intuitive answer ("enough to melt the worst snow you'll see") leads to over-spec'd, over-priced installations that homeowners and developers alike push back on.
 
 The right answer is more nuanced, because the system isn't trying to melt snow. It's trying to release it.
 
@@ -22,7 +22,7 @@ A standard 60-cell solar panel is steeply tilted (15-45° depending on location)
 - Light wind disturbing the snow surface
 - Just enough heat trace to free the panel's leading edge
 
-The third option is the one available on demand. And because gravity is doing most of the work, you only need enough wattage to break the ice bond — typically 6-10 watts per square foot of panel surface, applied for 30-60 minutes per event.
+The third option is the one available on demand. And because gravity is doing most of the work, you only need enough wattage to break the ice bond: typically 6-10 watts per square foot of panel surface, applied for 30-60 minutes per event.
 
 > Brute-force melting is the wrong design target. Releasing the bond is the right one.
 

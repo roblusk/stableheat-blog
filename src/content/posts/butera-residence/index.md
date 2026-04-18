@@ -1,15 +1,15 @@
 ---
 title: "Butera Residence: Twenty-Six Years Above 8,000 Feet"
-deck: "An Aspen residence installed in 2000 — radiant under the floors, snowmelt at the entries, monitored by a third-party engineering firm, and still running on the original elements."
+deck: "An Aspen residence installed in 2000: radiant under the floors, snowmelt at the entries, monitored by a third-party engineering firm, and still running on the original elements."
 category: "Residential"
 date: 2026-04-15
 readTime: "4 min read"
 thumbVariant: 9
 thumbIcon: "house"
-excerpt: "The Butera house in Aspen, Colorado is the longest-running large-scale STEP Warmfloor install we have on file — 7,500 sq ft of mountain home, 5,700 sq ft of heated floor, third-party-verified energy performance, and 26 years of continuous operation."
+excerpt: "The Butera house in Aspen, Colorado is the longest-running large-scale STEP Warmfloor install we have on file: 7,500 sq ft of mountain home, 5,700 sq ft of heated floor, third-party-verified energy performance, and 26 years of continuous operation."
 applications: ["home", "floor", "snowmelt"]
 heroImage: ./cover.jpg
-heroImageAlt: "Exterior view of the Butera Residence in Aspen, Colorado — a 7,500 sq ft mountain home set among trees at 8,000 ft elevation, with snowmelt-equipped entries and walks."
+heroImageAlt: "Exterior view of the Butera Residence in Aspen, Colorado, a 7,500 sq ft mountain home set among trees at 8,000 ft elevation, with snowmelt-equipped entries and walks."
 ---
 
 When a customer asks whether self-regulating radiant will still be running in twenty years, the answer we give them isn't theoretical. The Butera residence in Aspen, Colorado, was installed in 2000. It's running on the original elements, in the original configuration, in year twenty-six. The third-party energy data from the install is on file. The homeowners are still in the house.
@@ -25,15 +25,15 @@ The constraints handed to the contractor were unusually tight:
 - **No central gas service** at the property.
 - **Owner declined a propane tank** for aesthetic and land-use reasons.
 - **Aspen building energy code** at the time was among the strictest electric-heating jurisdictions in the country.
-- **Hydronic was off the table** — the owner's previous house had used hydronic heat and the system had failed.
-- **Forced air was off the table** — the owner specifically did not want it in the new build.
+- **Hydronic was off the table.** The owner's previous house had used hydronic heat and the system had failed.
+- **Forced air was off the table.** The owner specifically did not want it in the new build.
 - **Variety of finish floors**: hardwood, tile, natural stone, and carpet across different rooms.
 
-Schlumberger Construction, the general contractor, evaluated the available electric heating technologies and selected STEP Warmfloor — the underlying self-regulating polymer technology that today ships under the StableHeat brand.
+Schlumberger Construction, the general contractor, evaluated the available electric heating technologies and selected STEP Warmfloor, the underlying self-regulating polymer technology that today ships under the StableHeat brand.
 
 ## What got installed
 
-The system covers 4,878 sq ft on the main level and 836 sq ft on the upper level — 5,714 sq ft of heated floor in total — plus 2,219 sq ft of exterior snowmelt across seven separate entry, walkway, and patio zones.
+The system covers 4,878 sq ft on the main level and 836 sq ft on the upper level (5,714 sq ft of heated floor in total) plus 2,219 sq ft of exterior snowmelt across seven separate entry, walkway, and patio zones.
 
 Five different installation methods were used to handle the variety of subfloor and finish-floor conditions:
 
@@ -41,7 +41,7 @@ Five different installation methods were used to handle the variety of subfloor 
 - Element under the wood subfloor, between joists, for rooms where the finish floor was already in place.
 - Element in thinset on slab, for tile and stone areas.
 - Element embedded in concrete pours, for the exterior snowmelt zones.
-- Element in select wall locations — under tubs and shower pans, behind mirrors — for bathrooms where the floor area alone couldn't deliver the needed wattage.
+- Element in select wall locations (under tubs and shower pans, behind mirrors) for bathrooms where the floor area alone couldn't deliver the needed wattage.
 
 The whole system runs at 24V low voltage. Self-regulation is a property of the polymer itself: as the local floor temperature rises, the element's conductivity drops and output throttles back. There's no in-floor temperature sensor, no risk of overheating under rugs or furniture, and no special handling for the wet-area installs.
 
@@ -52,7 +52,7 @@ Schlumberger Construction submitted the project for an independent energy review
 - **29% less energy consumption than hydronic** for the same heating coverage.
 - **39% less energy consumption than forced air**, before adjusting for the altitude penalty on combustion efficiency.
 
-A separate Schlumberger snowmelt analysis compared the STEP snowmelt against a typical Class 1 hydronic snowmelt design for the Aspen climate. The STEP system delivered seasonal heating at roughly 36,300 Btu/sqft (idle-plus-event mode), versus 54,672 Btu/sqft for the hydronic comparison — a meaningful margin in a region where snowmelt energy use can dominate the winter electric bill.
+A separate Schlumberger snowmelt analysis compared the STEP snowmelt against a typical Class 1 hydronic snowmelt design for the Aspen climate. The STEP system delivered seasonal heating at roughly 36,300 Btu/sqft (idle-plus-event mode), versus 54,672 Btu/sqft for the hydronic comparison, a meaningful margin in a region where snowmelt energy use can dominate the winter electric bill.
 
 These are old numbers, generated by an outside firm at the time of the install. They've held up because the underlying physics hasn't changed.
 
@@ -60,6 +60,6 @@ These are old numbers, generated by an outside firm at the time of the install. 
 
 ## What the project won, and what it confirmed
 
-Schlumberger Construction took the Butera project to the Radiant Panel Association's industry awards and won the Judge's Choice Award in the Electric Residential category. That recognition came in the early years of the install. The more meaningful recognition has been the quiet operational record since — twenty-six years of continuous service, no element failures, no system replacement, no significant maintenance events outside of the kind of incidental work any building of that size requires.
+Schlumberger Construction took the Butera project to the Radiant Panel Association's industry awards and won the Judge's Choice Award in the Electric Residential category. That recognition came in the early years of the install. The more meaningful recognition has been the quiet operational record since: twenty-six years of continuous service, no element failures, no system replacement, no significant maintenance events outside of the kind of incidental work any building of that size requires.
 
 For a customer evaluating self-regulating polymer against hydronic or wire-based electric: the longevity question has an answer, and the answer is in Aspen, on a hillside above a river, in the same house it was installed in twenty-six years ago. That's the reference. It's been running the whole time.

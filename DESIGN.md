@@ -26,6 +26,67 @@ trust the framing.
 ("revolutionary," "cutting-edge," "best-in-class"). The product has been
 running since the 1990s — the work speaks.
 
+### Punctuation: discourage em-dashes (in customer-facing copy)
+
+Em-dashes (`—`) used as stylistic pauses are the single most reliable
+tell of generic LLM-generated prose. Avoid them by default in
+customer-facing copy. They're discouraged, not banned — there are edge
+cases where nothing else reads as cleanly — but reach for one only after
+you've tried the alternatives below and decided the dash genuinely wins.
+
+**Scope: customer-facing copy.** This guideline applies to anything that
+ships to a reader: post bodies, frontmatter, headings, alt text, captions,
+and any UI copy in components. It does **not** apply to internal docs
+(`CLAUDE.md`, `DESIGN.md`, `CONTENT_STATUS.md`, `STRONG_CANDIDATES_SURVEY.md`,
+agent briefs, commit messages, scratch notes). Use em-dashes freely in
+those.
+
+**Default to one of these instead:**
+
+| When the em-dash was doing… | Try first |
+| --- | --- |
+| A parenthetical aside (short) | Comma pair, or parentheses |
+| A sentence break for emphasis | Period, then a new sentence |
+| A list intro or definition | Colon |
+| A connector between two related thoughts | Period, semicolon, or "and"/"but" |
+
+If the rewrite reads worse than the em-dash, keep the em-dash. The goal
+is rhythm and clarity, not mechanical avoidance.
+
+**Always fine, even in customer-facing copy:**
+- **Hyphens in compound modifiers** (`self-regulating`, `low-voltage`,
+  `force-protection`). These aren't em-dashes.
+- **En-dashes (`–`) or em-dashes for numeric ranges** (`$600–$1,200`,
+  `2024–2026`) when "to" reads worse than the dash.
+- **Quoted source material** where the original used an em-dash.
+
+### Don't expose internal artifacts in posts
+
+Posts are read by customers, prospects, and the press. They are **not** a
+window into our internal organization. Never reference these in published
+copy:
+
+| Don't write… | Why |
+| --- | --- |
+| Internal folder paths (`Conformity/`, `Test Report/`, `Pictures/`) | Reads as a leaked file tree, not editorial |
+| Internal filenames (`EN 60335-96_Test Report.pdf`, `Article Moose Boat.docx`) | Same — looks like we're showing our wiki |
+| Internal project / job numbers (`Project 131009`, `#20-19718`) | Identifiers we use for accounting; readers don't care and the numbers can leak commercial info |
+| Commercial invoice numbers, PO numbers, customer order IDs | Confidential transactional data |
+| Quoted internal email subject lines or doc titles | Readers should see polished prose, not our doc tree |
+| OneDrive / SharePoint / Drive paths | Hint at internal infrastructure |
+| "The project file contains…" framing | Self-referential to our own organization |
+
+**Frame everything as the customer sees it.** Instead of *"the Conformity/
+folder contains the CE Declaration of Conformity for both the element and
+the power supply,"* write *"every international shipment goes out with a
+CE Declaration of Conformity for both the element and the power supply."*
+The fact is the same. The framing is editorial, not internal.
+
+When using catalog metadata or internal docs as source material for a
+post, treat them like a journalist treats a background interview: extract
+the facts, attribute them in customer-relevant ways (vessel name, build
+year, partner shipyard), and never reference the document by its filename.
+
 ### Tone scaffolds
 
 - Lead with a concrete observation, then zoom out to the principle.

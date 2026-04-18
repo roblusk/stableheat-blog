@@ -1,22 +1,22 @@
 ---
 title: "Radiant Heat and Air Quality: Why Going Ductless Matters"
-deck: "The forgotten upside of radiant isn't the warm floor — it's the air you're not breathing because nothing is stirring it up."
+deck: "The forgotten upside of radiant isn't the warm floor. It's the air you're not breathing because nothing is stirring it up."
 category: "Wellness"
 date: 2026-03-25
 readTime: "3 min read"
 thumbVariant: 10
 thumbIcon: "leaf"
-excerpt: "Radiant heat doesn't move air — which turns out to be a significant advantage for allergies, dust, and indoor wellness."
+excerpt: "Radiant heat doesn't move air, which turns out to be a significant advantage for allergies, dust, and indoor wellness."
 applications: ["home", "commercial", "rv", "marine"]
 ---
 
-Indoor air quality has quietly become one of the big residential conversations of the decade. HEPA filters, fresh-air ERVs, low-VOC finishes, houseplants-as-remediation — the list of things homeowners are being sold to improve the air inside their homes is long.
+Indoor air quality has quietly become one of the big residential conversations of the decade. HEPA filters, fresh-air ERVs, low-VOC finishes, houseplants-as-remediation: the list of things homeowners are being sold to improve the air inside their homes is long.
 
 There's one category that gets talked about less: the heating system itself.
 
 ## Forced air does a very specific thing
 
-Any HVAC system that delivers heat by moving warm air also, inevitably, moves everything else in the air. Dust, pet dander, pollen, mold spores, carpet fibers, cooking particulates, the fine dust from whatever sander you used in the garage last weekend — all of it gets picked up by every return grille and redistributed across the house every time the blower runs.
+Any HVAC system that delivers heat by moving warm air also, inevitably, moves everything else in the air. Dust, pet dander, pollen, mold spores, carpet fibers, cooking particulates, the fine dust from whatever sander you used in the garage last weekend: all of it gets picked up by every return grille and redistributed across the house every time the blower runs.
 
 A good filter catches a lot of that. A great filter catches more. But even the best filter is downstream of a machine whose job is to aerosolize particulates in the first place.
 
@@ -40,6 +40,6 @@ Studies on radiant heating and indoor air quality are converging on a few consis
 
 ## The practical takeaway
 
-If you're building or renovating with air quality in mind, radiant heat isn't the only answer — you still want fresh air, good filtration, and sensible materials. But it's a load-bearing piece of the puzzle, and it's one you can solve once, during construction, and then not think about again.
+If you're building or renovating with air quality in mind, radiant heat isn't the only answer. You still want fresh air, good filtration, and sensible materials. But it's a load-bearing piece of the puzzle, and it's one you can solve once, during construction, and then not think about again.
 
 The rest of your wellness upgrades work better when the air they're treating isn't being churned up every 15 minutes by the system that's supposed to be keeping you comfortable.

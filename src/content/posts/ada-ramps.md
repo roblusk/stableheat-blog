@@ -6,7 +6,7 @@ date: 2026-03-05
 readTime: "3 min read"
 thumbVariant: 3
 thumbIcon: "wheelchair"
-excerpt: "Why hospitals, banks, and grocery chains are quietly standardizing on heated ADA ramps — and the math that gets them there."
+excerpt: "Why hospitals, banks, and grocery chains are quietly standardizing on heated ADA ramps, and the math that gets them there."
 applications: ["snowmelt", "commercial"]
 ---
 
@@ -20,7 +20,7 @@ Snowmelt is overkill for some surfaces and absolutely justified for others. ADA 
 
 1. **Liability concentration.** Falls on accessibility infrastructure carry both ADA-compliance scrutiny and standard premises-liability exposure.
 2. **User vulnerability.** Wheelchair users, walker users, and elderly customers have the lowest tolerance for an iced surface and the highest injury risk from a fall.
-3. **Surface area.** Most ADA ramps are small — 100 to 300 square feet — which keeps both the install cost and the operating cost manageable.
+3. **Surface area.** Most ADA ramps are small (100 to 300 square feet), which keeps both the install cost and the operating cost manageable.
 
 A StableHeat snowmelt installation on a ramp typically runs $2,000-$5,000 depending on length and slope. A single slip-and-fall claim can run twenty times that, before legal fees.
 

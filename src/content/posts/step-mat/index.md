@@ -6,7 +6,7 @@ date: 2026-04-17
 readTime: "4 min read"
 thumbVariant: 8
 thumbIcon: "table-cells-large"
-excerpt: "STEP Mat puts the same self-regulating polymer element behind our permanent floor systems into a portable form — sized for a 6 by 10 footprint, plugs into the wall, lives under a rug."
+excerpt: "STEP Mat puts the same self-regulating polymer element behind our permanent floor systems into a portable form: sized for a 6 by 10 footprint, plugs into the wall, lives under a rug."
 applications: ["floor", "home"]
 heroImage: ./cover.jpg
 heroImageAlt: "A STEP Mat radiant heating mat laid flat in a workshop space, showing the rectangular panel form factor that goes under a rug."
@@ -22,7 +22,7 @@ That form is STEP Mat.
 
 ## The product
 
-STEP Mat is a flexible radiant heating mat built around the same self-regulating polymer element that powers our permanent floor systems. The standard exterior mat is six feet by ten feet — sixty square feet of heated surface — drawing under 900 watts at 120-volt household current.
+STEP Mat is a flexible radiant heating mat built around the same self-regulating polymer element that powers our permanent floor systems. The standard exterior mat is six feet by ten feet (sixty square feet of heated surface), drawing under 900 watts at 120-volt household current.
 
 You roll it out. You put a rug on top of it. You plug it in. You walk on it.
 
@@ -30,7 +30,7 @@ There is no installer in that sentence on purpose. The mat is the install.
 
 ## What the form factor changes
 
-A permanent radiant floor is sized to the room. The element is the room. STEP Mat is sized to the surface area you actually want warm — typically a few hundred square feet less than the room itself.
+A permanent radiant floor is sized to the room. The element is the room. STEP Mat is sized to the surface area you actually want warm, typically a few hundred square feet less than the room itself.
 
 That changes the use case in useful ways:
 
@@ -44,14 +44,14 @@ In all of those cases, the alternative is either nothing or a forced-air space h
 
 ## Why the self-regulation matters here
 
-The same polymer chemistry that lets us put the element under furniture in a permanent install lets us tell a renter they can leave the mat on overnight. As the mat warms, the resistance of the polymer rises, the current draw falls, and the equilibrium temperature settles into a safe range — a range you'd describe as warm to bare feet, not hot.
+The same polymer chemistry that lets us put the element under furniture in a permanent install lets us tell a renter they can leave the mat on overnight. As the mat warms, the resistance of the polymer rises, the current draw falls, and the equilibrium temperature settles into a safe range, one you'd describe as warm to bare feet, not hot.
 
 > A mat that can't overheat itself is a mat you can leave running while you sleep, and a mat your kid can sit on with a book.
 
-That's the property that matters when the product is going on the floor of a residence rather than the inside of a building's structure. We've benched-tested mats running continuously in a freezer at zero degrees Fahrenheit ambient — surface temperatures climbed steadily, then leveled off, then held. That's not a control loop doing its job. That's the polymer doing its job.
+That's the property that matters when the product is going on the floor of a residence rather than the inside of a building's structure. We've benched-tested mats running continuously in a freezer at zero degrees Fahrenheit ambient. Surface temperatures climbed steadily, then leveled off, then held. That's not a control loop doing its job. That's the polymer doing its job.
 
 ## What it isn't
 
 STEP Mat is not whole-room heating. It isn't sized to replace your furnace or your baseboard. The watt density is intentionally low so that the rug surface stays comfortable, not hot, which means it's a comfort layer rather than a primary heat source.
 
-For renters, dorm residents, and the cold-corner population in otherwise-conditioned spaces, that's exactly the right product. For everyone else who wants permanent radiant under the floor — that's the rest of our catalog.
+For renters, dorm residents, and the cold-corner population in otherwise-conditioned spaces, that's exactly the right product. For everyone else who wants permanent radiant under the floor: that's the rest of our catalog.

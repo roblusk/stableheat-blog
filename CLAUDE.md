@@ -22,7 +22,7 @@ A `.claude/launch.json` is already wired for the `blog` server.
 ## Architecture
 
 **Astro 4 static-site blog** — pure SSG, no client-side JS shipped beyond
-Font Awesome's CDN stylesheet. 53 posts, 9 application categories, deploys
+Font Awesome's CDN stylesheet. 74 posts, 9 application categories, deploys
 to GitHub Pages via `.github/workflows/deploy.yml` on push to `main`.
 
 ### The base-URL trap (most common bug)
@@ -135,6 +135,24 @@ content. Visual web links currently route to `https://stepheat.com` (the
 live legacy site) but display "stableheat.com" — don't change the href
 values until the new domain is live; only the visible text and email
 addresses (`sales@stableheat.com`) reflect the new brand.
+
+**Punctuation: discourage em-dashes (`—`) in customer-facing copy.**
+Em-dash punctuation is the single most reliable tell of generic LLM
+prose, so by default avoid it in anything that ships to readers (post
+bodies, frontmatter, headings, alt text, captions). Discouraged, not
+banned — there are edge cases where nothing else reads as cleanly. Reach
+for one only after the alternatives (commas, colons, periods, semicolons,
+parentheses) don't work. The guideline does NOT apply to internal docs
+(`CLAUDE.md`, `DESIGN.md`, `CONTENT_STATUS.md`, agent briefs, commit
+messages) — use em-dashes freely there. Full guideline + swap table in
+`DESIGN.md`.
+
+**Don't expose internal artifacts in posts.** Never reference internal
+folder paths, filenames, project / invoice numbers, or doc titles in
+published copy. Frame everything as a reader sees it, not as our file
+tree sees it. Full rule in `DESIGN.md` under "Don't expose internal
+artifacts in posts." Applies whenever you draft a post or brief an
+agent to draft one.
 
 ## Deploying
 

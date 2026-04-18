@@ -1,6 +1,6 @@
 ---
 title: "Freeze Protection for Propane Tanks"
-deck: "When ambient temperatures drop, propane vapor pressure drops with it — and the only fix is to keep the tank above its dew point."
+deck: "When ambient temperatures drop, propane vapor pressure drops with it. The only fix is to keep the tank above its dew point."
 category: "Specialty"
 date: 2025-12-10
 readTime: "3 min read"
@@ -12,7 +12,7 @@ heroImage: ./cover.jpg
 heroImageAlt: "A propane storage tank wrapped in a blue self-regulating heating element, photographed during install with an adjacent battery for the low-voltage power feed."
 ---
 
-Propane is a remarkable fuel — energy-dense, easy to store, and broadly available. It also has a problem most homeowners only encounter the hard way: at very cold temperatures, propane stops vaporizing efficiently. The liquid is still in the tank. The vapor pressure that would normally feed the regulator just isn't there.
+Propane is a remarkable fuel: energy-dense, easy to store, and broadly available. It also has a problem most homeowners only encounter the hard way: at very cold temperatures, propane stops vaporizing efficiently. The liquid is still in the tank. The vapor pressure that would normally feed the regulator just isn't there.
 
 The result is a furnace that runs lean and cuts out, a generator that won't start, an off-grid cabin that suddenly has no heat at exactly the moment heat matters most. The fuel is right there. It just won't move.
 
@@ -20,7 +20,7 @@ A heating wrap on the tank fixes this.
 
 ## Why this happens
 
-Propane's boiling point is around -44°F at atmospheric pressure. As temperature drops toward that threshold, vapor pressure inside the tank drops too. By the time outdoor temperatures hit -20°F or below — common in much of the northern U.S. and across Canada — the tank may not be supplying enough vapor to feed even modest demand.
+Propane's boiling point is around -44°F at atmospheric pressure. As temperature drops toward that threshold, vapor pressure inside the tank drops too. By the time outdoor temperatures hit -20°F or below (common in much of the northern U.S. and across Canada), the tank may not be supplying enough vapor to feed even modest demand.
 
 This is especially acute for:
 
@@ -43,7 +43,7 @@ The system is meaningful at modest power levels. A typical wrap on a residential
 
 Propane tanks are pressure vessels, and any heating system installed on one has to satisfy a specific safety constraint: the heating element cannot overheat the tank surface, period. A constant-wattage element under fault conditions could in principle do exactly that.
 
-A self-regulating polymer element physically cannot. Its resistance climbs as it warms, capping its surface temperature well below any value that would compromise the tank or its valves. The same property that makes self-regulating cable safe under floors makes it appropriate for propane tank surfaces — and explicitly rated for the application.
+A self-regulating polymer element physically cannot. Its resistance climbs as it warms, capping its surface temperature well below any value that would compromise the tank or its valves. The same property that makes self-regulating cable safe under floors makes it appropriate for propane tank surfaces, and explicitly rated for the application.
 
 ## Where it gets installed
 

@@ -1,6 +1,6 @@
 ---
 title: "Vail at 8,150 Feet: Walking Between Buildings Without a Shovel"
-deck: "A complete snowmelt installation in ski country — sidewalks, stairs, and the connecting passages — where the alternative to heat is winter homeownership as a part-time job."
+deck: "A complete snowmelt installation in ski country (sidewalks, stairs, and the connecting passages) where the alternative to heat is winter homeownership as a part-time job."
 category: "Snowmelt"
 date: 2026-01-13
 readTime: "3 min read"
@@ -22,18 +22,18 @@ The scope of a Vail snowmelt project is bigger than most homeowners initially pi
 
 - The main sidewalk approach to the house
 - The stair runs connecting different elevations of the property
-- The covered passages between buildings (which look like they shouldn't accumulate, but do — the wind funnels through them and dumps drift)
+- The covered passages between buildings (which look like they shouldn't accumulate, but do; the wind funnels through them and dumps drift)
 - The high-traffic entry zones where freeze-thaw is the worst
 
-The Vail elevation — about 8,150 feet at the village — adds difficulty. The snow is dry and powdery, the air is thin, and the freeze-thaw cycles run longer than at lower elevations. A snowmelt system that works in St. Louis isn't necessarily a system that works in ski country.
+The Vail elevation (about 8,150 feet at the village) adds difficulty. The snow is dry and powdery, the air is thin, and the freeze-thaw cycles run longer than at lower elevations. A snowmelt system that works in St. Louis isn't necessarily a system that works in ski country.
 
 > The snow isn't the problem. The compounding is. A heated path is one less thing winter is doing to your week.
 
 ## How the controls actually work
 
-The system runs on a transformer-based control with environmental sensing — specifically an ETO2-4550 controller paired with ground and air sensors. The controller energizes the heating elements only when two conditions are simultaneously true: ground temperature is below the freeze setpoint *and* moisture is detected. Either alone isn't enough. Both together means precipitation is about to bond, and the system needs to fire.
+The system runs on a transformer-based control with environmental sensing: specifically an ETO2-4550 controller paired with ground and air sensors. The controller energizes the heating elements only when two conditions are simultaneously true: ground temperature is below the freeze setpoint *and* moisture is detected. Either alone isn't enough. Both together means precipitation is about to bond, and the system needs to fire.
 
-In practice, this means the system runs much less than a homeowner intuitively expects. A normal Vail winter might fire the system 30-45 times across the season — each event lasting only as long as the storm. The rest of the time, the controller is idle. The energy footprint stays modest.
+In practice, this means the system runs much less than a homeowner intuitively expects. A normal Vail winter might fire the system 30-45 times across the season, each event lasting only as long as the storm. The rest of the time, the controller is idle. The energy footprint stays modest.
 
 ## The five-system breakdown
 

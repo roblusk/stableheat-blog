@@ -6,7 +6,7 @@ date: 2026-04-16
 readTime: "3 min read"
 thumbVariant: 6
 thumbIcon: "kitchen-set"
-excerpt: "A 2016 Michigan residential install centered on the kitchen — and a case for why the kitchen is almost always the first room a homeowner notices, and the last one they'd give up."
+excerpt: "A 2016 Michigan residential install centered on the kitchen, and a case for why the kitchen is almost always the first room a homeowner notices, and the last one they'd give up."
 applications: ["home", "floor"]
 heroImage: ./cover.jpg
 heroImageAlt: "A finished residential kitchen at the Jesson Residence in Michigan, with tile flooring warmed by self-regulating radiant heat installed beneath the finish floor."
@@ -21,14 +21,14 @@ The kitchen wins almost every time. The Jesson Residence in Michigan is a textbo
 Three things compound in a kitchen that don't compound anywhere else in the house:
 
 1. **Bare feet, every morning.** The kitchen is the first hard-floor room most people walk into on a winter morning. The tile is cold, the body is half-asleep, and the temperature delta between the bedroom carpet and the kitchen floor registers immediately.
-2. **Standing time at the counter.** Cooking, prep, dishes — the kitchen is where the household stands still on a hard floor for the longest stretches of any room. Cold floor, hours of contact, joint complaints by Tuesday.
+2. **Standing time at the counter.** Cooking, prep, dishes: the kitchen is where the household stands still on a hard floor for the longest stretches of any room. Cold floor, hours of contact, joint complaints by Tuesday.
 3. **The dog, the toddler, the laundry basket.** Everything in the house ends up on the kitchen floor at some point. If the floor is 62°F, everything that touches it is 62°F.
 
 A Michigan winter amplifies all three. The shoulder season runs October through December and February through April; the deep cold sits in for January and most of February. That's six months of cold-tile mornings if the kitchen isn't heated from below.
 
 ## What we put in at Jesson
 
-Self-regulating polymer element runs beneath the kitchen tile and the adjacent eating area, with the element sitting in thinset directly under the finish floor. Low-voltage 24V power, no in-floor sensor required (the element is self-regulating — it modulates locally based on floor temperature), wall-mount thermostat for the room.
+Self-regulating polymer element runs beneath the kitchen tile and the adjacent eating area, with the element sitting in thinset directly under the finish floor. Low-voltage 24V power, no in-floor sensor required (the element is self-regulating; it modulates locally based on floor temperature), wall-mount thermostat for the room.
 
 The visual finish is unchanged. The floor looks like a tile floor. It just doesn't feel like one.
 
@@ -44,7 +44,7 @@ Animals don't care about thermostat readings. They care about surface temperatur
 
 For homeowners who can't budget whole-house radiant in one shot, our recommendation is almost always the same: kitchen first, primary bath second, living area third. The kitchen has the highest hours-of-contact-per-day, the bath has the most visceral comfort delta (the bare-feet-after-shower moment), and the living area is the largest square footage and the slowest payback.
 
-Phased installs are common — and the order matters. Doing the living area first, before the kitchen, almost always leaves the homeowner asking why they didn't do the kitchen first.
+Phased installs are common, and the order matters. Doing the living area first, before the kitchen, almost always leaves the homeowner asking why they didn't do the kitchen first.
 
 The Jesson project did the kitchen as part of a broader install, and the kitchen is what the family talks about. That's been our experience on enough Michigan and Midwest projects to call it a rule rather than a coincidence.
 

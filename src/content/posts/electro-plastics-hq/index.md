@@ -6,10 +6,10 @@ date: 2025-12-01
 readTime: "3 min read"
 thumbVariant: 1
 thumbIcon: "building"
-excerpt: "How we outfitted Electro Plastics' headquarters in St. Louis with a full radiant install — turning our office into a working showcase for visiting clients."
+excerpt: "How we outfitted Electro Plastics' headquarters in St. Louis with a full radiant install, turning our office into a working showcase for visiting clients."
 applications: ["commercial"]
 heroImage: ./cover.jpg
-heroImageAlt: "The Electro Plastics headquarters building in St. Louis — a low-profile commercial structure with red trim, set behind a parking lot and landscaping."
+heroImageAlt: "The Electro Plastics headquarters building in St. Louis: a low-profile commercial structure with red trim, set behind a parking lot and landscaping."
 ---
 
 There's a credibility test that's specific to companies in our line of work. Anyone selling building systems will get the question, sometimes politely and sometimes not: *"Is your building heated with your own product?"* If the answer is no, the conversation slows down. The customer wonders, reasonably, why the people closest to the technology haven't bet their own comfort on it.
@@ -18,7 +18,7 @@ Our answer is yes. Our headquarters runs on the same self-regulating radiant we 
 
 ## What we put in our own building
 
-The HQ install at Electro Plastics covers the building's interior — the office areas, the mezzanine, and the heated working zones — with self-regulating polymer elements integrated below the finish flooring. Solar arrays on the building roof feed back into the electrical system, contributing to the heating loads (and to the rest of the building's electrical demand) across the year.
+The HQ install at Electro Plastics covers the building's interior (the office areas, the mezzanine, and the heated working zones) with self-regulating polymer elements integrated below the finish flooring. Solar arrays on the building roof feed back into the electrical system, contributing to the heating loads (and to the rest of the building's electrical demand) across the year.
 
 The systems we use ourselves are the same ones we ship to commercial customers. No internal-only spec, no special variants. If a customer evaluating us walks into our building and asks for a tour, what they see is the production product running in production conditions.
 
@@ -39,7 +39,7 @@ The HQ install gives us:
 
 Our own building has been instructive in ways that surprised us. A few takeaways:
 
-- **The mezzanine floor was the surprise win.** Office space above a workspace floor benefits disproportionately from radiant — air rises naturally, but the mezzanine surfaces themselves stay warm.
+- **The mezzanine floor was the surprise win.** Office space above a workspace floor benefits disproportionately from radiant: air rises naturally, but the mezzanine surfaces themselves stay warm.
 - **Solar contribution is bigger than the spec implied.** During spring and fall, the array contributes meaningfully to the heating load, especially in shoulder-season conditions.
 - **HVAC backup runs less than we expected.** The radiant system carries the bulk comfort load; the conventional HVAC mostly handles ventilation and shoulder-season air management.
 

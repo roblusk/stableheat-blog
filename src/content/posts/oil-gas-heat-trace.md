@@ -16,7 +16,7 @@ Heat trace is the answer the industry has been using for half a century. Self-re
 
 ## What it does
 
-A heat-trace system runs a heating cable along a pipe, tank, or instrument cluster — wrapped in insulation, often paired with a thermostat or end-seal kit. As the contained fluid loses heat to ambient, the cable replaces it. Set point holds. Operations continue.
+A heat-trace system runs a heating cable along a pipe, tank, or instrument cluster, wrapped in insulation, often paired with a thermostat or end-seal kit. As the contained fluid loses heat to ambient, the cable replaces it. Set point holds. Operations continue.
 
 For oil and gas, typical applications include:
 
@@ -27,12 +27,12 @@ For oil and gas, typical applications include:
 
 ## Why self-regulating matters in this environment
 
-Constant-wattage cable assumes the worst-case heat loss everywhere. That's safe but inefficient — and it can damage equipment if a cable runs hot under insulation it wasn't supposed to be under. It also fails predictably: a single cable damage point takes out the whole circuit downstream.
+Constant-wattage cable assumes the worst-case heat loss everywhere. That's safe but inefficient, and it can damage equipment if a cable runs hot under insulation it wasn't supposed to be under. It also fails predictably: a single cable damage point takes out the whole circuit downstream.
 
 StableHeat self-regulating cable behaves differently:
 
 - Each section adjusts its own draw based on local temperature.
-- The cable cannot overheat itself — making it safe to overlap, cross, or run under heavy insulation.
+- The cable cannot overheat itself, making it safe to overlap, cross, or run under heavy insulation.
 - A damage point only affects the immediately surrounding inches of cable, not the whole circuit.
 
 > The cable that adjusts itself is the cable you don't have to call out at 3 a.m.
@@ -41,6 +41,6 @@ StableHeat self-regulating cable behaves differently:
 
 StableHeat heat trace is field-cuttable, splice-friendly, and tolerant of the environments it ends up in: outdoor wellheads, partial-shelter compressor stations, tank batteries, frac sand silos. It's specified across a wide range of voltages and temperature ratings to match the application.
 
-For OEMs and process integrators, our team works upfront on layout, watt density, and certification — so that what arrives on site is engineered to work in the place it's being installed, not generic cable being asked to perform.
+For OEMs and process integrators, our team works upfront on layout, watt density, and certification, so that what arrives on site is engineered to work in the place it's being installed, not generic cable being asked to perform.
 
 In a business where downtime is denominated in barrels per day, that distinction is the entire point.

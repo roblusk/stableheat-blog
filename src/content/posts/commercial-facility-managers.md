@@ -6,24 +6,24 @@ date: 2026-04-14
 readTime: "4 min read"
 thumbVariant: 1
 thumbIcon: "building"
-excerpt: "HVAC budgets are shrinking while comfort expectations aren't. Here's how facility managers are using self-regulating radiant heat to cut energy draw in lobbies, offices, and healthcare spaces — without ripping out existing systems."
+excerpt: "HVAC budgets are shrinking while comfort expectations aren't. Here's how facility managers are using self-regulating radiant heat to cut energy draw in lobbies, offices, and healthcare spaces, without ripping out existing systems."
 featured: true
 applications: ["commercial"]
 ---
 
-If you manage a commercial building in 2026, you're probably dealing with a familiar three-way squeeze: utility rates are climbing, tenants expect hotel-level comfort, and the capital budget for a full HVAC replacement simply isn't there. The usual advice — smarter thermostats, retrofitted VFDs, another round of envelope upgrades — helps on the margin. But it rarely changes the math.
+If you manage a commercial building in 2026, you're probably dealing with a familiar three-way squeeze: utility rates are climbing, tenants expect hotel-level comfort, and the capital budget for a full HVAC replacement simply isn't there. The usual advice (smarter thermostats, retrofitted VFDs, another round of envelope upgrades) helps on the margin. But it rarely changes the math.
 
 That's why we're seeing more facility teams take a hard look at something they used to think of as a luxury residential feature: **electric radiant floor heat.**
 
 ## Why radiant is suddenly a commercial story
 
-Traditional forced-air heating conditions the *air*. Radiant heat conditions the *space* — and more specifically, the people and objects in it. That's a meaningful distinction when you're trying to keep a 14-foot lobby comfortable without over-heating the ceiling. With a StableHeat underfloor system, thermal energy radiates from the surface people actually touch, which means you can set the thermostat two or three degrees lower and still get the same perceived warmth.
+Traditional forced-air heating conditions the *air*. Radiant heat conditions the *space*, and more specifically, the people and objects in it. That's a meaningful distinction when you're trying to keep a 14-foot lobby comfortable without over-heating the ceiling. With a StableHeat underfloor system, thermal energy radiates from the surface people actually touch, which means you can set the thermostat two or three degrees lower and still get the same perceived warmth.
 
 For a 40,000-square-foot office, a two-degree setback compounded across a winter is real money.
 
 ## The self-regulating advantage
 
-The piece of the technology that makes this work at commercial scale is **self-regulation.** Every element in a StableHeat system is built from a conductive polymer that increases its resistance as it warms. In practical terms: a cold section draws more current and heats up quickly; a section that's already warm — say, under a rug, a filing cabinet, or a sunlit zone — naturally backs off on its own.
+The piece of the technology that makes this work at commercial scale is **self-regulation.** Every element in a StableHeat system is built from a conductive polymer that increases its resistance as it warms. In practical terms: a cold section draws more current and heats up quickly; a section that's already warm (say, under a rug, a filing cabinet, or a sunlit zone) naturally backs off on its own.
 
 > You don't need a zone controller for every hot spot. The floor handles it.
 
@@ -40,7 +40,7 @@ The facility types where we're seeing the fastest adoption tend to share one tra
 
 ## You don't have to rip anything out
 
-The piece facility managers often miss: radiant doesn't have to replace your existing system. It's a supplement. A StableHeat underlayment can go into a specific zone — the lobby, the ground-floor corridor, the freezing corner conference room — and handle the comfort load there while the main system does less work. Payback in those situations is often measured in a handful of heating seasons, not decades.
+The piece facility managers often miss: radiant doesn't have to replace your existing system. It's a supplement. A StableHeat underlayment can go into a specific zone (the lobby, the ground-floor corridor, the freezing corner conference room) and handle the comfort load there while the main system does less work. Payback in those situations is often measured in a handful of heating seasons, not decades.
 
 ### A short punch list to start
 

@@ -6,15 +6,15 @@ date: 2025-12-07
 readTime: "3 min read"
 thumbVariant: 4
 thumbIcon: "anchor"
-excerpt: "Inside the radiant heating systems aboard Nordhavn 7622 and 7623 — Pacific Asian Enterprises' legendary bluewater expedition yachts."
+excerpt: "Inside the radiant heating systems aboard Nordhavn 7622 and 7623: Pacific Asian Enterprises' legendary bluewater expedition yachts."
 applications: ["marine"]
 heroImage: ./cover.jpg
 heroImageAlt: "A finished Nordhavn yacht bathroom with mahogany cabinetry, polished brass fixtures, marble countertops over a double-sink vanity, and a marble floor with under-floor radiant heating."
 ---
 
-Nordhavn yachts are a particular kind of vessel. Built by Pacific Asian Enterprises, they're not the fastest boats on the water and they're not the flashiest. What they are is *capable* — purpose-engineered for genuine ocean crossings, polar latitudes, and multi-year cruising in waters that recreational vessels typically avoid. Owners take Nordhavns from California to Alaska, from the Caribbean to Iceland, from the Mediterranean to Antarctica. The boats are designed to make those crossings comfortably and arrive in working condition.
+Nordhavn yachts are a particular kind of vessel. Built by Pacific Asian Enterprises, they're not the fastest boats on the water and they're not the flashiest. What they are is *capable*: purpose-engineered for genuine ocean crossings, polar latitudes, and multi-year cruising in waters that recreational vessels typically avoid. Owners take Nordhavns from California to Alaska, from the Caribbean to Iceland, from the Mediterranean to Antarctica. The boats are designed to make those crossings comfortably and arrive in working condition.
 
-We've installed our radiant heating systems on multiple Nordhavn vessels — most recently Nordhavn 7622 and 7623.
+We've installed our radiant heating systems on multiple Nordhavn vessels, most recently Nordhavn 7622 and 7623.
 
 ## What heating means on a long-passage yacht
 
@@ -25,7 +25,7 @@ A Nordhavn is different. Owners are at sea for weeks at a time, often crossing l
 - The galley sole feels cold under bare feet in the morning
 - Crew quarters chill during the off-watch sleep period
 - Heads and shower stalls drip with condensation
-- The mahogany interior — which absorbs and re-emits temperature differently than fiberglass — never feels quite right
+- The mahogany interior, which absorbs and re-emits temperature differently than fiberglass, never feels quite right
 
 Radiant fixes all four. The element layer warms the surfaces directly. The HVAC carries the bulk space conditioning, with less load. The boat maintains the comfort level Nordhavn owners expect on multi-week passages.
 
@@ -35,12 +35,12 @@ Radiant fixes all four. The element layer warms the surfaces directly. The HVAC 
 
 Our Nordhavn installations cover the comfort-critical zones of the vessel:
 
-- **Owner's stateroom and master bath** — the interior that the owner is in for the most hours
-- **Guest staterooms and heads** — for charter capability and family use
-- **Galley sole** — the daily-use surface that defines the vessel's livability
-- **Crew quarters** — for vessels with paid crew, a non-negotiable for retention
+- **Owner's stateroom and master bath**: the interior that the owner is in for the most hours
+- **Guest staterooms and heads**: for charter capability and family use
+- **Galley sole**: the daily-use surface that defines the vessel's livability
+- **Crew quarters**: for vessels with paid crew, a non-negotiable for retention
 
-The element runs below the finish flooring (mahogany planking, marble in the heads, teak in the saloon) at watt densities tuned to each space. Self-regulation handles the variation between zones automatically — the cabin in tropical latitudes idles back, the cabin in polar latitudes draws what it needs.
+The element runs below the finish flooring (mahogany planking, marble in the heads, teak in the saloon) at watt densities tuned to each space. Self-regulation handles the variation between zones automatically. The cabin in tropical latitudes idles back, the cabin in polar latitudes draws what it needs.
 
 ## Why Nordhavn specifies us
 

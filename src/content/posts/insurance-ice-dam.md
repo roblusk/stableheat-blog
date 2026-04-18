@@ -6,11 +6,11 @@ date: 2026-02-25
 readTime: "3 min read"
 thumbVariant: 7
 thumbIcon: "shield-halved"
-excerpt: "Insurance carriers are quietly adding ice-dam questions to homeowner renewal forms — and starting to offer mitigation discounts."
+excerpt: "Insurance carriers are quietly adding ice-dam questions to homeowner renewal forms, and starting to offer mitigation discounts."
 applications: ["roof-de-ice", "home"]
 ---
 
-Homeowners insurance is, at its core, a numbers business. Carriers have decades of claims data, and when a particular failure mode starts spiking, they react — first with rate increases, then with policy questionnaires, then with mitigation requirements.
+Homeowners insurance is, at its core, a numbers business. Carriers have decades of claims data, and when a particular failure mode starts spiking, they react: first with rate increases, then with policy questionnaires, then with mitigation requirements.
 
 Ice dams are now firmly in the second phase of that cycle.
 
@@ -30,7 +30,7 @@ These aren't idle questions. They're informing both pricing and underwriting dec
 
 The flip side of the same story: a handful of carriers are now offering modest premium credits for properties with installed roof de-icing systems, similar to the credits that have existed for storm shutters in coastal markets and reinforced roofs in tornado country.
 
-The discounts aren't large yet — typically $50-$200 per year — but they're trending in the same direction shutter and impact-resistant glass discounts trended fifteen years ago. Mitigation gets recognized once enough properties have it installed for the actuaries to model it.
+The discounts aren't large yet (typically $50-$200 per year) but they're trending in the same direction shutter and impact-resistant glass discounts trended fifteen years ago. Mitigation gets recognized once enough properties have it installed for the actuaries to model it.
 
 ## Why this matters for upgrade decisions
 

@@ -6,11 +6,11 @@ date: 2026-01-28
 readTime: "3 min read"
 thumbVariant: 7
 thumbIcon: "industry"
-excerpt: "Intrinsically safe heat trace for hazardous environments — the technical case for IS-rated elements in classified locations."
+excerpt: "Intrinsically safe heat trace for hazardous environments: the technical case for IS-rated elements in classified locations."
 applications: ["oil-gas"]
 ---
 
-There's a category of heating problem most engineers never have to think about: how do you keep a tank, line, or instrument warm in an environment where any spark could ignite the surrounding atmosphere. The standard heat-trace toolkit doesn't apply. The element itself — the cable, the splice kit, the temperature sensor — has to be incapable of producing enough energy to ignite a flammable gas or dust.
+There's a category of heating problem most engineers never have to think about: how do you keep a tank, line, or instrument warm in an environment where any spark could ignite the surrounding atmosphere. The standard heat-trace toolkit doesn't apply. The element itself (the cable, the splice kit, the temperature sensor) has to be incapable of producing enough energy to ignite a flammable gas or dust.
 
 That's the world of intrinsically safe (IS) heating, and it's where StableHeat's industrial product line lives.
 
@@ -31,11 +31,11 @@ A constant-wattage cable that can heat to 600°F under fault conditions cannot b
 
 The market for intrinsically safe heating is small but critical. The applications include:
 
-- **Oil and gas platform operations** — wellheads, flow lines, instrument tubing in sour-gas service
-- **Refinery process units** — heat tracing on lines carrying volatile hydrocarbons
-- **Chemical processing plants** — process heating in solvent and reagent handling areas
-- **Grain elevators and bulk material handling** — combustible-dust environments in food, agricultural, and pharmaceutical processing
-- **Aerospace fuel handling** — testing facilities and ground-support equipment
+- **Oil and gas platform operations**: wellheads, flow lines, instrument tubing in sour-gas service
+- **Refinery process units**: heat tracing on lines carrying volatile hydrocarbons
+- **Chemical processing plants**: process heating in solvent and reagent handling areas
+- **Grain elevators and bulk material handling**: combustible-dust environments in food, agricultural, and pharmaceutical processing
+- **Aerospace fuel handling**: testing facilities and ground-support equipment
 
 In all of these, the cost of a non-IS heating event isn't measured in property damage. It's measured in fatalities, regulatory shutdown, and corporate-existential risk.
 

@@ -12,13 +12,13 @@ heroImage: ./cover.jpg
 heroImageAlt: "A log home with a green metal roof against pine trees, showing the contrast between snow-covered upper roof sections and a clearly heated, snow-free zone above the eave."
 ---
 
-The Bruce Oswald project is the most extensively-documented roof deicing installation in our portfolio — 27 photos covering every section of a multi-plane residential roof. Not all roof projects need that level of documentation, but this one earned it. The roof itself is the kind that breaks the standard playbook for roof deicing: too many planes, too many transitions, and too many places where ice could form for a single zone of cable to handle.
+The Bruce Oswald project is the most extensively-documented roof deicing installation in our portfolio: 27 photos covering every section of a multi-plane residential roof. Not all roof projects need that level of documentation, but this one earned it. The roof itself is the kind that breaks the standard playbook for roof deicing: too many planes, too many transitions, and too many places where ice could form for a single zone of cable to handle.
 
 ## Why multi-section roofs are harder
 
 A simple rectangular roof is straightforward to deice. Run cable along the eave and through the gutters; the meltwater has one path to follow. Done.
 
-A multi-section roof — gables intersecting, dormers sitting above main roof slopes, valley details collecting drift — has multiple ice-formation zones, each with its own thermal behavior. Snow accumulates differently on a south-facing dormer than it does on a north-facing valley. A cable layout that handles one well will leave the other vulnerable.
+A multi-section roof, with gables intersecting, dormers sitting above main roof slopes, and valley details collecting drift, has multiple ice-formation zones, each with its own thermal behavior. Snow accumulates differently on a south-facing dormer than it does on a north-facing valley. A cable layout that handles one well will leave the other vulnerable.
 
 The Bruce Oswald roof has multiple distinct sections, each treated as its own deicing problem with its own cable run, its own controller logic, and its own moisture sensor placement.
 

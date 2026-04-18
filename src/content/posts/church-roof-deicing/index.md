@@ -1,6 +1,6 @@
 ---
 title: "Saving a Church From Ice Dams (with Warmzone)"
-deck: "When the building you're protecting was designed in an era before modern roof loads — and replacement isn't an option — heat trace becomes the right answer."
+deck: "When the building you're protecting was designed in an era before modern roof loads, and replacement isn't an option, heat trace becomes the right answer."
 category: "Roof Deicing"
 date: 2026-01-01
 readTime: "3 min read"
@@ -12,9 +12,9 @@ heroImage: ./cover.jpg
 heroImageAlt: "Self-regulating heat trace installed in a serpentine pattern along the roof eave of a residential property, with the existing shingle pattern and orange securing caps visible."
 ---
 
-Older buildings — especially houses of worship — present roof problems that newer construction doesn't have. Many were built before modern attic insulation standards. Many have complex gable geometry that creates valleys where ice loves to form. And almost all of them were designed in an era when "winter maintenance" meant a sexton with a broom, not a four-figure annual snow-management contract.
+Older buildings, especially houses of worship, present roof problems that newer construction doesn't have. Many were built before modern attic insulation standards. Many have complex gable geometry that creates valleys where ice loves to form. And almost all of them were designed in an era when "winter maintenance" meant a sexton with a broom, not a four-figure annual snow-management contract.
 
-When a church's roof starts forming ice dams, the building can't really afford the consequences. The ceilings underneath are often plaster — irreplaceable in any historically meaningful sense. The roof structure is sometimes original. And the congregation is, almost by definition, not in a position to absorb a five-figure remediation bill.
+When a church's roof starts forming ice dams, the building can't really afford the consequences. The ceilings underneath are often plaster, irreplaceable in any historically meaningful sense. The roof structure is sometimes original. And the congregation is, almost by definition, not in a position to absorb a five-figure remediation bill.
 
 We partnered with Warmzone on a church roof deicing project that addressed exactly this problem.
 
@@ -33,11 +33,11 @@ The project covers the church's eaves, valleys, and gutters with self-regulating
 1. **Idle**, drawing essentially no current, in clear weather and at temperatures above the freeze threshold
 2. **Active**, energizing automatically when temperature and moisture sensors detect dam-forming conditions
 
-Self-regulating cable matters here for two specific reasons. First, the cable can run safely under shingle laps, around fittings, and through valleys without overheating itself — which constant-wattage cable can't reliably do. Second, the cable cannot ignite the underlayment or shingle adhesive even in worst-case fault scenarios. Both properties matter when the building you're protecting can't be replaced.
+Self-regulating cable matters here for two specific reasons. First, the cable can run safely under shingle laps, around fittings, and through valleys without overheating itself, which constant-wattage cable can't reliably do. Second, the cable cannot ignite the underlayment or shingle adhesive even in worst-case fault scenarios. Both properties matter when the building you're protecting can't be replaced.
 
 ## The bigger story
 
-The church project is part of a broader pattern we're seeing across institutional clients — churches, schools, libraries, smaller civic buildings. These properties have:
+The church project is part of a broader pattern we're seeing across institutional clients: churches, schools, libraries, smaller civic buildings. These properties have:
 
 - Older roof systems that pre-date modern insulation
 - Limited budgets for emergency remediation
