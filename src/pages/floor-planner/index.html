@@ -418,7 +418,7 @@
       <div class="stat-row"><span class="lbl">Power supplies needed</span><span class="val mono" id="mSupplies">—</span></div>
       <div id="mSuppliesBreak" style="margin-top: 8px;"></div>
       <div class="big-sub" style="margin-top: 10px;">
-        Each EPI-LX-R supply handles up to 57 ft of element. Strips are wired in parallel.
+        Each EPI-LX-R supply handles up to 57 ft of element. Strips are daisy-chained in circuits of up to 20 ft each.
       </div>
     </div>
 
@@ -457,7 +457,8 @@ const IN_PER_FT = 12;
 const PX_PER_FT_DEFAULT = 40;   // initial zoom; rescales to fit
 
 /* ---------- Wiring constants ---------- */
-const SUPPLY_CAPACITY_FT = 57;
+const SUPPLY_CAPACITY_FT = 57;     // each EPI-LX-R supply: up to 57 ft of element
+const CHAIN_CAPACITY_FT = 20;      // each daisy chain: up to 20 ft of element
 const SUPPLY_COLORS = ['#1A2B47', '#6B8AB3', '#B88954', '#30486A', '#6B7786'];  // navy, cool, bronze, navy-3, muted
 const WIRE_HOT = '#B23A2A';      // muted brick red (electrical hot)
 const WIRE_NEUTRAL = '#141A24';  // navy-ink (electrical neutral)
@@ -721,25 +722,54 @@ function computeElementLayout(polyIn) {
   const pitch = width + gap;
 
   const bb = bbox(rotated);
-  // Start strips so first strip center is at bb.minY + inset + width/2
-  const firstTop = bb.minY + inset;
-  const rows = [];
-  const stepX = 1; // inch resolution for scanning
-  let k = 0;
-  while (true) {
-    const y0 = firstTop + k * pitch;
-    const y1 = y0 + width;
-    if (y1 > bb.maxY - inset + 1e-6) break;
-    const yc = (y0 + y1) / 2;
+  const availTop = bb.minY + inset;
+  const availBot = bb.maxY - inset;
+  const availH = availBot - availTop;
+  const insetPoly = insetPolygonForDisplay(polyIn, inset);
 
-    // Scan x across bb; for each x, test center + top/bottom strip edges are inside with inset.
-    // Break into runs where the strip is fully clear (center inside poly AND dist to boundary >= inset, considering strip half-width).
+  if (availH < width) {
+    return { rows: [], totalInches: 0, totalFt: 0, angle, coverageSqIn: 0,
+             insetPoly, wallClearance: inset, elementWidth: width };
+  }
+
+  // How many bands fit at the minimum row spacing?
+  const maxBands = Math.max(1, Math.floor((availH + gap) / pitch));
+
+  // Decide final y positions UPFRONT. Even-distribute the bands across the
+  // available height when it doesn't compress below the minimum row gap;
+  // otherwise center-pack tight. Doing this before the polygon-clip pass
+  // means strips are always validated at their final y position, so they
+  // can't drift outside the polygon at corners.
+  const yPositions = [];
+  if (maxBands === 1) {
+    yPositions.push((availTop + availBot) / 2 - width / 2);
+  } else {
+    const evenGap = (availH - maxBands * width) / (maxBands + 1);
+    if (evenGap >= gap - 0.01) {
+      for (let i = 0; i < maxBands; i++) {
+        yPositions.push(availTop + evenGap + i * (width + evenGap));
+      }
+    } else {
+      const totalH = maxBands * width + (maxBands - 1) * gap;
+      const startY = availTop + (availH - totalH) / 2;
+      for (let i = 0; i < maxBands; i++) {
+        yPositions.push(startY + i * pitch);
+      }
+    }
+  }
+
+  // For each chosen y position, scan x and keep runs that stay inside the
+  // polygon AND at least `inset` from any edge (allowing for half the strip
+  // width on each side).
+  const rows = [];
+  const stepX = 1;
+  yPositions.forEach(y0 => {
+    const y1 = y0 + width;
+    const yc = (y0 + y1) / 2;
     const runs = [];
     let inRun = false, runStart = 0;
     for (let x = bb.minX; x <= bb.maxX; x += stepX) {
       const cPt = { x, y: yc };
-      // Quick check: center inside polygon AND distance from strip edges >= inset from walls.
-      // Effective constraint: distance from boundary to center >= inset + width/2 (so strip edge is >= inset from wall).
       const inside = pointInPoly(cPt, rotated);
       const d = inside ? distToPolyBoundary(cPt, rotated) : 0;
       const ok = inside && d >= inset + width / 2 - 0.5;
@@ -747,8 +777,6 @@ function computeElementLayout(polyIn) {
       else if (!ok && inRun) { inRun = false; runs.push([runStart, x - stepX]); }
     }
     if (inRun) runs.push([runStart, bb.maxX]);
-
-    // Keep runs with a minimum useful length
     const kept = runs.filter(([a, b]) => (b - a) >= 6);
     kept.forEach(([xs, xe]) => {
       const poly = [
@@ -763,50 +791,10 @@ function computeElementLayout(polyIn) {
         yCenter: yc
       });
     });
-    k++;
-    if (k > 1000) break; // safety
-  }
-
-  // Redistribute bands evenly across the available height instead of
-  // packing them tight against the top wall. Group rows by their y-band
-  // (concave rooms can have multiple runs in one band) so split rows
-  // shift together.
-  if (rows.length >= 2) {
-    const bandMap = new Map();
-    rows.forEach(r => {
-      const key = r.polyRotated[0].y.toFixed(3);
-      if (!bandMap.has(key)) bandMap.set(key, []);
-      bandMap.get(key).push(r);
-    });
-    const bands = Array.from(bandMap.values())
-      .sort((a, b) => a[0].polyRotated[0].y - b[0].polyRotated[0].y);
-    const nBands = bands.length;
-    if (nBands >= 2) {
-      const availTop = bb.minY + inset;
-      const availBot = bb.maxY - inset;
-      const availH = availBot - availTop;
-      const evenGap = (availH - nBands * width) / (nBands + 1);
-      // Only redistribute if it doesn't compress below minimum row spacing.
-      if (evenGap >= gap - 0.01) {
-        bands.forEach((bandRows, i) => {
-          const newY0 = availTop + evenGap + i * (width + evenGap);
-          const newY1 = newY0 + width;
-          bandRows.forEach(r => {
-            r.polyRotated[0].y = newY0;
-            r.polyRotated[1].y = newY0;
-            r.polyRotated[2].y = newY1;
-            r.polyRotated[3].y = newY1;
-            r.polyOriginal = rotPoly(r.polyRotated, angle);
-            r.yCenter = (newY0 + newY1) / 2;
-          });
-        });
-      }
-    }
-  }
+  });
 
   const totalIn = rows.reduce((s, r) => s + r.lengthIn, 0);
   const coverageSqIn = rows.reduce((s, r) => s + r.lengthIn * width, 0);
-  const insetPoly = insetPolygonForDisplay(polyIn, inset);
 
   return {
     rows, totalInches: totalIn, totalFt: totalIn / 12, angle,
@@ -814,22 +802,42 @@ function computeElementLayout(polyIn) {
   };
 }
 
-/* ---------- Power supply allocation ----------
-   Greedy pack rows into supplies: fill each up to SUPPLY_CAPACITY_FT,
-   then start a new supply. Returns array of { strips, totalFt, color, index }. */
+/* ---------- Daisy chain + supply allocation ----------
+   Strips are grouped into chains of <=CHAIN_CAPACITY_FT (each chain is one
+   breaker pair, daisy-chained end-to-end with jumpers between consecutive
+   strips). Chains are then grouped into supplies (each EPI-LX-R supply
+   has CHAINS_PER_SUPPLY breaker pairs and SUPPLY_CAPACITY_FT total).
+   Each supply exposes a flat `strips` list for back-compat with sidebar
+   code, plus structured `chains` for the wiring overlay. */
 function allocateSupplies(rows) {
-  const supplies = [];
-  let current = { strips: [], totalFt: 0 };
+  // Step 1: pack contiguous strips into chains
+  const chains = [];
+  let curChain = { strips: [], totalFt: 0 };
   for (const row of rows) {
     const lenFt = row.lengthIn / 12;
-    if (current.totalFt + lenFt > SUPPLY_CAPACITY_FT && current.strips.length > 0) {
-      supplies.push(current);
-      current = { strips: [], totalFt: 0 };
+    if (curChain.totalFt + lenFt > CHAIN_CAPACITY_FT && curChain.strips.length > 0) {
+      chains.push(curChain);
+      curChain = { strips: [], totalFt: 0 };
     }
-    current.strips.push(row);
-    current.totalFt += lenFt;
+    curChain.strips.push(row);
+    curChain.totalFt += lenFt;
   }
-  if (current.strips.length > 0) supplies.push(current);
+  if (curChain.strips.length > 0) chains.push(curChain);
+
+  // Step 2: pack chains into supplies (57 ft max per supply)
+  const supplies = [];
+  let curSupply = { chains: [], strips: [], totalFt: 0 };
+  for (const chain of chains) {
+    if (curSupply.totalFt + chain.totalFt > SUPPLY_CAPACITY_FT && curSupply.chains.length > 0) {
+      supplies.push(curSupply);
+      curSupply = { chains: [], strips: [], totalFt: 0 };
+    }
+    curSupply.chains.push(chain);
+    curSupply.strips.push.apply(curSupply.strips, chain.strips);
+    curSupply.totalFt += chain.totalFt;
+  }
+  if (curSupply.chains.length > 0) supplies.push(curSupply);
+
   supplies.forEach((s, i) => { s.color = SUPPLY_COLORS[i % SUPPLY_COLORS.length]; s.index = i + 1; });
   return supplies;
 }
@@ -854,43 +862,83 @@ function bezierPath(p1, p2, tangent, extend) {
 function renderWiring(svg, supplies, layout, roomBbox, fontIn) {
   if (!supplies.length) return;
   const angle = layout.angle;
-  const tbW = 8, tbH = 4.5;       // terminal block: small, white, colored border
+  const tbW = 8, tbH = 4.5;
   const along = { x: Math.cos(angle), y: Math.sin(angle) };
-  const PIGTAIL_EXT = 4;           // tangent extension for pigtail curves
+  const PIGTAIL_EXT = 4;
+  const JUMPER_SHORT = 1.5;  // wire taking the short path through the row gap
+  const JUMPER_LONG = 6;    // wire looping around the outside of both strips
 
   const wiringG = el('g');
 
   supplies.forEach(supply => {
     const color = supply.color;
+    const nChains = supply.chains.length;
 
-    // Terminal block in rotated space: just past the right end of this supply's strips.
+    // ONE terminal block per supply. Position: just past the right end
+    // of the supply's strips, at the average y of all chain first-strips.
+    // All chains' pigtails converge here.
     let xMaxRot = -Infinity, ySumRot = 0;
-    supply.strips.forEach(s => {
-      xMaxRot = Math.max(xMaxRot, s.polyRotated[1].x);
-      ySumRot += (s.polyRotated[0].y + s.polyRotated[2].y) / 2;
+    supply.chains.forEach(chain => {
+      const first = chain.strips[0];
+      xMaxRot = Math.max(xMaxRot, first.polyRotated[1].x);
+      ySumRot += (first.polyRotated[0].y + first.polyRotated[2].y) / 2;
     });
-    const yAvgRot = ySumRot / supply.strips.length;
+    const yAvgRot = ySumRot / nChains;
     const termOrig = rot({ x: xMaxRot + 5, y: yAvgRot }, angle);
 
-    // Pigtails: smooth curves from each strip end into the terminal block.
-    supply.strips.forEach(strip => {
-      const topRight = strip.polyOriginal[1];  // hot
-      const botRight = strip.polyOriginal[2];  // neutral
-      const tbHotIn = { x: termOrig.x - tbW / 2, y: termOrig.y - tbH * 0.22 };
-      const tbNeuIn = { x: termOrig.x - tbW / 2, y: termOrig.y + tbH * 0.22 };
+    supply.chains.forEach((chain, ci) => {
+      const first = chain.strips[0];
+
+      // Stagger pigtail entry points across the block height so wires
+      // from different chains don't overlap at the entry. With nChains
+      // chains, hot entries spread across the top half, neutral across
+      // the bottom half.
+      const t = nChains === 1 ? 0.5 : ci / (nChains - 1);  // 0..1
+      const hotY = termOrig.y - tbH * 0.32 + t * tbH * 0.18;
+      const neuY = termOrig.y + tbH * 0.14 + t * tbH * 0.18;
+      const tbHotIn = { x: termOrig.x - tbW / 2, y: hotY };
+      const tbNeuIn = { x: termOrig.x - tbW / 2, y: neuY };
+
+      // Pigtails: only the FIRST strip's right end goes to the terminal
+      // block. Other strips in the chain are reached via jumpers.
       wiringG.appendChild(el('path', {
-        d: bezierPath(topRight, tbHotIn, along, PIGTAIL_EXT),
+        d: bezierPath(first.polyOriginal[1], tbHotIn, along, PIGTAIL_EXT),
         class: 'wire-curve hot'
       }));
       wiringG.appendChild(el('path', {
-        d: bezierPath(botRight, tbNeuIn, along, PIGTAIL_EXT),
+        d: bezierPath(first.polyOriginal[2], tbNeuIn, along, PIGTAIL_EXT),
         class: 'wire-curve neutral'
       }));
+
+      // Jumpers between consecutive strips, alternating sides so the
+      // chain forms a snake (LEFT for i=0,2,4..., RIGHT for i=1,3,5...).
+      // Each jumper has TWO wires taking different paths so they don't
+      // visually cross: a SHORT curve through the row gap, and a LONG
+      // curve looping around the outside.
+      for (let i = 0; i < chain.strips.length - 1; i++) {
+        const sA = chain.strips[i];
+        const sB = chain.strips[i + 1];
+        const isLeft = (i % 2 === 0);
+        const sign = isLeft ? -1 : 1;
+        const tangent = { x: sign * along.x, y: sign * along.y };
+        // Corner indices: 0=top-left, 1=top-right, 2=bot-right, 3=bot-left
+        const idxANear = isLeft ? 3 : 2;
+        const idxBNear = isLeft ? 0 : 1;
+        const idxAFar  = isLeft ? 0 : 1;
+        const idxBFar  = isLeft ? 3 : 2;
+        wiringG.appendChild(el('path', {
+          d: bezierPath(sA.polyOriginal[idxANear], sB.polyOriginal[idxBNear], tangent, JUMPER_SHORT),
+          class: 'wire-curve hot'
+        }));
+        wiringG.appendChild(el('path', {
+          d: bezierPath(sA.polyOriginal[idxAFar], sB.polyOriginal[idxBFar], tangent, JUMPER_LONG),
+          class: 'wire-curve neutral'
+        }));
+      }
     });
 
-    // Terminal block (small white box, colored border, two tiny screws).
-    // Each terminal block represents one power supply; the sidebar Wiring
-    // card carries the per-supply count and capacity readouts.
+    // ONE terminal block for this supply, drawn after all wires so it
+    // sits on top.
     wiringG.appendChild(el('rect', {
       x: termOrig.x - tbW / 2, y: termOrig.y - tbH / 2,
       width: tbW, height: tbH,
@@ -1121,10 +1169,12 @@ function updateStats() {
     breakEl.innerHTML = '';
     supplies.forEach(s => {
       const pct = Math.min(100, (s.totalFt / SUPPLY_CAPACITY_FT) * 100);
+      const nChains = s.chains.length;
       const row = document.createElement('div');
       row.className = 'supply-row';
       row.innerHTML =
-        '<span class="lbl"><span class="supply-swatch" style="background:' + s.color + '"></span>Supply ' + s.index + '</span>' +
+        '<span class="lbl"><span class="supply-swatch" style="background:' + s.color + '"></span>Supply ' + s.index +
+        ' <span style="color:var(--ink-3); font-weight:500; margin-left:4px;">&middot; ' + nChains + ' circuit' + (nChains === 1 ? '' : 's') + '</span></span>' +
         '<span class="val">' + s.totalFt.toFixed(1) + ' / ' + SUPPLY_CAPACITY_FT + ' ft</span>';
       const bar = document.createElement('div');
       bar.style.gridColumn = '1 / -1';
