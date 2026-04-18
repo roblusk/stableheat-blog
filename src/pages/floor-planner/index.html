@@ -228,11 +228,9 @@
   .wire-curve { fill: none; stroke-width: 0.5; stroke-linecap: round; }
   .wire-curve.hot { stroke: #B23A2A; opacity: 0.9; }
   .wire-curve.neutral { stroke: var(--ink); opacity: 0.7; }
-  .daisy-chain { fill: none; stroke: var(--ink-3); stroke-width: 0.4; stroke-dasharray: 1.2 1.4; opacity: 0.5; }
   .terminal-block-rect { fill: var(--panel); stroke-width: 0.9; }
   .terminal-block-screw-hot { fill: #B23A2A; opacity: 0.7; }
   .terminal-block-screw-neutral { fill: var(--ink); opacity: 0.55; }
-  .power-supply-rect { fill: #FCFAF3; stroke-width: 1; }
 
   /* Wiring sidebar card */
   .supply-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 13px; align-items: center; }
@@ -838,9 +836,10 @@ function allocateSupplies(rows) {
 
 /* ---------- Wiring overlay rendering ----------
    Elegant 0.5px curves only. Each strip's pigtails curve smoothly from its end
-   into a small per-supply terminal block, then a curved bus from terminal to a
-   small power supply outside the room. Multiple supplies daisy-chain together
-   (per the EPI-LX-R spec, up to 20 ft of chain). */
+   into one per-supply terminal block. The power supply itself is implied by
+   the terminal block's accent color and surfaced in the sidebar Wiring card;
+   we don't draw a separate supply icon since the EPI-LX-R chain can route up
+   to 20 ft and the visual gets noisy when buses cross the room. */
 function bezierPath(p1, p2, tangent, extend) {
   // Cubic Bezier: leave p1 tangent to `tangent` direction, arrive at p2 tangent
   // to `-tangent`. Control points pulled along tangent by `extend` inches.
@@ -856,17 +855,15 @@ function renderWiring(svg, supplies, layout, roomBbox, fontIn) {
   if (!supplies.length) return;
   const angle = layout.angle;
   const tbW = 8, tbH = 4.5;       // terminal block: small, white, colored border
-  const psSize = 5;                // power supply: ~5" square (well under 6")
-  const psOffsetX = 12;            // inches outside room bbox
-  const psSpacingY = psSize + 4.5; // tight stack
   const along = { x: Math.cos(angle), y: Math.sin(angle) };
   const PIGTAIL_EXT = 4;           // tangent extension for pigtail curves
-  const BUS_EXT = 7;               // tangent extension for terminal -> supply curves
 
   const wiringG = el('g');
 
-  // Pre-compute supply positions so we can draw the daisy chain after icons.
-  const layouts = supplies.map((supply, sIdx) => {
+  supplies.forEach(supply => {
+    const color = supply.color;
+
+    // Terminal block in rotated space: just past the right end of this supply's strips.
     let xMaxRot = -Infinity, ySumRot = 0;
     supply.strips.forEach(s => {
       xMaxRot = Math.max(xMaxRot, s.polyRotated[1].x);
@@ -874,35 +871,13 @@ function renderWiring(svg, supplies, layout, roomBbox, fontIn) {
     });
     const yAvgRot = ySumRot / supply.strips.length;
     const termOrig = rot({ x: xMaxRot + 5, y: yAvgRot }, angle);
-    const psOrigin = {
-      x: roomBbox.maxX + psOffsetX,
-      y: roomBbox.minY + (sIdx + 0.5) * psSpacingY
-    };
-    return { supply, termOrig, psOrigin };
-  });
-
-  // Daisy chain (per EPI-LX-R spec: up to 20 ft of chain between supplies).
-  // Thin dashed line connecting consecutive supplies vertically.
-  for (let i = 0; i < layouts.length - 1; i++) {
-    const a = layouts[i].psOrigin;
-    const b = layouts[i + 1].psOrigin;
-    const x = a.x + psSize / 2;
-    wiringG.appendChild(el('line', {
-      x1: x, y1: a.y + psSize / 2,
-      x2: x, y2: b.y - psSize / 2,
-      class: 'daisy-chain'
-    }));
-  }
-
-  layouts.forEach(({ supply, termOrig, psOrigin }) => {
-    const color = supply.color;
 
     // Pigtails: smooth curves from each strip end into the terminal block.
     supply.strips.forEach(strip => {
       const topRight = strip.polyOriginal[1];  // hot
       const botRight = strip.polyOriginal[2];  // neutral
-      const tbHotIn  = { x: termOrig.x - tbW / 2, y: termOrig.y - tbH * 0.22 };
-      const tbNeuIn  = { x: termOrig.x - tbW / 2, y: termOrig.y + tbH * 0.22 };
+      const tbHotIn = { x: termOrig.x - tbW / 2, y: termOrig.y - tbH * 0.22 };
+      const tbNeuIn = { x: termOrig.x - tbW / 2, y: termOrig.y + tbH * 0.22 };
       wiringG.appendChild(el('path', {
         d: bezierPath(topRight, tbHotIn, along, PIGTAIL_EXT),
         class: 'wire-curve hot'
@@ -913,7 +888,9 @@ function renderWiring(svg, supplies, layout, roomBbox, fontIn) {
       }));
     });
 
-    // Terminal block (small, white, colored border)
+    // Terminal block (small white box, colored border, two tiny screws).
+    // Each terminal block represents one power supply; the sidebar Wiring
+    // card carries the per-supply count and capacity readouts.
     wiringG.appendChild(el('rect', {
       x: termOrig.x - tbW / 2, y: termOrig.y - tbH / 2,
       width: tbW, height: tbH,
@@ -928,35 +905,6 @@ function renderWiring(svg, supplies, layout, roomBbox, fontIn) {
     wiringG.appendChild(el('circle', {
       cx: termOrig.x + tbW * 0.22, cy: termOrig.y, r: 0.55,
       class: 'terminal-block-screw-neutral'
-    }));
-
-    // Bus: curved 0.5px from terminal block edge to power supply edge.
-    const tbExitTop = { x: termOrig.x + tbW / 2, y: termOrig.y - tbH * 0.22 };
-    const tbExitBot = { x: termOrig.x + tbW / 2, y: termOrig.y + tbH * 0.22 };
-    const psEntryTop = { x: psOrigin.x, y: psOrigin.y - psSize * 0.18 };
-    const psEntryBot = { x: psOrigin.x, y: psOrigin.y + psSize * 0.18 };
-    const horiz = { x: 1, y: 0 };
-    wiringG.appendChild(el('path', {
-      d: bezierPath(tbExitTop, psEntryTop, horiz, BUS_EXT),
-      class: 'wire-curve hot'
-    }));
-    wiringG.appendChild(el('path', {
-      d: bezierPath(tbExitBot, psEntryBot, horiz, BUS_EXT),
-      class: 'wire-curve neutral'
-    }));
-
-    // Power supply: small square, colored border, single colored dot inside.
-    // No text on the canvas — the sidebar card carries all labeling.
-    wiringG.appendChild(el('rect', {
-      x: psOrigin.x, y: psOrigin.y - psSize / 2,
-      width: psSize, height: psSize,
-      rx: 0.8, ry: 0.8,
-      class: 'power-supply-rect',
-      stroke: color
-    }));
-    wiringG.appendChild(el('circle', {
-      cx: psOrigin.x + psSize / 2, cy: psOrigin.y, r: 0.7,
-      fill: color, opacity: 0.65
     }));
   });
 
@@ -1057,7 +1005,7 @@ function render() {
       });
       svg.appendChild(gEl);
 
-      // Wiring overlay (curved pigtails, terminal blocks, daisy-chained supplies)
+      // Wiring overlay (curved pigtails into per-supply terminal blocks)
       if (state.showWiring && layout.rows.length) {
         const supplies = allocateSupplies(layout.rows);
         const roomBbox = bbox(state.pts);
