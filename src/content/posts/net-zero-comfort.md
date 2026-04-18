@@ -31,7 +31,7 @@ For new net-zero builds, the increasingly common pattern is:
 - **Heat pump** for primary space heating across the whole home
 - **StableHeat radiant** in 3-6 strategic zones: bathrooms, kitchen tile, primary bedroom, sometimes the basement office
 
-The radiant zones add maybe 1-2% to the total annual energy budget — well within what an additional solar panel pair compensates for, and trivial compared to the comfort difference. They also serve as a battery-backable comfort layer (see [Battery + Radiant](/posts/battery-radiant)).
+The radiant zones add maybe 1-2% to the total annual energy budget — well within what an additional solar panel pair compensates for, and trivial compared to the comfort difference. They also serve as a battery-backable comfort layer for outage scenarios.
 
 ## The retrofit pattern
 

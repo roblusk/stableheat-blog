@@ -1,13 +1,16 @@
 ---
 import { applications } from '../data/applications';
-const path = Astro.url.pathname.replace(/\/$/, '');
+import { path } from '../utils/url';
+
+const stripTrailing = (s: string) => s.replace(/\/$/, '');
+const currentPath = stripTrailing(Astro.url.pathname);
 ---
 <nav class="app-strip" aria-label="Browse posts by application">
   <div class="container">
     <ul>
       {applications.map((app) => {
-        const href = `/category/${app.slug}`;
-        const isActive = path === href;
+        const href = path(`/category/${app.slug}`);
+        const isActive = currentPath === stripTrailing(href);
         return (
           <li>
             <a href={href} class={isActive ? 'active' : ''} aria-current={isActive ? 'page' : undefined}>

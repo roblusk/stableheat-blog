@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { applications } from '../../data/applications';
+import { path } from '../../utils/url';
 
 export async function getStaticPaths() {
   return applications.map((app) => ({
@@ -57,7 +58,7 @@ const posts = allPosts
       </div>
       <div style="display:flex; gap:14px; flex-wrap:wrap;">
         <a class="btn btn-primary" href="https://stepheat.com" target="_blank" rel="noopener">Explore products →</a>
-        <a class="btn btn-ghost" href="/" style="color:#fff; border-color:rgba(255,255,255,0.5);">Read the blog</a>
+        <a class="btn btn-ghost" href={path('/')} style="color:#fff; border-color:rgba(255,255,255,0.5);">Read the blog</a>
       </div>
     </div>
   </section>

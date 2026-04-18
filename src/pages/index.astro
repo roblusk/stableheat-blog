@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
+import { path } from '../utils/url';
 
 const posts = (await getCollection('posts')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
@@ -69,7 +70,7 @@ const list = rest.slice(3);
       </div>
       <div style="display:flex; gap:14px; flex-wrap:wrap;">
         <a class="btn btn-primary" href="https://stepheat.com" target="_blank" rel="noopener">Explore products →</a>
-        <a class="btn btn-ghost" href="/about" style="color:#fff; border-color:rgba(255,255,255,0.5);">About StableHeat</a>
+        <a class="btn btn-ghost" href={path('/about')} style="color:#fff; border-color:rgba(255,255,255,0.5);">About StableHeat</a>
       </div>
     </div>
   </section>

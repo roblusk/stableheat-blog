@@ -1,10 +1,11 @@
 ---
+import { path } from '../utils/url';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="container">
     <div>
-      <a class="brand" href="/" style="margin-bottom: 12px;">
+      <a class="brand" href={path('/')} style="margin-bottom: 12px;">
         <span class="brand-mark">
           <i class="fa-solid fa-temperature-half" aria-hidden="true"></i>
         </span>
@@ -24,10 +25,10 @@ const year = new Date().getFullYear();
     <div>
       <h5>Blog</h5>
       <ul>
-        <li><a href="/">Latest stories</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/posts/electric-vs-hydronic">Guides</a></li>
-        <li><a href="/posts/self-regulating-tech">Technology</a></li>
+        <li><a href={path('/')}>Latest stories</a></li>
+        <li><a href={path('/about')}>About</a></li>
+        <li><a href={path('/posts/electric-vs-hydronic')}>Guides</a></li>
+        <li><a href={path('/posts/self-regulating-tech')}>Technology</a></li>
       </ul>
     </div>
     <div>

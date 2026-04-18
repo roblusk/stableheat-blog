@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Thumb from '../../components/Thumb.astro';
+import { path } from '../../utils/url';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -16,7 +17,7 @@ const dateStr = data.date.toLocaleDateString('en-US', { month: 'short', day: 'nu
 <BaseLayout title={`${data.title} — StableHeat`} description={data.excerpt}>
   <section class="article-hero">
     <div class="container">
-      <div class="article-breadcrumb"><a href="/">Blog</a> / {data.category}</div>
+      <div class="article-breadcrumb"><a href={path('/')}>Blog</a> / {data.category}</div>
       <span class="article-category">{data.category}</span>
       <h1 class="article-title">{data.title}</h1>
       <p class="article-deck">{data.deck}</p>
@@ -48,6 +49,6 @@ const dateStr = data.date.toLocaleDateString('en-US', { month: 'short', day: 'nu
       </div>
       <a class="btn btn-primary" href="https://stepheat.com" target="_blank" rel="noopener">Visit stableheat.com →</a>
     </div>
-    <a href="/" class="back-link">← Back to all stories</a>
+    <a href={path('/')} class="back-link">← Back to all stories</a>
   </div>
 </BaseLayout>
