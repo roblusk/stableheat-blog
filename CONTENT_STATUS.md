@@ -3,7 +3,7 @@
 A live snapshot of what's published on the StableHeat blog and what's still
 on deck from the project catalog. Updated when posts are added.
 
-**As of last update:** 53 posts live, 9 categories filled, 65 built pages.
+**As of last update:** 74 posts live, 9 categories filled, 86 built pages.
 
 ---
 
@@ -15,7 +15,7 @@ Posts come from two sources:
    aren't tied to a specific customer project. Live as flat `.md` files in
    `src/content/posts/`.
 
-2. **Customer project posts** (27) — drawn from the StableHeat Project
+2. **Customer project posts** (48) — drawn from the StableHeat Project
    Catalog (`StableHeat_Project_Catalog.xlsx`). Each is co-located with its
    hero photo as a folder: `src/content/posts/<slug>/{index.md, cover.jpg}`.
 
@@ -25,22 +25,32 @@ Posts come from two sources:
 
 The catalog has 56 numbered projects. Coverage status below.
 
-### ✅ Covered (27 of 56)
+### ✅ Covered (48 of 56)
 
 | # | Catalog Project | Blog Post Slug | Hero photo |
 | - | --------------- | -------------- | ---------- |
 | 1 | Atlantis Casino Resort Spa | `atlantis-spa` | ✅ |
 | 2 | Opera House | `opera-house` | ✅ + 3 inline (FLIR) |
 | 3 | Electro Plastics HQ | `electro-plastics-hq` | ✅ |
+| 4 | Rush Creek Spa | `rush-creek-spa` | ✅ |
 | 5 | Snowbank Lake Residence (2022) | `snowbank-lake` | ✅ |
+| 6 | Ohio House (2021) | `ohio-house` | ✅ |
+| 7 | Jesson Residence, Michigan (2016) | `jesson-residence` | ✅ |
+| 8 | John Adams Residence (2012) | `john-adams-residence` | ✅ |
 | 9 | Conservatory (2008) | `conservatory` | ✅ |
+| 10 | Butera Residence (2000) | `butera-residence` | ✅ |
 | 11 | DIYnet Feature (2012) | `diynet-feature` | ✅ |
 | 15 | Church Roof Deicing (Warmzone) | `church-roof-deicing` | ✅ |
 | 16 | Bruce Oswald Roof Deicing | `bruce-oswald-roof` | ✅ |
 | 17 | Bowa Roof Deicing | `bowa-roof` | ✅ |
+| 18 | American Dock Roof Deicing | `american-dock-roof` | ✅ |
 | 19 | Gutter Deicing Systems | `gutter-deicing` | ✅ |
 | 20 | Vail, Colorado Snowmelt System | `vail-snowmelt` | ✅ |
 | 21 | Chadfield Snowmelt | `chadfield-snowmelt` | ✅ |
+| 22 | Able Electric Snowmelt | `able-electric-snowmelt` | ✅ |
+| 23 | Duffy Snowmelt | `duffy-snowmelt` | ✅ |
+| 24 | Electro Plastics Snowmelt | `electro-plastics-snowmelt` | ✅ |
+| 25 | Elevation Snowmelt | `elevation-snowmelt` | ✅ |
 | 26 | UNAVCO Antarctic Polar Research | `unavco-antarctic` | ✅ |
 | 28 | Red Bull Custom RV | `red-bull-rv` | ✅ |
 | 29 | Houseboat Heating | `dutch-houseboat` | ✅ |
@@ -48,45 +58,38 @@ The catalog has 56 numbered projects. Coverage status below.
 | 31 | Palm Tree Heater | `palm-tree-heater` | ✅ |
 | 32 | Propane Tank Heating | `propane-tank` | ✅ |
 | 33 | Battery-Powered Wearable Heaters | `wearable-heaters` | ✅ |
+| 34 | Natural Current NanoHeaters | `nanoheaters` | ✅ |
+| 35 | Under Desk Heater | `under-desk-heater` | ✅ |
+| 36 | STEP Mat | `step-mat` | ✅ |
 | 37 | Intrinsically Safe Heating | `intrinsically-safe` | — (no source photo) |
 | 38 | Chase Plaza Thermal Verification | `chase-plaza-thermal` | ✅ + 1 inline |
 | 39 | NOAA Fisheries Research Vessels | `noaa-fisheries` | ✅ |
 | 40 | NYPD Patrol Boat Fleet | `nypd-patrol-boats` | ✅ |
 | 41 | Turquoise 77m Mega Yacht | `turquoise-yacht` | — (no editorial photo) |
 | 43 | Gladding-Hearn Shipbuilding | `gladding-hearn` | ✅ |
+| 44 | Gulf Island — Seaway Guardian | `seaway-guardian` | ✅ |
+| 45 | Conrad Shipyard (James M. Keen)¹ | `conrad-shipyard` | ✅ (FLIR) |
 | 46 | Nordhavn Explorer Yachts | `nordhavn-yacht` | ✅ |
+| 47 | SAFE Boats International | `safe-boats` | — (no source photo) |
+| 48 | Moose Boats | `moose-boats` | ✅ |
+| 50 | Ulutas Group | `ulutas-group` | ✅ |
+| 51 | Waterman Glass Restaurant | `waterman-glass-restaurant` | ✅ |
 | 54 | Florstar RV Installation | `florstar-rv` | ✅ |
+| 55 | Rogmans RV Project | `rogmans-rv` | ✅ |
+| 56 | Sokaski RV Project | `sokaski-rv` | ✅ |
 
-### ⏳ Not yet covered (29 of 56)
+¹ The catalog described Conrad as a Polish luxury-yacht builder in
+Gdansk. The actual OneDrive contents are for the **James M. Keen**, a
+110-foot crane barge built at **Conrad Shipyard in Morgan City, Louisiana**
+for the U.S. Army Corps of Engineers (Olmsted Lock and Dam, Ohio River).
+The post and slug reflect the documented project, not the catalog summary.
+
+### ⏳ Not yet covered (8 of 56)
 
 Sorted by best-next-priority. "Photos" column reflects the catalog's
-"Photos Available" field.
-
-#### Strong candidates (good photos, clean stories)
-
-| # | Catalog Project | Category | Photos | Notes |
-| - | --------------- | -------- | ------ | ----- |
-| 4 | Rush Creek Spa | Commercial | YES | Second commercial spa to pair with Atlantis |
-| 6 | Ohio House (2021) | Residential | YES | Recent residential, fills home category |
-| 7 | Jesson Residence, Michigan (2016) | Residential | YES | Kitchen-focused, six photos |
-| 8 | John Adams Residence (2012) | Residential | YES | Residential reference |
-| 10 | Butera Residence (2000) | Residential | YES | Oldest dated install — longevity story |
-| 18 | American Dock Roof Deicing | Roof | YES | Commercial roof reference |
-| 22 | Able Electric Snowmelt | Snowmelt | YES | More snowmelt projects available |
-| 23 | Duffy Snowmelt | Snowmelt | YES | More snowmelt projects available |
-| 24 | Electro Plastics Snowmelt | Snowmelt | YES | Pairs with the HQ post |
-| 25 | Elevation Snowmelt | Snowmelt | YES | Distinctive name |
-| 34 | Natural Current NanoHeaters | Specialty | YES | Tech-angle product story |
-| 35 | Under Desk Heater | Specialty | YES | Consumer product line |
-| 36 | STEP Mat | Specialty | YES | Product line — fills floor category |
-| 44 | Gulf Island - Seaway Guardian | Marine | YES | Distinctive vessel name |
-| 45 | Conrad Yachts | Marine | YES | Yacht builder relationship |
-| 47 | SAFE Boats International | Marine | YES | Federal/military marine reference |
-| 48 | Moose Boats | Marine | YES | Already partially covered via NYPD post |
-| 50 | Ulutas Group | Marine | YES | International marine reference |
-| 51 | Waterman Glass Restaurant | Reference | YES | Hospitality reference |
-| 55 | Rogmans RV Project | RV/Mobile | YES | More RV reference |
-| 56 | Sokaski RV Project | RV/Mobile | YES | More RV reference |
+"Photos Available" field. The 21 prior "strong candidates" were all
+written in the April 2026 batch — what remains is the harder-to-write
+tail.
 
 #### Worth considering (but harder to write well)
 
@@ -108,7 +111,7 @@ Sorted by best-next-priority. "Photos" column reflects the catalog's
 
 ---
 
-## Editorial / topic posts (26 of 53)
+## Editorial / topic posts (26 of 74)
 
 These aren't tied to a specific catalog project — they're guides, comparisons,
 and topical explainers that cover the broader StableHeat story.
@@ -169,15 +172,15 @@ and topical explainers that cover the broader StableHeat story.
 
 | App | Posts | Notes |
 | --- | ----- | ----- |
-| Home | 13 | Most posts, healthy depth |
-| Floor | 5 | Could use STEP Mat (#36) and more residentials |
-| Commercial | 8 | Atlantis, Opera, Electro Plastics, others — could add Rush Creek, Waterman |
-| RV | 5 | Florstar, Red Bull, Boondocking + 2 fictional — could add Rogmans/Sokaski |
-| Marine | 8 | Strong: NOAA, NYPD, Turquoise, Houseboat, Liveaboard, Nordhavn, Gladding-Hearn |
-| Snowmelt | 5 | Vail, Chadfield, Chase Plaza + 2 fictional — could add Able/Duffy/Elevation |
-| Roof De-Ice | 5 | Church, Bowa, Bruce Oswald, Gutter Deicing + 2 fictional |
+| Home | 28 | Strongest depth — adds Ohio House, Jesson, John Adams, Butera, NanoHeaters, Under Desk, STEP Mat |
+| Floor | 15 | Now well-covered after Apr 2026 batch (Rush Creek, Ohio House, Jesson, John Adams, Butera, NanoHeaters, STEP Mat) |
+| Commercial | 14 | Adds Rush Creek, Electro Plastics SM, American Dock, Under Desk, Waterman Glass |
+| RV | 7 | Adds Rogmans, Sokaski |
+| Marine | 14 | Adds Seaway Guardian, Conrad Shipyard (FLIR), SAFE Boats, Moose, Ulutas |
+| Snowmelt | 11 | Adds Able Electric, Duffy, Electro Plastics SM, Elevation, Butera (snowmelt-tagged) |
+| Roof De-Ice | 9 | Adds American Dock, Able Electric (roof-tagged) |
 | Solar | 3 | All editorial; no customer projects in catalog |
-| Oil & Gas | 4 | Intrinsically Safe + 3 fictional — no other customer O&G in catalog |
+| Oil & Gas | 6 | Intrinsically Safe + 5 editorial — no other customer O&G in catalog |
 
 ---
 
