@@ -1,6 +1,6 @@
 ---
 title: "Snowbank Lake: A Lakefront Home Built Around Warm Floors"
-deck: "Twenty-six photos document one of the most extensively-shot residential installations in our portfolio. The story they tell is about how radiant changes a lakefront house's relationship to winter."
+deck: "A full-house radiant build across a lakefront residence: parallel element strips under engineered wood, room-by-room zoning on a wall of dedicated controllers, and a homeowner who wanted winter to stop being the price of the view."
 category: "Residential"
 date: 2026-01-07
 readTime: "3 min read"
@@ -14,7 +14,11 @@ heroImageAlt: "Parallel runs of self-regulating heating element strips laid acro
 
 The Snowbank Lake project came to us in 2022 with a clear brief: build out a full-house radiant system across a lakefront residence in a part of the country where winters arrive early and stay late. The owner had lived in the house for several seasons. The view was what they bought it for. The cold was what they were trying to fix.
 
-We documented the install across 26 photos, one of the most extensively-shot residential projects in our portfolio. The pictures tell the story better than any spec sheet, but the underlying story is about something specific: how a lakefront house in a snowy climate works *differently* with radiant.
+We documented the install in May 2022, across the great room, the bedrooms, the bathrooms, and the mechanical wall that holds it all together. The pictures tell the story better than any spec sheet, but the underlying story is about something specific: how a lakefront house in a snowy climate works *differently* with radiant.
+
+![Two installers working on parallel runs of self-regulating element strips in a great room with timber-frame ceilings and a wall of windows facing the lake.](./images/great-room-install.jpg)
+
+*The great room mid-install. The element strips run perpendicular to the lake-facing window wall, where the cold-load is heaviest.*
 
 ## Why lakefront houses need this more than most
 
@@ -35,6 +39,10 @@ Key project decisions visible in the photo documentation:
 - **Strip spacing tuned per room.** Higher density in the bathrooms and the lake-facing great room; standard density in interior rooms.
 - **Engineered wood, not solid hardwood.** Dimensionally stable across the temperature swings a radiant system produces.
 - **Zone control by use, not by floor.** The owner wanted the bedrooms to fall back overnight and the great room to stay constant, which is easier with per-room zoning.
+
+![A bank of toroidal transformers and control boards mounted in two columns on a plywood mechanical wall, with armored conduit running to nearby junction boxes.](./images/zone-control-panel.jpg)
+
+*The mechanical wall. Each transformer and controller pair drives one zone, which is what makes the per-room thermostat layout possible.*
 
 ## What changed for the owner
 

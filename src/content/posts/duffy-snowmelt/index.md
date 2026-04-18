@@ -1,6 +1,6 @@
 ---
 title: "The Duffy Driveway: A Residential Snowmelt Build, Documented Step by Step"
-deck: "Fifteen photographs, one driveway, and the question every homeowner eventually asks: does it actually clear in time for the morning commute?"
+deck: "A residential snowmelt build, photographed from element layout through the concrete pour to the first cleared storm. The question it answers is the one every homeowner eventually asks: does it actually clear in time for the morning commute?"
 category: "Snowmelt"
 date: 2026-04-16
 readTime: "3 min read"
@@ -12,7 +12,7 @@ heroImage: ./cover.jpg
 heroImageAlt: "The completed Duffy residential driveway after a snow event: the heated surface visibly clear of snow while the surrounding ground stays covered."
 ---
 
-The Duffy project is a residential driveway snowmelt install that the owner photographed methodically: element layout in the trench, the concrete pour, the cured surface, and the first storms after commissioning. Fifteen photographs across the build. The reason that's worth dwelling on isn't documentation for its own sake. It's that we can now walk a prospective customer through every stage of what their own driveway would look like, with real photographs of a real driveway in someone else's life.
+The Duffy project is a residential driveway snowmelt install that the owner photographed methodically: element layout on the prepared base, the concrete pour, the cured surface, and the first storms after commissioning. The reason that's worth dwelling on isn't documentation for its own sake. It's that we can now walk a prospective customer through every stage of what their own driveway would look like, with real photographs of a real driveway in someone else's life.
 
 That's a different sales conversation than a brochure.
 
@@ -39,7 +39,19 @@ Walking through the Duffy build photographs in order, what a prospective custome
 3. **The cured driveway surface**: finished concrete, no visible evidence of what's underneath, indistinguishable from any other residential driveway.
 4. **The first cleared storm**: heated surface clear of snow, surrounding ground covered, the contrast that tells the whole story in one frame.
 
+![Self-regulating polymer heating element laid in parallel runs across the prepared base of a residential driveway, with two installers working at the top of the drive near the garage.](./images/element-layout.jpg)
+
+*Stage one. The element runs the full width of the heated zone, with the leads pulled toward the garage where the controller and transformer live.*
+
+![A freshly poured and cured residential driveway in concrete, with the garage opening visible at the top and trimmed forms still visible at the edges.](./images/finished-concrete.jpg)
+
+*Stage three. After the pour, the driveway is indistinguishable from any other residential concrete drive. Nothing on the surface gives away what's underneath.*
+
 That's the build. There's no fourth act. The system clears the drive when it snows; the homeowner drives to work.
+
+![A residential driveway after a winter storm, the heated concrete surface clear of snow while the surrounding lawn and walks are still covered.](./images/cleared-after-storm.jpg)
+
+*Stage four. The proof season. The driveway cleared itself; the lawn and the walks did not.*
 
 ## The ROI question, honestly
 
