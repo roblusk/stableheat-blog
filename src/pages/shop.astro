@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const kits = [
+  {
+    size: 'S',
+    name: 'Small Kit',
+    price: 600,
+    coverage: 'Up to 30 sq ft',
+    bestFor: 'A single bathroom, mudroom, or small zone.',
+    includes: [
+      'Self-regulating heating element',
+      'Smart programmable thermostat with floor sensor',
+      'Power leads, end seals, and install hardware',
+      'Step-by-step installation guide',
+    ],
+    accent: 'cool',
+  },
+  {
+    size: 'M',
+    name: 'Medium Kit',
+    price: 1200,
+    coverage: 'Up to 60 sq ft',
+    bestFor: 'A kitchen, large bath, basement zone, or open laundry.',
+    includes: [
+      'Self-regulating heating element (extended panels)',
+      'Smart programmable thermostat with floor sensor',
+      'Power leads, end seals, and install hardware',
+      'Step-by-step installation guide',
+    ],
+    popular: true,
+    accent: 'mid',
+  },
+  {
+    size: 'L',
+    name: 'Large Kit',
+    price: 1800,
+    coverage: 'Up to 100 sq ft',
+    bestFor: 'A whole room, sunroom, or open-plan area.',
+    includes: [
+      'Self-regulating heating element (full coverage)',
+      'Multi-zone smart thermostat with floor sensors',
+      'Power leads, end seals, and install hardware',
+      'Step-by-step installation guide',
+    ],
+    accent: 'warm',
+  },
+];
+
+const fmt = (n: number) => `$${n.toLocaleString('en-US')}`;
+---
+<BaseLayout title="Shop Kits — StableHeat" description="Pre-bundled StableHeat Warmfloor kits in three sizes — ready to ship and install.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="kicker">Shop</span>
+      <h1>Shop Kits</h1>
+      <p>Pre-bundled StableHeat Warmfloor kits, sized for the most common projects. Pick the kit that fits your room — or talk to our team for anything custom.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="kit-grid">
+        {kits.map((kit) => (
+          <article class={`kit-card kit-${kit.accent}${kit.popular ? ' kit-popular' : ''}`}>
+            {kit.popular && <span class="kit-badge">Most popular</span>}
+            <div class="kit-size">{kit.size}</div>
+            <h3 class="kit-name">{kit.name}</h3>
+            <div class="kit-price">{fmt(kit.price)}</div>
+            <div class="kit-coverage">{kit.coverage}</div>
+            <p class="kit-best">{kit.bestFor}</p>
+            <div class="kit-divider"></div>
+            <h4 class="kit-includes-title">What's included</h4>
+            <ul class="kit-includes">
+              {kit.includes.map((item) => <li><i class="fa-solid fa-check" aria-hidden="true"></i> {item}</li>)}
+            </ul>
+            <a class="btn btn-primary kit-cta" href={`mailto:sales@stableheat.com?subject=${encodeURIComponent(`Order ${kit.name} (${kit.size})`)}`}>Order {kit.name} →</a>
+          </article>
+        ))}
+      </div>
+
+      <p class="kit-footnote">
+        Need a different size, a commercial scope, or a snowmelt / marine / industrial system? <a href="mailto:sales@stableheat.com">Email our team</a> or call <a href="tel:+13142025540">314.202.5540</a> — we'll size your project in about five minutes.
+      </p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <div>
+        <h2>Not sure which kit you need?</h2>
+        <p>Send us a quick note about your room — square footage, finish floor, and what you're trying to fix — and we'll point you to the right kit (or a custom layout).</p>
+      </div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="mailto:sales@stableheat.com">Email us</a>
+        <a class="btn btn-ghost" href="tel:+13142025540" style="color:#fff; border-color:rgba(255,255,255,0.5);">Call 314.202.5540</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

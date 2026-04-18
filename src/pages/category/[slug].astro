@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { applications } from '../../data/applications';
+
+export async function getStaticPaths() {
+  return applications.map((app) => ({
+    params: { slug: app.slug },
+    props: { app },
+  }));
+}
+
+const { app } = Astro.props;
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .filter((p) => p.data.applications?.includes(app.slug))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout title={`${app.name} — StableHeat`} description={app.tagline}>
+  <section class="page-hero">
+    <div class="container">
+      <span class="kicker">Application</span>
+      <h1>{app.name}</h1>
+      <p>{app.longDescription}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {posts.length > 0 ? (
+        <>
+          <div class="section-header">
+            <h2 class="section-title">Stories on {app.name}</h2>
+            <span class="section-more">{posts.length} post{posts.length === 1 ? '' : 's'}</span>
+          </div>
+          <div class="post-grid">
+            {posts.map((post) => <PostCard post={post} variant="card" />)}
+          </div>
+        </>
+      ) : (
+        <div class="empty-state">
+          <i class={`fa-solid fa-${app.icon}`} aria-hidden="true"></i>
+          <h3>Stories coming soon.</h3>
+          <p>We don't have a {app.name} post in the journal yet — but we'd love to write one. In the meantime, learn more about StableHeat for {app.name} at <a href="https://stepheat.com" target="_blank" rel="noopener">stableheat.com</a>.</p>
+          <a class="btn btn-primary" href="https://stepheat.com" target="_blank" rel="noopener">Visit stableheat.com →</a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container">
+      <div>
+        <h2>Have a {app.name} project?</h2>
+        <p>{app.tagline} Talk to our team about your application.</p>
+      </div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="https://stepheat.com" target="_blank" rel="noopener">Explore products →</a>
+        <a class="btn btn-ghost" href="/" style="color:#fff; border-color:rgba(255,255,255,0.5);">Read the blog</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Thumb from '../../components/Thumb.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { data } = post;
+const dateStr = data.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+<BaseLayout title={`${data.title} — StableHeat`} description={data.excerpt}>
+  <section class="article-hero">
+    <div class="container">
+      <div class="article-breadcrumb"><a href="/">Blog</a> / {data.category}</div>
+      <span class="article-category">{data.category}</span>
+      <h1 class="article-title">{data.title}</h1>
+      <p class="article-deck">{data.deck}</p>
+      <div class="article-byline">
+        <span>{dateStr}</span>
+        <span class="sep">·</span>
+        <span>{data.readTime}</span>
+        <span class="sep">·</span>
+        <span>By the StableHeat team</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="article-visual">
+    <div class="thumb-wrap">
+      <Thumb variant={data.thumbVariant} icon={data.thumbIcon} />
+    </div>
+  </div>
+
+  <article class="article-body">
+    <Content />
+  </article>
+
+  <div class="article-footer">
+    <div class="cta-inline">
+      <div>
+        <h4>Learn more about StableHeat</h4>
+        <p>Spec sheets, product details, and installation resources.</p>
+      </div>
+      <a class="btn btn-primary" href="https://stepheat.com" target="_blank" rel="noopener">Visit stableheat.com →</a>
+    </div>
+    <a href="/" class="back-link">← Back to all stories</a>
+  </div>
+</BaseLayout>

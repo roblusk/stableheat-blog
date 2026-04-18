@@ -1,0 +1,12 @@
+---
+export interface Props {
+  variant: number;
+  icon: string; // Font Awesome Free name without prefix, e.g. "building", "caravan"
+  style?: 'solid' | 'regular' | 'brands';
+}
+const { variant, icon, style = 'solid' } = Astro.props;
+const styleClass = `fa-${style}`;
+---
+<div class={`thumb thumb-${variant}`}>
+  <i class={`${styleClass} fa-${icon}`} aria-hidden="true"></i>
+</div>

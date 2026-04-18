@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const featured = posts.find((p) => p.data.featured) ?? posts[0];
+const rest = posts.filter((p) => p.slug !== featured.slug);
+const cards = rest.slice(0, 3);
+const list = rest.slice(3);
+---
+<BaseLayout title="StableHeat — Electric Radiant Heating Insights">
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="hero-kicker">The StableHeat Journal</span>
+        <h1 class="hero-title">Warmth, <em>reimagined</em> — from the floor up.</h1>
+        <p class="hero-lede">Self-regulating electric radiant heat from StableHeat (formerly STEP Heat) delivers even, efficient warmth across homes, commercial spaces, driveways, vessels, and beyond. Here's what we're thinking about.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#latest">Read the latest</a>
+          <a class="btn btn-ghost" href="https://stepheat.com" target="_blank" rel="noopener">Visit StableHeat →</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <i class="fa-solid fa-house" aria-hidden="true"></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="latest">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Story</h2>
+        <span class="section-more">Updated weekly</span>
+      </div>
+
+      <PostCard post={featured} variant="feature" />
+
+      {cards.length > 0 && (
+        <div class="post-grid">
+          {cards.map((post) => <PostCard post={post} variant="card" />)}
+        </div>
+      )}
+    </div>
+  </section>
+
+  {list.length > 0 && (
+    <section class="section" style="padding-top: 16px;">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">More Stories</h2>
+          <span class="section-more">From the archive</span>
+        </div>
+        <div class="post-list">
+          {list.map((post) => <PostCard post={post} variant="list" />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="cta-band">
+    <div class="container">
+      <div>
+        <h2>Ready to feel the future of warmth?</h2>
+        <p>See how StableHeat fits your home, building, driveway, or vessel — or talk to our engineering team about a custom application.</p>
+      </div>
+      <div style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a class="btn btn-primary" href="https://stepheat.com" target="_blank" rel="noopener">Explore products →</a>
+        <a class="btn btn-ghost" href="/about" style="color:#fff; border-color:rgba(255,255,255,0.5);">About StableHeat</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
